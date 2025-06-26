@@ -27,50 +27,54 @@ import {
   FaTags,
   FaThList,
   FaTrash,
-  FaUpload
+  FaUpload,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
-    brand: { name: "", id: "" },
-    category: { name: "", id: "" },
     sku: "",
     img: "",
     title: "",
-    slug: "",
-    unit: "",
-    parent: "",
-    children: "",
+    slug: "default-slug",
+    unit: "cái",
+    imageURLs: [],
+    parent: "CPU Heat Pipes",
+    children: "CPU Cooler",
     price: 0,
     discount: 0,
     quantity: 0,
+    brand: { name: "Deepcool", id: "64154ee693b3f0f2c7ec7ff8" },
+    category: { name: "CPU Heat Pipes", id: "6419723bd7dc5155c04350d5" },
     status: "in-stock",
-    productType: "",
+    reviews: [],
+    productType: "clothing",
     description: "",
+    additionalInformation: [],
+    tags: [],
+    sizes: [],
     featured: false,
     sellCount: 0,
-    tags: [],
-    additionalInformation: [{ key: "", value: "" }],
-    imageURLs: [{ color: { name: "", clrCode: "" }, img: "" }],
   });
 
-  const [brand, setBrand] = useState([]);
+  // const [brand, setBrand] = useState([]);
   const [category, setCategory] = useState([]);
   const [children, setChildren] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadingIndex, setUploadingIndex] = useState(null);
 
   useEffect(() => {
-    const fetchBrand = async () => {
-      try {
-        const res = await axios.get(`${process.env.API_LINK}/api/brand/all`);
-        console.log(res.data.result);
-        setBrand(res.data?.result);
-        return res.data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const fetchBrand = async () => {
+    //   try {
+    //     const res = await axios.get("http://localhost:9999/api/brand/all");
+    //     console.log(res.data.result);
+    //     setBrand(res.data?.result);
+    //     return res.data;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
     const fetchCategory = async () => {
       try {
         const res = await axios.get("http://localhost:9999/api/category/all");
@@ -80,7 +84,7 @@ const AddProduct = () => {
         console.log(error);
       }
     };
-    fetchBrand();
+    // fetchBrand();
     fetchCategory();
   }, []);
 
@@ -91,7 +95,7 @@ const AddProduct = () => {
   const [productImageUrl, setProductImageUrl] = useState("");
   const [productImageUrlInput, setProductImageUrlInput] = useState("");
   const [isUploadingProduct, setIsUploadingProduct] = useState(false);
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
@@ -110,14 +114,14 @@ const AddProduct = () => {
     setChildren(selectedCate?.children || []);
   };
 
-  const handleChangeBrand = (e) => {
-    const { value } = e.target;
-    const selectedBrand = brand.find((bra) => bra._id === value);
-    setProduct({
-      ...product,
-      brand: { id: selectedBrand._id, name: selectedBrand.name },
-    });
-  };
+  // const handleChangeBrand = (e) => {
+  //   const { value } = e.target;
+  //   const selectedBrand = brand.find((bra) => bra._id === value);
+  //   setProduct({
+  //     ...product,
+  //     brand: { id: selectedBrand._id, name: selectedBrand.name },
+  //   });
+  // };
 
   const handleAddTag = () => {
     if (tag.trim()) {
@@ -327,7 +331,8 @@ const AddProduct = () => {
     for (let i = 0; i < product.imageURLs.length; i++) {
       if (product.imageURLs[i].file && !product.imageURLs[i].img) {
         alert(
-          `Please upload the image for ${product.imageURLs[i].color.name || "unnamed color"
+          `Please upload the image for ${
+            product.imageURLs[i].color.name || "unnamed color"
           } before submitting`
         );
         return false;
@@ -342,26 +347,37 @@ const AddProduct = () => {
     if (!validateImageUrls()) {
       return;
     }
+    const cleanProduct = {
+      ...product,
+      price: Number(product.price),
+      discount: Number(product.discount),
+      quantity: Number(product.quantity),
+      additionalInformation: product.additionalInformation.filter(
+        (item) => item.key && item.value
+      ),
+      imageURLs: product.imageURLs.filter(
+        (item) => item.img && item.color?.name
+      ),
+    };
 
     try {
+      console.log("DỮ LIỆU GỬI:", product);
+      console.log("DỮ LIỆU SẠCH:", cleanProduct);
       const response = await fetch("http://localhost:9999/api/product/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify(cleanProduct),
       });
 
       const result = await response.json();
 
       if (result.success) {
-        console.log(
-          `Product created successfully with SKU: ${result.data.sku}`
-        );
-        return result.data;
+        toast.success("Thêm sản phẩm thành công!");
+        navigate("/products");
       } else {
-        console.error(`Failed to add product: ${result.message}`);
-        return null;
+        toast.error(`Lỗi: ${result.message}`);
       }
     } catch (error) {
       console.error("Error adding product:", error);
@@ -373,16 +389,16 @@ const AddProduct = () => {
     <Container className="py-4">
       <Card className="shadow">
         <Card.Header className="bg-primary text-white">
-          <h2 className="mb-0">Add New Product</h2>
+          <h2 className="mb-0">Thêm sản phẩm mới</h2>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Row>
               {/* Left Column */}
               <Col md={6}>
-                <h4 className="border-bottom pb-2 mb-3">Basic Information</h4>
+                <h4 className="border-bottom pb-2 mb-3">Thông tin cơ bản</h4>
 
-                {/* Brand */}
+                {/* Brand
                 <Form.Group className="mb-3">
                   <Form.Label>
                     <FaTag className="me-2" />
@@ -400,9 +416,9 @@ const AddProduct = () => {
                       </option>
                     ))}
                   </Form.Select>
-                </Form.Group>
+                </Form.Group> */}
 
-                {/* Category */}
+                {/* Category
                 <Form.Group className="mb-3">
                   <Row>
                     <Col sm={6}>
@@ -445,13 +461,27 @@ const AddProduct = () => {
                       </Form.Group>
                     </Col>
                   </Row>
+                </Form.Group> */}
+                {/* Title */}
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <FaInfo className="me-2" />
+                    Tên sản phẩm
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={product.title}
+                    placeholder="Product Title"
+                    onChange={handleInputChange}
+                  />
                 </Form.Group>
 
                 {/* SKU */}
                 <Form.Group className="mb-3">
                   <Form.Label>
                     <FaBarcode className="me-2" />
-                    SKU
+                    Mã sản phẩm (SKU)
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -465,7 +495,7 @@ const AddProduct = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>
                     <FaImage className="me-2" />
-                    Image
+                    Ảnh
                   </Form.Label>
                   <Card className="p-3">
                     <Row>
@@ -507,7 +537,9 @@ const AddProduct = () => {
                           <Button
                             variant="outline-secondary"
                             onClick={handleUploadProductImageUrl}
-                            disabled={isUploadingProduct || !productImageUrlInput}
+                            disabled={
+                              isUploadingProduct || !productImageUrlInput
+                            }
                           >
                             {isUploadingProduct ? (
                               <Spinner
@@ -545,58 +577,13 @@ const AddProduct = () => {
                   </Card>
                 </Form.Group>
 
-                {/* Title */}
-                <Form.Group className="mb-3">
-                  <Form.Label>
-                    <FaInfo className="me-2" />
-                    Title
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="title"
-                    value={product.title}
-                    placeholder="Product Title"
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-
-                {/* Slug */}
-                <Form.Group className="mb-3">
-                  <Form.Label>
-                    <FaInfo className="me-2" />
-                    Slug
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="slug"
-                    value={product.slug}
-                    placeholder="product-slug"
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-
-                {/* Unit */}
-                <Form.Group className="mb-3">
-                  <Form.Label>
-                    <FaInfo className="me-2" />
-                    Unit
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="unit"
-                    value={product.unit}
-                    placeholder="Unit (e.g. 3pcs)"
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-
                 {/* Price & Discount */}
                 <Row>
                   <Col sm={3}>
                     <Form.Group className="mb-3">
                       <Form.Label>
                         <FaDollarSign className="me-2" />
-                        Price
+                        Giá
                       </Form.Label>
                       <Form.Control
                         type="number"
@@ -611,7 +598,7 @@ const AddProduct = () => {
                     <Form.Group className="mb-3">
                       <Form.Label>
                         <FaPercent className="me-2" />
-                        Discount
+                        Giảm giá
                       </Form.Label>
                       <Form.Control
                         type="number"
@@ -625,65 +612,14 @@ const AddProduct = () => {
                   <Col sm={3}>
                     <Form.Group className="mb-3">
                       <Form.Label>
-                        <FaSpeakap className="me-2" />
-                        SellCount
-                      </Form.Label>
-                      <Form.Control
-                        type="number"
-                        name="sellCount"
-                        value={product.sellCount}
-                        placeholder="Sell Count"
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col sm={3}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>
                         <FaBoxes className="me-2" />
-                        Quantity
+                        Số lượng
                       </Form.Label>
                       <Form.Control
                         type="number"
                         name="quantity"
                         value={product.quantity}
                         placeholder="Quantity"
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-
-                {/* Status & Type */}
-                <Row>
-                  <Col sm={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>
-                        <FaInfo className="me-2" />
-                        Status
-                      </Form.Label>
-                      <Form.Select
-                        name="status"
-                        value={product.status}
-                        onChange={handleInputChange}
-                      >
-                        <option value="in-stock">In Stock</option>
-                        <option value="out-of-stock">Out of Stock</option>
-                        <option value="coming-soon">Coming Soon</option>
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-                  <Col sm={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>
-                        <FaInfo className="me-2" />
-                        Product Type
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        name="productType"
-                        value={product.productType}
-                        placeholder="Product Type"
                         onChange={handleInputChange}
                       />
                     </Form.Group>
@@ -707,20 +643,20 @@ const AddProduct = () => {
 
               {/* Right Column */}
               <Col md={6}>
-                <h4 className="border-bottom pb-2 mb-3">Details & Images</h4>
+                <h4 className="border-bottom pb-2 mb-3">Chi tiết & Ảnh</h4>
 
                 {/* Description */}
                 <Form.Group className="mb-3">
                   <Form.Label>
                     <FaInfo className="me-2" />
-                    Description
+                    Chi tiết sản phẩm
                   </Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={5}
                     name="description"
                     value={product.description}
-                    placeholder="Product Description"
+                    placeholder="Chi tiết sản phẩm"
                     onChange={handleInputChange}
                   />
                 </Form.Group>
@@ -859,11 +795,14 @@ const AddProduct = () => {
                             <Form.Control
                               type="text"
                               placeholder="Or paste image URL"
-                              value={item.img || ''}
+                              value={item.img || ""}
                               onChange={(e) => {
                                 const updatedColors = [...product.imageURLs];
                                 updatedColors[index].img = e.target.value;
-                                setProduct({ ...product, imageURLs: updatedColors });
+                                setProduct({
+                                  ...product,
+                                  imageURLs: updatedColors,
+                                });
                               }}
                               size="sm"
                             />
@@ -877,7 +816,9 @@ const AddProduct = () => {
                                   alert("Image URL is valid!");
                                 };
                                 tempImg.onerror = () => {
-                                  alert("Invalid image URL. Please check the link.");
+                                  alert(
+                                    "Invalid image URL. Please check the link."
+                                  );
                                 };
                                 tempImg.src = item.img;
                               }}
@@ -906,14 +847,14 @@ const AddProduct = () => {
                   <Form.Label className="d-flex justify-content-between align-items-center">
                     <span>
                       <FaThList className="me-2" />
-                      Additional Information
+                      Thêm thông tin bổ sung
                     </span>
                     <Button
                       variant="outline-primary"
                       size="sm"
                       onClick={handleAddInfo}
                     >
-                      <FaPlus /> Add Field
+                      <FaPlus /> Thêm hàng thông tin
                     </Button>
                   </Form.Label>
 
@@ -962,7 +903,7 @@ const AddProduct = () => {
             {/* Submit Button */}
             <div className="d-grid gap-2 mt-4">
               <Button variant="primary" type="submit" size="lg">
-                Add Product
+                Thêm sản phẩm
               </Button>
             </div>
           </Form>
