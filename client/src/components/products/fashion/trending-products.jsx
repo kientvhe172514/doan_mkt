@@ -74,10 +74,10 @@ const TrendingProducts = () => {
               <div className="tp-trending-wrapper">
                 <div className="tp-section-title-wrapper-2 mb-50">
                   <span className="tp-section-title-pre-2">
-                    More to Discover
+                    Khám Phá
                     <TextShapeLine />
                   </span>
-                  <h3 className="tp-section-title-2">Trending Arrivals</h3>
+                  <h3 className="tp-section-title-2">Xu Hướng Thời Trang</h3>
                 </div>
                 <div className="tp-trending-slider">
                   {content}
@@ -89,12 +89,12 @@ const TrendingProducts = () => {
               <div className="tp-trending-banner p-relative ml-35">
                 <div className="tp-trending-banner-thumb w-img include-bg" style={{backgroundImage:`url(${trending_banner.src})`}}></div>
                 <div className="tp-trending-banner-content">
-                  <h3 className="tp-trending-banner-title">
+                  {/* <h3 className="tp-trending-banner-title">
                     <Link href="/shop">Short Sleeve Tunic <br /> Tops Casual Swing</Link>
-                  </h3>
+                  </h3> */}
                   <div className="tp-trending-banner-btn">
                     <Link href="/shop" className="tp-btn tp-btn-border tp-btn-border-white tp-btn-border-white-sm">
-                      Explore More
+                      Khám Phá Ngay
                       <ArrowRightLong />
                     </Link>
                   </div>

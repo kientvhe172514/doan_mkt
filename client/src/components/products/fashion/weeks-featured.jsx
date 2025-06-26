@@ -82,7 +82,7 @@ const WeeksFeatured = () => {
                   <Rating allowFraction size={16} initialValue={reviews && reviews.length > 0 ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length : 0} readonly={true} />
                 </div>
                 <div className="tp-featured-btn">
-                  <Link href={`/product-details/${_id}`} className="tp-btn tp-btn-border tp-btn-border-sm">Shop Now
+                  <Link href={`/product-details/${_id}`} className="tp-btn tp-btn-border tp-btn-border-sm">Cửa Hàng
                     {" "}<ArrowRightLong />
                   </Link>
                 </div>
@@ -100,10 +100,10 @@ const WeeksFeatured = () => {
           <div className="col-xl-12">
             <div className="tp-section-title-wrapper-2 mb-50">
               <span className="tp-section-title-pre-2">
-                Shop by Featured
+                Sản Phẩm Hot
                 <TextShapeLine />
               </span>
-              <h3 className="tp-section-title-2">This {"Week's"} Featured</h3>
+              <h3 className="tp-section-title-2">Trong {"Tuần"}</h3>
             </div>
           </div>
         </div>

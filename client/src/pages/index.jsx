@@ -26,7 +26,7 @@ export default function Home() {
       <WeeksFeatured/>
       <TrendingProducts/>
       <BestSellerProducts/>
-      <FashionTestimonial/>
+      {/* <FashionTestimonial/> */}
       <BlogArea/>
       <FeatureAreaTwo/>
       <InstagramAreaTwo/>

@@ -58,7 +58,7 @@ const FashionCategory = () => {
               onClick={() => handleCategoryRoute(item.parent)}
               className="cursor-pointer tp-btn tp-btn-border tp-btn-border-sm"
             >
-              Shop Now <ArrowRightLong />
+              Cửa Hàng <ArrowRightLong />
             </a>
           </div>
         </div>

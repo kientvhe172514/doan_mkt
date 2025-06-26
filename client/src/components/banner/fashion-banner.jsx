@@ -15,20 +15,20 @@ import thumb_shape_2 from '@assets/img/slider/2/shape/shape-3.png';
 const slider_data = [
   {
     id: 1,
-    subtitle: 'New Arrivals 2023',
-    title: 'The Clothing Collection',
+    subtitle: 'Gu tôi chọn, dáng tôi yêu',
+    title: 'L’Muse',
     img: slider_img_1,
   },
   {
     id: 2,
-    subtitle: 'Best Selling 2023',
-    title: 'The Summer Collection',
+    subtitle: 'Bộ sưu tập mới nhất',
+    title: 'L’Muse',
     img: slider_img_2,
   },
   {
     id: 3,
-    subtitle: 'Winter Has Arrived',
-    title: 'Amazing New designs',
+    subtitle: 'thoả sức sáng tạo',
+    title: 'L’Muse',
     img: slider_img_3,
   },
 ]
@@ -66,7 +66,7 @@ const FashionBanner = () => {
                         <span>{item.subtitle}</span>
                         <h3 className="tp-slider-title-2">{item.title}</h3>
                         <div className="tp-slider-btn-2">
-                          <Link href="/shop" className="tp-btn tp-btn-border">Shop Collection</Link>
+                          <Link href="/shop" className="tp-btn tp-btn-border">Cửa hàng</Link>
                         </div>
                       </div>
                     </div>

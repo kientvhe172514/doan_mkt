@@ -21,9 +21,9 @@ const CheckoutArea = () => {
         <div className="container">
           {cart_products.length === 0 && (
             <div className="text-center pt-50">
-              <h3 className="py-2">No items found in cart to checkout</h3>
+              <h3 className="py-2">Không có sản phẩm nào</h3>
               <Link href="/shop" className="tp-checkout-btn">
-                Return to shop
+                Quay Lại Mua Sắm
               </Link>
             </div>
           )}
@@ -32,11 +32,11 @@ const CheckoutArea = () => {
               <div className="col-xl-7 col-lg-7">
                 <div className="tp-checkout-verify">
                   <CheckoutLogin />
-                  <CheckoutCoupon
+                  {/* <CheckoutCoupon
                     handleCouponCode={handleCouponCode}
                     couponRef={couponRef}
                     couponApplyMsg={couponApplyMsg}
-                  />
+                  /> */}
                 </div>
               </div>
               <form onSubmit={handleSubmit(submitHandler)}>

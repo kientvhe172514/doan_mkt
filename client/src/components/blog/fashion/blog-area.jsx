@@ -15,10 +15,10 @@ const BlogArea = () => {
             <div className="col-xl-12">
               <div className="tp-section-title-wrapper-2 mb-50 text-center">
                 <span className="tp-section-title-pre-2">
-                  Our Blog & News
+                   Blog
                   <TextShapeLine />
                 </span>
-                <h3 className="tp-section-title-2">Latest News & Articles</h3>
+                <h3 className="tp-section-title-2">Tin Tức & Bài Viết Mới Nhất</h3>
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@ const BlogArea = () => {
           <div className="row">
             <div className="col-xl-12">
               <div className="tp-blog-more-2 mt-10 text-center">
-                <Link href="/blog" className="tp-btn tp-btn-border tp-btn-border-sm">Discover More</Link>
+                <Link href="/blog" className="tp-btn tp-btn-border tp-btn-border-sm">Xem Thêm</Link>
               </div>
             </div>
           </div>

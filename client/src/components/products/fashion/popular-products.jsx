@@ -125,11 +125,11 @@ const PopularProducts = () => {
             <div className="col-xl-12">
               <div className="tp-section-title-wrapper-2 text-center mb-50">
                 <span className="tp-section-title-pre-2">
-                  Shop by Popular
+                  Phổ Biến Nhất
                   <TextShapeLine />
                 </span>
                 <h3 className="tp-section-title-2">
-                  Popular on the Shofy store.
+                  Mặt Hàng Phổ Biến Nhất
                 </h3>
               </div>
             </div>

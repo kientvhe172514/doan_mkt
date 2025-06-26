@@ -108,20 +108,20 @@ const useCheckoutSubmit = () => {
     cartTotal,
   ]);
 
-  // create payment intent
-  useEffect(() => {
-    if (cartTotal) {
-      createPaymentIntent({
-        price: parseInt(cartTotal),
-      })
-        .then((data) => {
-          setClientSecret(data?.data?.clientSecret);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [createPaymentIntent, cartTotal]);
+  // // create payment intent
+  // useEffect(() => {
+  //   if (cartTotal) {
+  //     createPaymentIntent({
+  //       price: parseInt(cartTotal),
+  //     })
+  //       .then((data) => {
+  //         setClientSecret(data?.data?.clientSecret);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }, [createPaymentIntent, cartTotal]);
 
   // handleCouponCode
   const handleCouponCode = (e) => {
@@ -194,15 +194,14 @@ const useCheckoutSubmit = () => {
   const submitHandler = async (data) => {
     dispatch(set_shipping(data));
     setIsCheckoutSubmit(true);
-
     let orderInfo = {
       name: `${data.firstName} ${data.lastName}`,
       address: data.address,
       contact: data.contactNo,
       email: data.email,
       city: data.city,
-      country: data.country,
-      zipCode: data.zipCode,
+      country: "Việt Nam",
+      zipCode: "123456",
       shippingOption: data.shippingOption,
       status: "Pending",
       cart: cart_products,
@@ -212,7 +211,7 @@ const useCheckoutSubmit = () => {
       discount: discountAmount,
       totalAmount: cartTotal,
       orderNote:data.orderNote,
-      user: `${user?._id}`,
+      user: user?._id || null,
     };
     if (data.payment === 'Card') {
       if (!stripe || !elements) {

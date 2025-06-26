@@ -36,7 +36,7 @@ const Header = () => {
                     <span>
                       <ShippingCar />
                     </span>
-                    <p>FREE Express Shipping On Orders $570+</p>
+                    <p>Miễn Phí Đơn Hàng từ 1.000.000</p>
                   </div>
                 </div>
                 <div className="col-md-6">

@@ -6,7 +6,7 @@ import ProductItem from './product-item';
 import { HomeTwoPrdLoader } from '@/components/loader';
 
 // tabs
-const tabs = ["All Collection", "Shoes", "Clothing", "Bags"];
+const tabs = ["Bộ Sưu Tập"];
 
 const ProductArea = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -36,13 +36,14 @@ const ProductArea = () => {
     if (activeTab === 'All Collection') {
       product_items = products.data
     }
-    else if (activeTab === 'Shoes') {
-      product_items = products.data.filter(p => p.category.name === 'Shoes')
-    } else if (activeTab === 'Clothing') {
-      product_items = products.data.filter(p => p.category.name === 'Clothing')
-    } else if (activeTab === 'Bags') {
-      product_items = products.data.filter(p => p.category.name === 'Bags')
-    } else {
+    // else if (activeTab === 'Shoes') {
+    //   product_items = products.data.filter(p => p.category.name === 'Shoes')
+    // } else if (activeTab === 'Clothing') {
+    //   product_items = products.data.filter(p => p.category.name === 'Clothing')
+    // } else if (activeTab === 'Bags') {
+    //   product_items = products.data.filter(p => p.category.name === 'Bags')
+    // } 
+    else {
       product_items = products.data;
     }
     content = <>
@@ -83,10 +84,10 @@ const ProductArea = () => {
             <div className="col-xl-12">
               <div className="tp-section-title-wrapper-2 text-center mb-35">
                 <span className="tp-section-title-pre-2">
-                  All Product Shop
+                  Tất Cả Sản Phẩm
                   <TextShapeLine />
                 </span>
-                <h3 className="tp-section-title-2">Customer Favorite Style Product</h3>
+                <h3 className="tp-section-title-2">Phong Cách Yêu Thích Của Bạn</h3>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 // internal
 import Menus from './header-com/menus';
-import logo from '@assets/img/logo/logo.svg';
+import logo from '@assets/img/logo/logo.png';
 import useSticky from '@/hooks/use-sticky';
 import useCartInfo from '@/hooks/use-cart-info';
 import { openCartMini } from '@/redux/features/cartSlice';
@@ -33,15 +33,15 @@ const HeaderTwo = ({ style_2 = false }) => {
                     <div className="tp-header-info-item">
                       <a href="#">
                         <span>
-                          <Facebook />
+                          {/* <Facebook /> */}
                         </span> 7500k Followers
                       </a>
                     </div>
                     <div className="tp-header-info-item">
                       <a href="tel:966-595-035-008">
                         <span>
-                          <PhoneTwo />
-                        </span> +(966) 595 035 008
+                          {/* <PhoneTwo /> */}
+                        </span> 0363.697.288
                       </a>
                     </div>
                   </div>
@@ -81,7 +81,7 @@ const HeaderTwo = ({ style_2 = false }) => {
                             onChange={(e) => setSearchText(e.target.value)}
                             value={searchText}
                             type="text"
-                            placeholder="Search for Products..." />
+                            placeholder="Tìm Kiếm Sản Phẩm..." />
                           <button type="submit">
                             <Search />
                           </button>

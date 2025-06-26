@@ -63,7 +63,7 @@ const AddProduct = () => {
   useEffect(() => {
     const fetchBrand = async () => {
       try {
-        const res = await axios.get("http://localhost:9999/api/brand/all");
+        const res = await axios.get(`${process.env.API_LINK}/api/brand/all`);
         console.log(res.data.result);
         setBrand(res.data?.result);
         return res.data;
