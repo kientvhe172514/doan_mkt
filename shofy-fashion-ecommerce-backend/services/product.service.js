@@ -7,10 +7,7 @@ exports.createProductService = async (data) => {
   const product = await Product.create(data);
   const { _id: productId, brand, category } = product;
   //update Brand
-  await Brand.updateOne(
-    { _id: brand.id },
-    { $push: { products: productId } }
-  );
+  await Brand.updateOne({ _id: brand.id }, { $push: { products: productId } });
   //Category Brand
   await Category.updateOne(
     { _id: category.id },
@@ -161,31 +158,30 @@ exports.updateProductService = async (id, currProduct) => {
   return product;
 };
 
-
-
 // get Reviews Products
 exports.getReviewsProducts = async () => {
   const result = await Product.find({
     reviews: { $exists: true, $ne: [] },
-  })
-    .populate({
-      path: "reviews",
-      populate: { path: "userId", select: "name email imageURL" },
-    });
+  }).populate({
+    path: "reviews",
+    populate: { path: "userId", select: "name email imageURL" },
+  });
 
-  const products = result.filter(p => p.reviews.length > 0)
+  const products = result.filter((p) => p.reviews.length > 0);
 
   return products;
 };
 
 // get Reviews Products
 exports.getStockOutProducts = async () => {
-  const result = await Product.find({ status: "out-of-stock" }).sort({ createdAt: -1 })
+  const result = await Product.find({ status: "out-of-stock" }).sort({
+    createdAt: -1,
+  });
   return result;
 };
 
 // get Reviews Products
 exports.deleteProduct = async (id) => {
-  const result = await Product.findByIdAndDelete(id)
+  const result = await Product.findByIdAndDelete(id);
   return result;
 };

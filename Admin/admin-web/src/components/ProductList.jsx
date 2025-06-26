@@ -40,7 +40,10 @@ const ProductList = () => {
   const [brands, setBrands] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
+  const [priceRange, setPriceRange] = useState({
+    min: 0,
+    max: Number.MAX_VALUE,
+  });
   const [statusFilter, setStatusFilter] = useState("");
 
   useEffect(() => {
@@ -163,10 +166,26 @@ const ProductList = () => {
     setShowDeleteModal(true);
   };
 
-  const deleteProduct = () => {
+  const deleteProduct = async () => {
     if (productToDelete) {
-      setProducts(products.filter((p) => p._id !== productToDelete._id));
-      setShowDeleteModal(false);
+      try {
+        await axios.delete(
+          `http://localhost:9999/api/product/${productToDelete._id}`
+        );
+
+        // Cập nhật lại danh sách sản phẩm sau khi xoá thành công
+        setProducts((prev) =>
+          prev.filter((product) => product._id !== productToDelete._id)
+        );
+        setFilteredProducts((prev) =>
+          prev.filter((product) => product._id !== productToDelete._id)
+        );
+
+        setShowDeleteModal(false);
+      } catch (error) {
+        console.error("Lỗi khi xoá sản phẩm:", error);
+        alert("Đã xảy ra lỗi khi xoá sản phẩm.");
+      }
     }
   };
 

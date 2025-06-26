@@ -30,6 +30,7 @@ import {
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const ProductManagement = () => {
   const location = useLocation();
@@ -38,15 +39,73 @@ const ProductManagement = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState({ ...product });
+  const [newColorName, setNewColorName] = useState("");
+  const [newColorCode, setNewColorCode] = useState("");
+  const [newColorFile, setNewColorFile] = useState(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const handleEdit = () => {
     setIsEditing(true);
     setEditedProduct({ ...product });
   };
 
-  const handleSave = () => {
-    setProduct({ ...editedProduct });
-    setIsEditing(false);
+  const handleSave = async () => {
+    const normalizeProductData = (prod) => {
+      return {
+        title: prod.title || "Tên sản phẩm",
+        sku: prod.sku || "",
+        img: prod.img || "", // giả lập ảnh
+        slug: prod.slug || "",
+        unit: prod.unit || "cái",
+        imageURLs: prod.imageURLs || [],
+        parent: prod.parent || "parent",
+        children: prod.children || "children",
+        price: prod.price ?? 0,
+        discount: prod.discount ?? 0,
+        quantity: prod.quantity ?? 0,
+        status: prod.status || "in-stock",
+        productType: prod.productType || "default",
+        description: prod.description || "",
+        additionalInformation: prod.additionalInformation || [],
+        offerDate: prod.offerDate || { startDate: null, endDate: null },
+        tags: prod.tags || [],
+        sizes: prod.sizes || [],
+        featured: prod.featured ?? false,
+        sellCount: prod.sellCount ?? 0,
+        brand: {
+          name: prod.brand?.name || "",
+          id: prod.brand?.id || "",
+        },
+        category: {
+          name: prod.category?.name || "",
+          id: prod.category?.id || "",
+        },
+        reviews: prod.reviews || [],
+        videoId: prod.videoId || "",
+      };
+    };
+
+    try {
+      const cleaned = normalizeProductData(editedProduct);
+
+      console.log("Saving cleaned product:", cleaned);
+
+      const res = await axios.patch(
+        `http://localhost:9999/api/product/edit-product/${product._id}`,
+        cleaned
+      );
+
+      if (res.data && res.data.data) {
+        setProduct(res.data.data);
+        setIsEditing(false);
+        alert("Cập nhật thành công!");
+      } else {
+        alert("Đã có lỗi khi cập nhật!");
+      }
+    } catch (err) {
+      console.error("Lỗi khi cập nhật:", err);
+      alert("Lỗi khi cập nhật sản phẩm.");
+    }
   };
 
   const handleCancel = () => {
@@ -63,6 +122,76 @@ const ProductManagement = () => {
 
   const calculateDiscountedPrice = (price, discount) => {
     return ((price * (100 - discount)) / 100).toFixed(2);
+  };
+  const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    try {
+      const res = await axios.post(
+        "http://localhost:9999/api/cloudinary/add-img",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return res.data.data.url;
+    } catch (err) {
+      console.error("Upload failed:", err);
+      return null;
+    }
+  };
+  const handleAddColorImage = (colorName, colorCode, file) => {
+    if (!colorName || !colorCode || !file) {
+      alert("Vui lòng nhập đầy đủ tên màu, mã màu và chọn ảnh!");
+      return;
+    }
+
+    const newImageItem = {
+      color: {
+        name: colorName,
+        clrCode: colorCode,
+      },
+      img: "", // sẽ cập nhật sau khi upload
+      file,
+    };
+
+    setEditedProduct((prev) => ({
+      ...prev,
+      imageURLs: [...prev.imageURLs, newImageItem],
+    }));
+  };
+  const handleUploadColorImage = async (index) => {
+    const imageItem = editedProduct.imageURLs[index];
+    if (!imageItem?.file) {
+      alert("Bạn chưa chọn ảnh.");
+      return;
+    }
+
+    const imageUrl = await uploadImageToCloudinary(imageItem.file);
+    if (imageUrl) {
+      const updatedImages = [...editedProduct.imageURLs];
+      updatedImages[index].img = imageUrl;
+      delete updatedImages[index].file;
+
+      setEditedProduct((prev) => ({
+        ...prev,
+        imageURLs: updatedImages,
+      }));
+
+      alert("Tải ảnh lên thành công!");
+    } else {
+      alert("Tải ảnh lên thất bại!");
+    }
+  };
+  const handleRemoveImage = (index) => {
+    const updatedImages = [...editedProduct.imageURLs];
+    updatedImages.splice(index, 1);
+    setEditedProduct((prev) => ({
+      ...prev,
+      imageURLs: updatedImages,
+    }));
   };
 
   return (
@@ -128,7 +257,7 @@ const ProductManagement = () => {
                   <Form.Label>Thương Hiệu</Form.Label>
                   <Form.Control
                     type="text"
-                    value={product.brand.name}
+                    value={product?.brand?.name || ""}
                     disabled
                   />
                 </Form.Group>
@@ -136,7 +265,7 @@ const ProductManagement = () => {
                   <Form.Label>Danh Mục</Form.Label>
                   <Form.Control
                     type="text"
-                    value={product.category.name}
+                    value={product?.category?.name || ""}
                     disabled
                   />
                 </Form.Group>
@@ -254,17 +383,82 @@ const ProductManagement = () => {
                     </Card>
                   </Col>
                 ))}
-                <Col md={3}>
-                  <Card className="h-100 d-flex justify-content-center align-items-center">
-                    <Button variant="light" className="w-100 h-100">
-                      <FontAwesomeIcon
-                        icon={faPlus}
-                        className="mb-2"
-                        size="lg"
+                <Col md={5}>
+                  <Form className="mb-3">
+                    <Form.Label>Thêm Hình Ảnh Mới</Form.Label>
+                    <InputGroup className="mb-2">
+                      <Form.Control
+                        placeholder="Tên màu (ví dụ: Đỏ)"
+                        value={newColorName}
+                        onChange={(e) => setNewColorName(e.target.value)}
                       />
-                      <div>Thêm Hình Ảnh</div>
-                    </Button>
-                  </Card>
+                      <Form.Control
+                        placeholder="Mã màu (#FF0000)"
+                        value={newColorCode}
+                        onChange={(e) => setNewColorCode(e.target.value)}
+                      />
+                      <Form.Control
+                        type="file"
+                        onChange={(e) => setNewColorFile(e.target.files[0])}
+                      />
+                      <Button
+                        variant="primary"
+                        disabled={isUploadingImage}
+                        onClick={async () => {
+                          if (!newColorName || !newColorCode || !newColorFile) {
+                            alert(
+                              "Vui lòng nhập đầy đủ thông tin và chọn file ảnh."
+                            );
+                            return;
+                          }
+
+                          setIsUploadingImage(true);
+                          const formData = new FormData();
+                          formData.append("image", newColorFile);
+
+                          try {
+                            const res = await axios.post(
+                              "http://localhost:9999/api/cloudinary/add-img",
+                              formData,
+                              {
+                                headers: {
+                                  "Content-Type": "multipart/form-data",
+                                },
+                              }
+                            );
+
+                            const imageUrl = res.data.data.url;
+
+                            const newImage = {
+                              img: imageUrl,
+                              color: {
+                                name: newColorName,
+                                clrCode: newColorCode,
+                              },
+                            };
+
+                            setEditedProduct((prev) => ({
+                              ...prev,
+                              imageURLs: [...prev.imageURLs, newImage],
+                            }));
+
+                            // Reset form
+                            setNewColorName("");
+                            setNewColorCode("");
+                            setNewColorFile(null);
+                            alert("Upload ảnh thành công!");
+                          } catch (err) {
+                            console.error("Upload lỗi:", err);
+                            alert("Upload ảnh thất bại.");
+                          } finally {
+                            setIsUploadingImage(false);
+                          }
+                        }}
+                      >
+                        Tải lên
+                      </Button>
+                    </InputGroup>
+                  </Form>
                 </Col>
               </Row>
             </Card.Body>
@@ -450,7 +644,7 @@ const ProductManagement = () => {
         </Col>
       </Row>
 
-      {/* Các hành động quản lý */}
+      {/* Các hành động quản lý
       <Row className="mt-4">
         <Col>
           <Card>
@@ -493,7 +687,7 @@ const ProductManagement = () => {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
+      </Row> */}
     </Container>
   );
 };
