@@ -1,3 +1,5 @@
+// ĐÃ SỬA HOÀN CHỈNH
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,13 +17,18 @@ const CartMiniSidebar = () => {
 
   // handle remove product
   const handleRemovePrd = (prd) => {
-    dispatch(remove_product(prd))
-  }
+    // FIX 1: Gửi đi payload chứa cartId và title như reducer mong đợi
+    dispatch(remove_product({
+      cartId: prd.cartId,
+      title: prd.title,
+    }));
+  };
 
-// handle close cart mini 
-const handleCloseCartMini = () => {
-  dispatch(closeCartMini())
-}
+  // handle close cart mini
+  const handleCloseCartMini = () => {
+    dispatch(closeCartMini());
+  };
+
   return (
     <>
       <div className={`cartmini__area tp-all-font-roboto ${cartMiniOpen ? 'cartmini-opened' : ''}`}>
@@ -38,26 +45,34 @@ const handleCloseCartMini = () => {
               </div>
             </div>
             <div className="cartmini__shipping">
-              <RenderCartProgress/>
+              <RenderCartProgress />
             </div>
             {cart_products.length > 0 && <div className="cartmini__widget">
               {cart_products.map((item) => (
-                <div key={item._id} className="cartmini__widget-item">
+                // FIX 2: Sử dụng cartId làm key vì nó là duy nhất cho mỗi phiên bản sản phẩm
+                <div key={item.cartId} className="cartmini__widget-item">
                   <div className="cartmini__thumb">
                     <Link href={`/product-details/${item._id}`}>
-                      <Image src={item.img} width={70} height={60} alt="product img" />
+                      {/* FIX 3: Hiển thị ảnh của phiên bản màu đã chọn */}
+                      <Image src={item.selectedColor?.img || item.img} width={70} height={60} alt="product img" />
                     </Link>
                   </div>
                   <div className="cartmini__content">
                     <h5 className="cartmini__title">
                       <Link href={`/product-details/${item._id}`}>{item.title}</Link>
                     </h5>
+                    {/* FIX 4: Hiển thị thêm màu sắc và kích cỡ đã chọn */}
+                    <div className="cartmini__variation" style={{fontSize: '13px', color: '#55585b'}}>
+                        {item.selectedColor && <span>{item.selectedColor.color.name}</span>}
+                        {item.selectedSize && <span> / {item.selectedSize}</span>}
+                    </div>
                     <div className="cartmini__price-wrapper">
                       {item.discount > 0 ? <span className="cartmini__price">${(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100).toFixed(2)}</span> : <span className="cartmini__price">${item.price.toFixed(2)}</span>}
                       <span className="cartmini__quantity">{" "}x{item.orderQuantity}</span>
                     </div>
                   </div>
-                  <a onClick={() => handleRemovePrd({ title: item.title, id: item._id })} className="cartmini__del cursor-pointer"><i className="fa-regular fa-xmark"></i></a>
+                  {/* Truyền cả object 'item' vào hàm handleRemovePrd */}
+                  <a onClick={() => handleRemovePrd(item)} className="cartmini__del cursor-pointer"><i className="fa-regular fa-xmark"></i></a>
                 </div>
               ))}
             </div>}

@@ -1,3 +1,5 @@
+// src/redux/features/cartSlice.js
+
 import { createSlice } from "@reduxjs/toolkit";
 import { getLocalStorage, setLocalStorage } from "@/utils/localstorage";
 import { notifyError, notifySuccess } from "@/utils/toast";
@@ -5,7 +7,17 @@ import { notifyError, notifySuccess } from "@/utils/toast";
 const initialState = {
   cart_products: [],
   orderQuantity: 1,
-  cartMiniOpen:false,
+  cartMiniOpen: false,
+};
+
+// Hàm này vẫn hữu ích để kiểm tra số lượng tồn kho
+const getAvailableQuantity = (productVariant) => {
+  const sizeItem = productVariant.selectedColor?.sizes?.find(
+    (sz) => sz.size === productVariant.selectedSize
+  );
+  // Nếu không có size, giả sử tồn kho là một số lớn hoặc dựa trên logic khác
+  if (!productVariant.selectedSize) return 999; 
+  return sizeItem?.quantity || 0;
 };
 
 export const cartSlice = createSlice({
@@ -13,78 +25,91 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     add_cart_product: (state, { payload }) => {
-      const isExist = state.cart_products.some((i) => i._id === payload._id);
-      if (!isExist) {
-        const newItem = {
-          ...payload,
-          orderQuantity: state.orderQuantity,
-        };
-        state.cart_products.push(newItem);
-        notifySuccess(`${state.orderQuantity} ${payload.title} added to cart`);
+      // THAY ĐỔI 1: Lấy cartId từ payload
+      const { cartId, orderQuantity = 1 } = payload;
+      
+      // THAY ĐỔI 2: Tìm sản phẩm bằng cartId duy nhất
+      const existingIndex = state.cart_products.findIndex(
+        (item) => item.cartId === cartId
+      );
+
+      const maxQuantity = getAvailableQuantity(payload);
+
+      if (existingIndex !== -1) {
+        const existingItem = state.cart_products[existingIndex];
+        // Kiểm tra xem tổng số lượng có vượt quá tồn kho không
+        if (existingItem.orderQuantity + orderQuantity <= maxQuantity) {
+          existingItem.orderQuantity += orderQuantity;
+          notifySuccess(`${orderQuantity} ${payload.title} đã được thêm vào giỏ hàng`);
+        } else {
+          notifyError(
+            `Chỉ có thể thêm tối đa ${maxQuantity - existingItem.orderQuantity} sản phẩm nữa!`
+          );
+        }
       } else {
-        state.cart_products.map((item) => {
-          if (item._id === payload._id) {
-            if (item.quantity >= item.orderQuantity + state.orderQuantity) {
-              item.orderQuantity =
-                state.orderQuantity !== 1
-                  ? state.orderQuantity + item.orderQuantity
-                  : item.orderQuantity + 1;
-              notifySuccess(`${state.orderQuantity} ${item.title} added to cart`);
-            } else {
-              notifyError("No more quantity available for this product!");
-              state.orderQuantity = 1;
-            }
-          }
-          return { ...item };
-        });
+        // Kiểm tra số lượng thêm mới có hợp lệ không
+        if (orderQuantity <= maxQuantity) {
+          const newItem = {
+            ...payload,
+            orderQuantity: orderQuantity,
+          };
+          state.cart_products.push(newItem);
+          notifySuccess(`${orderQuantity} ${payload.title} đã được thêm vào giỏ hàng`);
+        } else {
+          notifyError(`Không thể thêm quá số lượng có sẵn (${maxQuantity})!`);
+        }
       }
+
       setLocalStorage("cart_products", state.cart_products);
     },
+
     increment: (state, { payload }) => {
       state.orderQuantity = state.orderQuantity + 1;
     },
     decrement: (state, { payload }) => {
       state.orderQuantity =
-        state.orderQuantity > 1
-          ? state.orderQuantity - 1
-          : (state.orderQuantity = 1);
+        state.orderQuantity > 1 ? state.orderQuantity - 1 : 1;
     },
+    
+    // THAY ĐỔI 3: Cập nhật hàm này để dùng cartId
     quantityDecrement: (state, { payload }) => {
-      state.cart_products.map((item) => {
-        if (item._id === payload._id) {
-          if (item.orderQuantity > 1) {
-            item.orderQuantity = item.orderQuantity - 1;
-          }
+      const itemIndex = state.cart_products.findIndex(item => item.cartId === payload.cartId);
+      if (itemIndex !== -1) {
+        if (state.cart_products[itemIndex].orderQuantity > 1) {
+          state.cart_products[itemIndex].orderQuantity -= 1;
         }
-        return { ...item };
-      });
+      }
       setLocalStorage("cart_products", state.cart_products);
     },
+    
+    // THAY ĐỔI 4: Cập nhật hàm xóa sản phẩm để dùng cartId
     remove_product: (state, { payload }) => {
+      // payload bây giờ nên là { cartId: '...', title: '...' }
       state.cart_products = state.cart_products.filter(
-        (item) => item._id !== payload.id
+        (item) => item.cartId !== payload.cartId
       );
       setLocalStorage("cart_products", state.cart_products);
-      notifyError(`${payload.title} Remove from cart`);
+      notifyError(`${payload.title} đã được xóa khỏi giỏ hàng`);
     },
+    
     get_cart_products: (state, action) => {
-      state.cart_products = getLocalStorage("cart_products");
+      state.cart_products = getLocalStorage("cart_products") || [];
     },
     initialOrderQuantity: (state, { payload }) => {
       state.orderQuantity = 1;
     },
-    clearCart:(state) => {
-      const isClearCart = window.confirm('Are you sure you want to remove all items ?');
-      if(isClearCart){
-        state.cart_products = []
+    clearCart: (state) => {
+      const isClearCart = window.confirm('Bạn có chắc muốn xóa tất cả sản phẩm?');
+      if (isClearCart) {
+        state.cart_products = [];
       }
       setLocalStorage("cart_products", state.cart_products);
     },
-    openCartMini:(state,{payload}) => {
-      state.cartMiniOpen = true
+    openCartMini: (state, { payload }) => {
+      state.cartMiniOpen = true;
     },
-    closeCartMini:(state,{payload}) => {
-      state.cartMiniOpen = false
+    closeCartMini: (state, { payload }) => {
+      state.cartMiniOpen = false;
     },
   },
 });
@@ -101,4 +126,5 @@ export const {
   closeCartMini,
   openCartMini,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;
