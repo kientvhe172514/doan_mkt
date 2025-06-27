@@ -84,7 +84,7 @@ const CompareArea = () => {
                         ))}
                       </tr>
                       {/* Add to cart*/}
-                      <tr>
+                      {/* <tr>
                         <th>Add to cart</th>
                         {compareItems.map(item => (
                           <td key={item._id}>
@@ -95,7 +95,7 @@ const CompareArea = () => {
                             </div>
                           </td>
                         ))}
-                      </tr>
+                      </tr> */}
                       {/* Rating */}
                       <tr>
                         <th>Rating</th>

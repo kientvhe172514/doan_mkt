@@ -56,7 +56,7 @@ const ShopListItem = ({ product }) => {
             >
               <QuickView />
               <span className="tp-product-tooltip tp-product-tooltip-right">
-                Quick View
+                Xem Nhanh
               </span>
             </button>
             <button
@@ -66,7 +66,7 @@ const ShopListItem = ({ product }) => {
             >
               <Wishlist />
               <span className="tp-product-tooltip tp-product-tooltip-right">
-                Add To Wishlist
+               Thêm vào yêu thích
               </span>
             </button>
             <button

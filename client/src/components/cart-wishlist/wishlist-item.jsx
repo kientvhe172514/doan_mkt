@@ -61,7 +61,7 @@ const WishlistItem = ({ product }) => {
         </div>
       </td>
 
-      <td className="tp-cart-add-to-cart">
+      {/* <td className="tp-cart-add-to-cart">
         <button
           onClick={() => handleAddProduct(product)}
           type="button"
@@ -69,7 +69,7 @@ const WishlistItem = ({ product }) => {
         >
           Add To Cart
         </button>
-      </td>
+      </td> */}
 
       <td className="tp-cart-action">
         <button

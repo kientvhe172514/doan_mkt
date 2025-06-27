@@ -71,7 +71,7 @@ const ProductItem = ({ product }) => {
               disabled={status === 'out-of-stock'}
             >
               <Wishlist />
-              <span className="tp-product-tooltip">Add To Wishlist</span>
+              <span className="tp-product-tooltip">Thêm vào yêu thích</span>
             </button>
           </div>
         </div>

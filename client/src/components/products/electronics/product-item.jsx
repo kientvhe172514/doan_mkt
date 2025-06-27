@@ -91,7 +91,7 @@ const ProductItem = ({ product, offer_style = false }) => {
               >
                 <QuickView />
 
-                <span className="tp-product-tooltip">Quick View</span>
+                <span className="tp-product-tooltip">Xem nhanh</span>
               </button>
               <button
                 type="button"
@@ -100,7 +100,7 @@ const ProductItem = ({ product, offer_style = false }) => {
                 disabled={status === 'out-of-stock'}
               >
                 <Wishlist />
-                <span className="tp-product-tooltip">Add To Wishlist</span>
+                <span className="tp-product-tooltip">Thêm vào yêu thích</span>
               </button>
             </div>
           </div>
