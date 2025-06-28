@@ -9,9 +9,9 @@ import LoginArea from '@/components/login-register/login-area';
 const LoginPage = () => {
   return (
     <Wrapper>
-      <SEO pageTitle="Login" />
+      <SEO pageTitle="Đăng Nhập" />
       <HeaderTwo style_2={true} />
-      <CommonBreadcrumb title="Login" subtitle="Login" center={true} />
+      <CommonBreadcrumb title="Đăng Nhập" subtitle="Đăng Nhập" center={true} />
       <LoginArea/>
       <Footer primary_style={true} />
     </Wrapper>

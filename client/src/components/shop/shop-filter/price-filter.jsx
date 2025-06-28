@@ -6,7 +6,7 @@ const PriceFilter = ({ priceFilterValues,maxPrice }) => {
   return (
     <>
       <div className="tp-shop-widget mb-35">
-        <h3 className="tp-shop-widget-title no-border">Price Filter</h3>
+        <h3 className="tp-shop-widget-title no-border">Tìm kiếm theo giá</h3>
 
         <div className="tp-shop-widget-content">
           <div className="tp-shop-widget-filter">
@@ -21,10 +21,10 @@ const PriceFilter = ({ priceFilterValues,maxPrice }) => {
             </div>
             <div className="tp-shop-widget-filter-info d-flex align-items-center justify-content-between">
               <span className="input-range">
-                ${priceValue[0]} - ${priceValue[1]}
+                {priceValue[0]} - ${priceValue[1]}đ
               </span>
               <button className="tp-shop-widget-filter-btn" type="button">
-                Filter
+                Tìm
               </button>
             </div>
           </div>

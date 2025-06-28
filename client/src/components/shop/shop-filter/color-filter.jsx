@@ -91,7 +91,7 @@ const ColorFilter = ({setCurrPage,shop_right=false}) => {
   return (
     <>
       <div className="tp-shop-widget mb-50">
-        <h3 className="tp-shop-widget-title">Filter by Color</h3>
+        <h3 className="tp-shop-widget-title">Tim kiếm theo màu</h3>
         <div className="tp-shop-widget-content">
           <div className="tp-shop-widget-checkbox-circle-list">
             <ul>{content}</ul>

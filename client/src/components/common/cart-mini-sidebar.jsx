@@ -36,7 +36,7 @@ const CartMiniSidebar = () => {
           <div className="cartmini__top-wrapper">
             <div className="cartmini__top p-relative">
               <div className="cartmini__top-title">
-                <h4>Shopping cart</h4>
+                <h4>Giỏ hàng</h4>
               </div>
               <div className="cartmini__close">
                 <button onClick={() => dispatch(closeCartMini())} type="button" className="cartmini__close-btn cartmini-close-btn">
@@ -67,7 +67,7 @@ const CartMiniSidebar = () => {
                         {item.selectedSize && <span> / {item.selectedSize}</span>}
                     </div>
                     <div className="cartmini__price-wrapper">
-                      {item.discount > 0 ? <span className="cartmini__price">${(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100).toFixed(2)}</span> : <span className="cartmini__price">${item.price.toFixed(2)}</span>}
+                      {item.discount > 0 ? <span className="cartmini__price">{(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100).toFixed(2)}đ</span> : <span className="cartmini__price">{item.price.toFixed(2)}đ</span>}
                       <span className="cartmini__quantity">{" "}x{item.orderQuantity}</span>
                     </div>
                   </div>
@@ -79,18 +79,18 @@ const CartMiniSidebar = () => {
             {/* if no item in cart */}
             {cart_products.length === 0 && <div className="cartmini__empty text-center">
               <Image src={empty_cart_img} alt="empty-cart-img" />
-              <p>Your Cart is empty</p>
+              <p>Giỏ hàng của bạn trống</p>
               <Link href="/shop" className="tp-btn">Go to Shop</Link>
             </div>}
           </div>
           <div className="cartmini__checkout">
             <div className="cartmini__checkout-title mb-30">
-              <h4>Subtotal:</h4>
-              <span>${total.toFixed(2)}</span>
+              <h4>tổng giá:</h4>
+              <span>{total.toFixed(2)}đ</span>
             </div>
             <div className="cartmini__checkout-btn">
-              <Link href="/cart" onClick={handleCloseCartMini} className="tp-btn mb-10 w-100"> view cart</Link>
-              <Link href="/checkout" onClick={handleCloseCartMini} className="tp-btn tp-btn-border w-100"> checkout</Link>
+              <Link href="/cart" onClick={handleCloseCartMini} className="tp-btn mb-10 w-100"> Xem giỏ hàng</Link>
+              <Link href="/checkout" onClick={handleCloseCartMini} className="tp-btn tp-btn-border w-100"> Thanh Toán</Link>
             </div>
           </div>
         </div>

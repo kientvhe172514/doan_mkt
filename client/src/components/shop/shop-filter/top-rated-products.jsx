@@ -54,7 +54,7 @@ const TopRatedProducts = () => {
   return (
     <>
       <div className="tp-shop-widget mb-50">
-        <h3 className="tp-shop-widget-title">Top Rated Products</h3>
+        <h3 className="tp-shop-widget-title">Sản Phẩm được đánh giá cao nhất</h3>
         <div className="tp-shop-widget-content">
           <div className="tp-shop-widget-product">
             {content}

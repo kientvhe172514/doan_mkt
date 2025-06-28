@@ -32,10 +32,10 @@ exports.signup = async (req, res, next) => {
   
           <a href="${secret.client_url}/email-verify/${token}" style="background:#0989FF;color:white;border:1px solid #0989FF; padding: 10px 15px; border-radius: 4px; text-decoration:none;">Verify Account</a>
   
-          <p style="margin-top: 35px;">If you did not initiate this request, please contact us immediately at FPTshop@gmail.com</p>
+          <p style="margin-top: 35px;">If you did not initiate this request, please contact us immediately at lmuse.contact@gmail.com</p>
   
           <p style="margin-bottom:0px;">Thank you</p>
-          <strong>FPT Team</strong>
+          <strong>Lmuse Shop</strong>
            `,
       };
       const message = "Please check your email to verify!";

@@ -55,7 +55,7 @@ const LoginForm = () => {
             <input {...register("email", { required: `Email is required!` })} name="email" id="email" type="email" placeholder="shofy@mail.com" />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="email">Your Email</label>
+            <label htmlFor="email">Email</label>
           </div>
           <ErrorMsg msg={errors.email?.message} />
         </div>
@@ -75,7 +75,7 @@ const LoginForm = () => {
               </span>
             </div>
             <div className="tp-login-input-title">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Mật khẩu</label>
             </div>
           </div>
           <ErrorMsg msg={errors.password?.message}/>
@@ -84,14 +84,14 @@ const LoginForm = () => {
       <div className="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
         <div className="tp-login-remeber">
           <input id="remeber" type="checkbox" />
-          <label htmlFor="remeber">Remember me</label>
+          <label htmlFor="remeber">Nhớ tài khoản</label>
         </div>
         <div className="tp-login-forgot">
-          <Link href="/forgot">Forgot Password?</Link>
+          <Link href="/forgot">Quên mật khẩu?</Link>
         </div>
       </div>
       <div className="tp-login-bottom">
-        <button type='submit' className="tp-login-btn w-100">Login</button>
+        <button type='submit' className="tp-login-btn w-100">Đăng nhập</button>
       </div>
     </form>
   );

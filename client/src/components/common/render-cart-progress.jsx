@@ -3,15 +3,15 @@ import useCartInfo from "@/hooks/use-cart-info";
 
 const RenderCartProgress = () => {
   const { total } = useCartInfo();
-  const freeShippingThreshold = 200;
+  const freeShippingThreshold = 1000000;
   const progress = (total / freeShippingThreshold) * 100;
   if (total < freeShippingThreshold) {
     const remainingAmount = freeShippingThreshold - total;
     return (
       <>
-        <p>{`Add $${remainingAmount.toFixed(
+        <p>{`Thêm ${remainingAmount.toFixed(
           2
-        )} more to qualify for free shipping`}</p>
+        )}đ để được miễn phí vận chuyển`}</p>
         <div className="progress">
           <div
             className="progress-bar progress-bar-striped progress-bar-animated"
@@ -28,7 +28,7 @@ const RenderCartProgress = () => {
   }
   return (
     <>
-      <p> You are eligible for free shipping</p>
+      <p> Bạn được miễn phí vận chuyển</p>
       <div className="progress">
         <div
           className="progress-bar progress-bar-striped progress-bar-animated"

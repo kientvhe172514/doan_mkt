@@ -22,7 +22,7 @@ const StatusFilter = ({setCurrPage,shop_right=false}) => {
   }
   return (
     <div className="tp-shop-widget mb-50">
-      <h3 className="tp-shop-widget-title">Product Status</h3>
+      <h3 className="tp-shop-widget-title">Trạng Thái Sản Phẩm</h3>
       <div className="tp-shop-widget-content">
         <div className="tp-shop-widget-checkbox">
           <ul className="filter-items filter-checkbox">

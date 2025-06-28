@@ -41,7 +41,7 @@ const ProductSliderItem = ({ product }) => {
       ></div>
       <div className="tp-product-action-3 tp-product-action-4 tp-product-action-blackStyle tp-product-action-brownStyle">
         <div className="tp-product-action-item-3 d-flex flex-column">
-          {isAddedToCart ? (
+          {/* {isAddedToCart ? (
             <Link
               href="/cart"
               className={`tp-product-action-btn-3 ${isAddedToCart ? 'active' : ''} tp-product-add-cart-btn`}
@@ -58,14 +58,14 @@ const ProductSliderItem = ({ product }) => {
               <Cart />
               <span className="tp-product-tooltip">Add to Cart</span>
             </button>
-          )}
+          )} */}
           <button
             type="button"
             className="tp-product-action-btn-3 tp-product-quick-view-btn"
             onClick={() => dispatch(handleProductModal(product))}
           >
             <QuickView />
-            <span className="tp-product-tooltip">Quick View</span>
+            <span className="tp-product-tooltip">Xem nhanh</span>
           </button>
           <button
             type="button"
@@ -73,7 +73,7 @@ const ProductSliderItem = ({ product }) => {
             className={`tp-product-action-btn-3 ${isAddedToWishlist ? 'active' : ''} tp-product-add-to-wishlist-btn`}
           >
             <Wishlist />
-            <span className="tp-product-tooltip">Add To Wishlist</span>
+            <span className="tp-product-tooltip">Thêm vào yêu thích</span>
           </button>
         </div>
       </div>
@@ -83,7 +83,7 @@ const ProductSliderItem = ({ product }) => {
         </h3>
         <div className="tp-category-price-wrapper-4">
           <span className="tp-category-price-4">${price.toFixed(2)}</span>
-          <div className="tp-category-add-to-cart">
+          {/* <div className="tp-category-add-to-cart">
             {isAddedToCart ? (
               <Link href="/cart" className="tp-category-add-to-cart-4">
                 <AddCart />{" "}View Cart
@@ -93,7 +93,7 @@ const ProductSliderItem = ({ product }) => {
                 <AddCart />{" "}Add to Cart
               </button>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -65,7 +65,7 @@ const ProductItem = ({ product, offer_style = false }) => {
           {/*  product action */}
           <div className="tp-product-action">
             <div className="tp-product-action-item d-flex flex-column">
-              {isAddedToCart ? (
+              {/* {isAddedToCart ? (
                 <Link
                   href="/cart"
                   className={`tp-product-action-btn ${isAddedToCart ? 'active' : ''} tp-product-add-cart-btn`}
@@ -83,7 +83,7 @@ const ProductItem = ({ product, offer_style = false }) => {
 
                   <span className="tp-product-tooltip">Add to Cart</span>
                 </button>
-              )}
+              )} */}
               <button
                 onClick={() => dispatch(handleProductModal(product))}
                 type="button"

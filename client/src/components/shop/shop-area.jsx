@@ -43,13 +43,13 @@ const ShopArea = ({ all_products, products, otherProps }) => {
                 {/* status */}
                 <StatusFilter setCurrPage={setCurrPage} />
                 {/* categories */}
-                <CategoryFilter setCurrPage={setCurrPage} />
+                {/* <CategoryFilter setCurrPage={setCurrPage} /> */}
                 {/* color */}
                 <ColorFilter setCurrPage={setCurrPage} />
                 {/* product rating */}
                 <TopRatedProducts />
                 {/* brand */}
-                <ProductBrand setCurrPage={setCurrPage} />
+                {/* <ProductBrand setCurrPage={setCurrPage} /> */}
                 {/* reset filter */}
                 <ResetButton/>
               </div>
@@ -76,7 +76,7 @@ const ShopArea = ({ all_products, products, otherProps }) => {
                     </div>
                   </div>
                 </div>
-                {products.length === 0 && <h2>No products found</h2>}
+                {products.length === 0 && <h2>Không có sản phẩm nào được tìm thấy</h2>}
                 {products.length > 0 && (
                   <div className="tp-shop-items-wrapper tp-shop-item-primary">
                     <div className="tab-content" id="productTabContent">

@@ -98,7 +98,7 @@ const ShopListItem = ({ product }) => {
               <>
                 <span className="tp-product-price-2 new-price">${price}</span>
                 <span className="tp-product-price-2 old-price">
-                  {" "} ${(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+                  {" "} {(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}đ
                 </span>
               </>
             ) : (
@@ -108,11 +108,11 @@ const ShopListItem = ({ product }) => {
           <p>
             {description.substring(0, 100)}
           </p>
-          <div className="tp-product-list-add-to-cart">
+          {/* <div className="tp-product-list-add-to-cart">
             <button onClick={() => handleAddProduct(product)} className="tp-product-list-add-to-cart-btn">
               Add To Cart
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
