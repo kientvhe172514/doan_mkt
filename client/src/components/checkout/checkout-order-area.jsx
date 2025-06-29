@@ -1,24 +1,22 @@
-import { useState } from "react";
-import { CardElement } from "@stripe/react-stripe-js";
+import { useState, useEffect } from "react"; // Corrected: consolidated useEffect import
+// Removed: import { CardElement } from "@stripe/react-stripe-js"; // No longer needed for VNPAY
 import { useSelector } from "react-redux";
 // internal
 import useCartInfo from "@/hooks/use-cart-info";
 import ErrorMsg from "../common/error-msg";
-import { useEffect } from "react";
+// Removed: duplicate import for useState and useEffect
 
 const CheckoutOrderArea = ({ checkoutData }) => {
   const {
     handleShippingCost,
     cartTotal = 0,
-    stripe,
     isCheckoutSubmit,
-    clientSecret,
     register,
     errors,
-    showCard,
-    setShowCard,
+    showCard, // This will now control VNPAY info display
+    setShowCard, // This will now control VNPAY info display
     shippingCost,
-    discountAmount
+    discountAmount,
   } = checkoutData;
 
   const { cart_products } = useSelector((state) => state.cart);
@@ -114,32 +112,18 @@ const CheckoutOrderArea = ({ checkoutData }) => {
               required: `Payment Option is required!`,
             })}
             type="radio"
-            id="back_transfer"
+            id="vnpay_payment" // Changed ID
             name="payment"
-            value="Card"
-            onClick={() => setShowCard(true)}
+            value="VNPAY" // Changed value
+            onClick={() => setShowCard(true)} // Keep setShowCard for VNPAY
           />
-          <label htmlFor="back_transfer">Thanh toán online</label>
-          {showCard && (
+          <label htmlFor="vnpay_payment">Thanh toán qua VNPAY</label>
+          {showCard && ( // This will now conditionally show VNPAY specific info if any
             <div className="direct-bank-transfer">
-              <div className="payment_card">
-                <CardElement
-                  options={{
-                    style: {
-                      base: {
-                        fontSize: "16px",
-                        color: "#424770",
-                        "::placeholder": {
-                          color: "#aab7c4",
-                        },
-                      },
-                      invalid: {
-                        color: "#9e2146",
-                      },
-                    },
-                  }}
-                />
-              </div>
+              <p>
+                Bạn sẽ được chuyển hướng đến cổng thanh toán VNPAY để hoàn tất
+                đơn hàng.
+              </p>
             </div>
           )}
           <ErrorMsg msg={errors?.payment?.message} />
@@ -164,7 +148,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
       <div className="tp-checkout-btn-wrapper">
         <button
           type="submit"
-          disabled={!stripe || isCheckoutSubmit}
+          disabled={isCheckoutSubmit} // Stripe dependency removed
           className="tp-checkout-btn w-100"
         >
           Đặt hàng

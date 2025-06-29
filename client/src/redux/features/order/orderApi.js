@@ -7,7 +7,7 @@ export const authApi = apiSlice.injectEndpoints({
     // createPaymentIntent
     createPaymentIntent: builder.mutation({
       query: (data) => ({
-        url: `${API_BASE_URL}/order/create-payment-intent`,
+        url: `${API_BASE_URL}/vnpay/create_payment_url`,
         method: "POST",
         body: data,
       }),

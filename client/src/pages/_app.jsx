@@ -5,6 +5,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import '../styles/index.scss';
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import 'react-toastify/dist/ReactToastify.css';
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }
