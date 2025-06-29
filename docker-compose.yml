@@ -6,8 +6,8 @@ services:
     ports:
       - "5000:5000"
     restart: always
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    depends_on:
+      - mongo
   frontend:
     image: tranvukien125/doan_tot_nghiep_client:latest
     ports:
