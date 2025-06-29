@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 
 # Copy file .env.production vào làm .env để build
-COPY .env.production .env
+COPY .env.local .env
 
 # Build production
 RUN npm run build
