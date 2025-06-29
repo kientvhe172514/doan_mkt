@@ -22,8 +22,8 @@ const productsSchema = mongoose.Schema(
     imageURLs: [
       {
         color: {
-          name: { type: String, required: true, trim: true },
-          clrCode: { type: String, required: true, trim: true },
+          name: { type: String, required: false, trim: true },
+          clrCode: { type: String, required: false, trim: true },
         },
         img: {
           type: String,
@@ -71,7 +71,7 @@ const productsSchema = mongoose.Schema(
     },
     status: {
       type: String,
-      required: true,
+      required: false,
       enum: {
         values: ["in-stock", "out-of-stock", "discontinued"],
         message: "status can't be {VALUE}",

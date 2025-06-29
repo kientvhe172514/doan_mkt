@@ -63,7 +63,7 @@ const Dashboard = () => {
       (order) => order.status.toLowerCase() === "pending"
     ).length;
     const deliveredOrders = orderData.filter(
-      (order) => order.status.toLowerCase() === "delivered"
+      (order) => order.status.toLowerCase() === "success"
     ).length;
 
     setStats({
