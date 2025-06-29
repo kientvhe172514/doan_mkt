@@ -42,7 +42,7 @@ exports.signup = async (req, res, next) => {
       sendEmail(mailData, res, message);
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -106,7 +106,7 @@ module.exports.login = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -151,7 +151,7 @@ exports.confirmEmail = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -194,7 +194,7 @@ exports.forgetPassword = async (req, res, next) => {
       sendEmail(body, res, message);
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -236,7 +236,7 @@ exports.confirmForgetPassword = async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -251,26 +251,25 @@ exports.changePassword = async (req, res, next) => {
     }
     if (googleSignIn) {
       const hashedPassword = bcrypt.hashSync(newPassword);
-      await User.updateOne({ email: email }, { password: hashedPassword })
+      await User.updateOne({ email: email }, { password: hashedPassword });
       return res.status(200).json({ message: "Password changed successfully" });
     }
     if (!bcrypt.compareSync(password, user?.password)) {
       return res.status(401).json({ message: "Incorrect current password" });
-    }
-    else {
+    } else {
       const hashedPassword = bcrypt.hashSync(newPassword);
-      await User.updateOne({ email: email }, { password: hashedPassword })
+      await User.updateOne({ email: email }, { password: hashedPassword });
       res.status(200).json({ message: "Password changed successfully" });
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
 // update a profile
 exports.updateUser = async (req, res, next) => {
   try {
-    const userId = req.params.id
+    const userId = req.params.id;
     const user = await User.findById(userId);
     if (user) {
       user.name = req.body.name;
@@ -290,7 +289,7 @@ exports.updateUser = async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -321,7 +320,7 @@ exports.signUpWithProvider = async (req, res, next) => {
         name: user.name,
         email: user.email,
         imageURL: user.picture,
-        status: 'active'
+        status: "active",
       });
 
       const signUpUser = await newUser.save();
@@ -337,11 +336,11 @@ exports.signUpWithProvider = async (req, res, next) => {
             email: signUpUser.email,
             imageURL: signUpUser.imageURL,
             googleSignIn: true,
-          }
+          },
         },
       });
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
 };

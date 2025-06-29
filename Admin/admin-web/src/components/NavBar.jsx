@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { logout } from "../redux/slices/authSlice";
 import "./styles/Navbar.css";
-
+import { NavLink } from "react-router-dom";
 const DashboardNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -106,24 +106,37 @@ const DashboardNavbar = () => {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/" active className="fw-medium px-3">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                `fw-medium px-3 nav-link ${isActive ? "active" : ""}`
+              }
+            >
               Dashboard
-            </Nav.Link>
-            <Nav.Link href="/products" className="fw-medium px-3">
+            </NavLink>
+
+            <NavLink
+              to="/products"
+              className={({ isActive }) =>
+                `fw-medium px-3 nav-link ${isActive ? "active" : ""}`
+              }
+            >
               Products
-            </Nav.Link>
-            <Nav.Link href="/orders" className="fw-medium px-3">
+            </NavLink>
+
+            <NavLink
+              to="/orders"
+              className={({ isActive }) =>
+                `fw-medium px-3 nav-link ${isActive ? "active" : ""}`
+              }
+            >
               Orders
-            </Nav.Link>
-            <Nav.Link href="/cloudinary" className="fw-medium px-3">
-              Cloudinary
-            </Nav.Link>
-            <Nav.Link href="/coupon" className="fw-medium px-3">
-              Coupon
-            </Nav.Link>
-            <Nav.Link href="/user" className="fw-medium px-3">
-              User
-            </Nav.Link>
+            </NavLink>
+
+            {/* <NavLink to="/cloudinary" className="fw-medium px-3 nav-link">Cloudinary</NavLink>
+    <NavLink to="/coupon" className="fw-medium px-3 nav-link">Coupon</NavLink>
+    <NavLink to="/user" className="fw-medium px-3 nav-link">User</NavLink> */}
           </Nav>
 
           <div className="d-flex align-items-center">

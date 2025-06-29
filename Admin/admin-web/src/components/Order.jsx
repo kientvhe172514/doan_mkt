@@ -134,13 +134,17 @@ const OrderList = () => {
                         handleStatusChange(ord._id, e.target.value)
                       }
                     >
-                      {["pending", "processing", "delivered", "cancel"].map(
-                        (status) => (
-                          <option key={status} value={status}>
-                            {status.charAt(0).toUpperCase() + status.slice(1)}
-                          </option>
-                        )
-                      )}
+                      {[
+                        "pending",
+                        "processing",
+                        "delivered",
+                        "cancel",
+                        "success",
+                      ].map((status) => (
+                        <option key={status} value={status}>
+                          {status.charAt(0).toUpperCase() + status.slice(1)}
+                        </option>
+                      ))}
                     </Form.Select>
                   </td>
                   <td>
@@ -266,7 +270,17 @@ const OrderList = () => {
                           }}
                         />
                       </td>
-                      <td>{item.title}</td>
+                      <td>
+                        <strong>{item.title}</strong>
+                        <br />
+                        <span>Size: {item.selectedSize || "N/A"}</span>
+                        <br />
+                        <span>Quantity: {item.orderQuantity || 1}</span>
+                        <br />
+                        <span>
+                          Color: {item.selectedColor?.color?.name || "N/A"}
+                        </span>
+                      </td>
                       <td>${item.price}</td>
                     </tr>
                   ))}

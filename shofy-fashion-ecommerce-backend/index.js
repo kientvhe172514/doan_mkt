@@ -11,6 +11,7 @@ const morgan = require("morgan");
 // error handler
 const globalErrorHandler = require("./middleware/global-error-handler");
 // routes
+const vnpayRoutes = require("./routes/vnpay.route");
 const userRoutes = require("./routes/user.routes");
 const categoryRoutes = require("./routes/category.routes");
 const brandRoutes = require("./routes/brand.routes");
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 connectDB();
 
 app.use("/api/user", userRoutes);
+app.use("/api/vnpay", vnpayRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/brand", brandRoutes);
 app.use("/api/product", productRoutes);

@@ -12,7 +12,8 @@ import { set_coupon } from "@/redux/features/coupon/couponSlice";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import {useCreatePaymentIntentMutation,useSaveOrderMutation} from "@/redux/features/order/orderApi";
 import { useGetOfferCouponsQuery } from "@/redux/features/coupon/couponApi";
-
+import { toast } from 'react-toastify';
+import axios from 'axios';
 const useCheckoutSubmit = () => {
   // offerCoupons
   const { data: offerCoupons, isError, isLoading } = useGetOfferCouponsQuery();
@@ -213,29 +214,25 @@ const useCheckoutSubmit = () => {
       orderNote:data.orderNote,
       user: user?._id || null,
     };
-    if (data.payment === 'Card') {
-      if (!stripe || !elements) {
-        return;
-      }
-      const card = elements.getElement(CardElement);
-      if (card == null) {
-        return;
-      }
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: card,
-      });
-      if (error && !paymentMethod) {
-        setCardError(error.message);
+    if (data.payment === 'VNPAY') {
+      try {
+        const response = await createPaymentIntent({
+          amount: cartTotal,
+          orderId: new Date().getTime(),
+          orderInfo: "Thanh toán đơn hàng",
+          returnUrl: `${window.location.origin}/order-status`,
+        }).unwrap(); // unwrap để lấy dữ liệu gốc
+    
+        if (response?.vnpUrl) {
+          window.location.href = response.vnpUrl;
+        } else {
+          toast.error("Không thể tạo liên kết thanh toán VNPAY.");
+          setIsCheckoutSubmit(false);
+        }
+      } catch (error) {
+        console.error("Lỗi khi tạo liên kết thanh toán VNPAY:", error);
+        toast.error("Đã xảy ra lỗi trong quá trình thanh toán VNPAY.");
         setIsCheckoutSubmit(false);
-      } else {
-        setCardError('');
-        const orderData = {
-          ...orderInfo,
-          cardInfo: paymentMethod,
-        };
-
-       return handlePaymentWithStripe(orderData);
       }
     }
     if (data.payment === 'COD') {
@@ -256,48 +253,48 @@ const useCheckoutSubmit = () => {
   };
 
   // handlePaymentWithStripe
-  const handlePaymentWithStripe = async (order) => {
-    try {
-      const {paymentIntent, error:intentErr} = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: {
-            card: elements.getElement(CardElement),
-            billing_details: {
-              name: user?.firstName,
-              email: user?.email,
-            },
-          },
-        },
-      );
-      if (intentErr) {
-        notifyError(intentErr.message);
-      } else {
-        // notifySuccess("Your payment processed successfully");
-      }
+  // const handlePaymentWithStripe = async (order) => {
+  //   try {
+  //     const {paymentIntent, error:intentErr} = await stripe.confirmCardPayment(
+  //       clientSecret,
+  //       {
+  //         payment_method: {
+  //           card: elements.getElement(CardElement),
+  //           billing_details: {
+  //             name: user?.firstName,
+  //             email: user?.email,
+  //           },
+  //         },
+  //       },
+  //     );
+  //     if (intentErr) {
+  //       notifyError(intentErr.message);
+  //     } else {
+  //       // notifySuccess("Your payment processed successfully");
+  //     }
 
-      const orderData = {
-        ...order,
-        paymentIntent,
-      };
+  //     const orderData = {
+  //       ...order,
+  //       paymentIntent,
+  //     };
 
-      saveOrder({
-        ...orderData
-      })
-      .then((result) => {
-          if(result?.error){
-          }
-          else {
-            localStorage.removeItem("couponInfo");
-            notifySuccess("Your Order Confirmed!");
-            router.push(`/order/${result.data?.order?._id}`);
-          }
-        })
-       } 
-    catch (err) {
-      console.log(err);
-    }
-  };
+  //     saveOrder({
+  //       ...orderData
+  //     })
+  //     .then((result) => {
+  //         if(result?.error){
+  //         }
+  //         else {
+  //           localStorage.removeItem("couponInfo");
+  //           notifySuccess("Your Order Confirmed!");
+  //           router.push(`/order/${result.data?.order?._id}`);
+  //         }
+  //       })
+  //      } 
+  //   catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return {
     handleCouponCode,

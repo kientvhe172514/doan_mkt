@@ -384,7 +384,7 @@ const ProductManagement = () => {
                   </Col>
                 ))}
                 <Col md={5}>
-                  <Form className="mb-3">
+                  {/* <Form className="mb-3">
                     <Form.Label>Thêm Hình Ảnh Mới</Form.Label>
                     <InputGroup className="mb-2">
                       <Form.Control
@@ -458,7 +458,7 @@ const ProductManagement = () => {
                         Tải lên
                       </Button>
                     </InputGroup>
-                  </Form>
+                  </Form> */}
                 </Col>
               </Row>
             </Card.Body>
