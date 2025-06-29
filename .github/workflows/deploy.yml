@@ -38,7 +38,7 @@ jobs:
           username: root
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /root/WDP
+            cd /root/doan_tot_nghiep
             docker-compose down
             docker-compose pull
             docker-compose up -d
