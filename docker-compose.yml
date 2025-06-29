@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     env_file:
-      - ./server/shofy-fashion-ecommerce-backend/.env
+      - ./shofy-fashion-ecommerce-backend/.env
     restart: always
   frontend:
     image: tranvukien125/doan_tot_nghiep_client:latest
