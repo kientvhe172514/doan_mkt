@@ -6,7 +6,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+# Copy toàn bộ mã nguồn
 COPY . .
+
+# Copy file .env.production vào làm .env để build
+COPY .env.production .env
+
+# Build production
 RUN npm run build
 
 # Production stage
@@ -14,11 +20,13 @@ FROM node:18-alpine AS runner
 
 WORKDIR /app
 
+# Copy app từ build stage
 COPY --from=builder /app ./
 
-# Optional: nếu bạn dùng .env.production trong Next.js
-# COPY .env.production .env
+# Cài minimal deps cho chạy production
+RUN npm install --omit=dev
 
 EXPOSE 3000
 
+# Chạy Next.js production mode
 CMD ["npm", "start"]

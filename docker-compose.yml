@@ -6,8 +6,6 @@ services:
     ports:
       - "5000:5000"
     restart: always
-    depends_on:
-      - mongo
   frontend:
     image: tranvukien125/doan_tot_nghiep_client:latest
     ports:
