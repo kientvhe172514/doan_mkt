@@ -1,13 +1,24 @@
-FROM node:18 AS build
+# Build stage
+FROM node:18 AS builder
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm install 
-COPY . .
 
-ENV NODE_OPTIONS=--max-old-space-size=1536
+COPY package*.json ./
+RUN npm install
+
+COPY . .
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
+# Production stage
+FROM node:18-alpine AS runner
+
+WORKDIR /app
+
+COPY --from=builder /app ./
+
+# Optional: nếu bạn dùng .env.production trong Next.js
+# COPY .env.production .env
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
