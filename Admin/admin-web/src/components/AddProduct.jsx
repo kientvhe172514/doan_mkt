@@ -49,7 +49,7 @@ const AddProduct = () => {
     category: { name: "CPU Heat Pipes", id: "6419723bd7dc5155c04350d5" },
     status: "in-stock",
     reviews: [],
-    productType: "clothing",
+    productType: "fashion",
     description: "",
     additionalInformation: [],
     tags: [],
