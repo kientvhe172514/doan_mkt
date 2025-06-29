@@ -5,13 +5,12 @@ services:
     image: tranvukien125/doan_tot_nghiep_backend:latest
     ports:
       - "5000:5000"
-    env_file:
-      - ./shofy-fashion-ecommerce-backend/.env
     restart: always
+
   frontend:
     image: tranvukien125/doan_tot_nghiep_client:latest
     ports:
-      - "3000:3000"   # ✅ phải sửa thành 3000:3000 vì Next.js lắng nghe trên cổng 3000
+      - "3000:3000"
     restart: always
 
   admin:
