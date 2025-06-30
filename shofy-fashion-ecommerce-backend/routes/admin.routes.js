@@ -12,6 +12,7 @@ const {
   forgetPassword,
   confirmAdminEmail,
   confirmAdminForgetPass,
+  updateAdmin,
 } = require("../controller/admin.controller");
 
 //register a staff
@@ -41,8 +42,8 @@ router.get("/get/:id", getStaffById);
 // update a staff
 router.patch("/update-stuff/:id", updateStaff);
 
-//update staf status
-// router.put("/update-status/:id", updatedStatus);
+//update admin
+router.put("/update-admin/:id", updateAdmin);
 
 //delete a staff
 router.delete("/:id", deleteStaff);

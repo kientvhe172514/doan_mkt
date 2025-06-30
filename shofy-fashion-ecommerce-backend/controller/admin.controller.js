@@ -282,6 +282,7 @@ const updateStaff = async (req, res) => {
 const deleteStaff = async (req, res, next) => {
   try {
     await Admin.findByIdAndDelete(req.params.id);
+    console.log("XÓA ADMIN:", req.params.id);
     res.status(200).json({
       message: "Admin Deleted Successfully",
     });
@@ -290,20 +291,23 @@ const deleteStaff = async (req, res, next) => {
   }
 };
 
-const updatedStatus = async (req, res) => {
+const updateAdmin = async (req, res) => {
   try {
-    const newStatus = req.body.status;
+    const updateData = req.body;
 
-    await Admin.updateOne(
-      { _id: req.params.id },
-      {
-        $set: {
-          status: newStatus,
-        },
-      }
-    );
-    res.send({
-      message: `Store ${newStatus} Successfully!`,
+    const updatedAdmin = await Admin.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    ).select("-password");
+
+    if (!updatedAdmin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.status(200).json({
+      message: "Admin updated successfully",
+      data: updatedAdmin,
     });
   } catch (err) {
     res.status(500).send({
@@ -322,7 +326,7 @@ module.exports = {
   getStaffById,
   updateStaff,
   deleteStaff,
-  updatedStatus,
   changePassword,
   confirmAdminForgetPass,
+  updateAdmin,
 };

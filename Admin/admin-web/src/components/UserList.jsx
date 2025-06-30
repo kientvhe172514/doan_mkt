@@ -1,5 +1,5 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import 'bootstrap-icons/font/bootstrap-icons.min.css';
+import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 
@@ -19,6 +19,21 @@ const UserList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
+  const [editUser, setEditUser] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [viewUser, setViewUser] = useState(null);
+  const [showViewModal, setShowViewModal] = useState(false);
+
+  const handleEdit = (user) => {
+    setEditUser(user); // Gán user vào form
+    setShowEditModal(true); // Hiện modal
+  };
+  const handleView = (user) => {
+    setViewUser(user);
+    setShowViewModal(true);
+  };
+
+  const API_LINK = process.env.REACT_APP_API_LINK;
 
   // Lọc chi tiết
   const [filters, setFilters] = useState({
@@ -31,21 +46,37 @@ const UserList = () => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchAccounts = async () => {
       try {
-        // Thay thế bằng API thực tế của bạn
-        const response = await axios.get("http://localhost:9999/api/admin/all");
-        setUsers(response.data?.data);
+        // Gọi API admin trước
+        const adminRes = await axios.get(`${API_LINK}/api/admin/all`);
+        const admins = (adminRes.data?.data || []).map((admin) => ({
+          ...admin,
+          role: "Admin",
+        }));
+
+        // Gọi API user sau
+        const userRes = await axios.get(`${API_LINK}/api/user/all`);
+        const users = (userRes.data?.data || []).map((user) => ({
+          ...user,
+          role: "User",
+        }));
+
+        // Gộp danh sách
+        const merged = [...admins, ...users];
+        setUsers(merged);
         setLoading(false);
-        return;
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        console.error("Lỗi khi tải dữ liệu người dùng:", error);
+        setError(error.message);
         setLoading(false);
       }
     };
 
-    fetchUsers();
-  }, []);
+    if (API_LINK) {
+      fetchAccounts();
+    }
+  }, [API_LINK]);
 
   // Tính tổng số trang khi users hoặc usersPerPage thay đổi
   useEffect(() => {
@@ -130,12 +161,9 @@ const UserList = () => {
       if (filters.role && user.role !== filters.role) {
         return false;
       }
-      if (filters.status && user.status !== filters.status) {
-        return false;
-      }
       if (
-        filters.country &&
-        !user.country.toLowerCase().includes(filters.country.toLowerCase())
+        filters.status &&
+        user.status.toLowerCase() !== filters.status.toLowerCase()
       ) {
         return false;
       }
@@ -274,6 +302,61 @@ const UserList = () => {
     );
   }
 
+  const handleDelete = async (id) => {
+    const user = users.find((u) => u._id === id);
+
+    if (!user) {
+      alert("Không tìm thấy người dùng.");
+      return;
+    }
+
+    const role = user.role;
+    const endpoint = role === "Admin" ? "admin" : "user";
+
+    if (
+      !window.confirm(
+        `Bạn có chắc chắn muốn xóa ${role.toLowerCase()} này không?`
+      )
+    )
+      return;
+
+    try {
+      const url = `${API_LINK}/api/${endpoint}/${id}`;
+      console.log("🗑️ Đang gửi DELETE tới:", url);
+
+      const res = await axios.delete(url);
+
+      console.log("✅ Xóa thành công:", res.data);
+      // Cập nhật danh sách
+      setUsers((prev) => prev.filter((u) => u._id !== id));
+    } catch (error) {
+      console.error("❌ Lỗi khi xóa:", error.response?.data || error.message);
+      alert(
+        error.response?.data?.message ||
+          "Không thể xóa người dùng. Vui lòng thử lại."
+      );
+    }
+  };
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const endpoint =
+        editUser.role === "Admin" ? "admin/update-admin" : "user/update-user";
+
+      await axios.put(`${API_LINK}/api/${endpoint}/${editUser._id}`, editUser);
+
+      setUsers((prev) =>
+        prev.map((u) => (u._id === editUser._id ? editUser : u))
+      );
+
+      setShowEditModal(false);
+      alert("Cập nhật thành công!");
+    } catch (error) {
+      console.error("Lỗi khi cập nhật:", error);
+      alert("Không thể cập nhật. Vui lòng thử lại.");
+    }
+  };
+
   return (
     <div className="container-fluid mt-4">
       <h2 className="mb-4">Danh sách người dùng</h2>
@@ -343,8 +426,7 @@ const UserList = () => {
                 >
                   <option value="">Tất cả</option>
                   <option value="Admin">Admin</option>
-                  <option value="Manager">Manager</option>
-                  <option value="Employee">Employee</option>
+                  <option value="User">User</option>
                 </select>
               </div>
               <div className="col-md-2 mb-2">
@@ -359,17 +441,6 @@ const UserList = () => {
                   <option value="Active">Hoạt động</option>
                   <option value="Inactive">Không hoạt động</option>
                 </select>
-              </div>
-              <div className="col-md-2 mb-2">
-                <label className="form-label">Quốc gia</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="country"
-                  value={filters.country}
-                  onChange={handleFilterChange}
-                  placeholder="Lọc theo quốc gia"
-                />
               </div>
             </div>
             <div className="row mt-2">
@@ -425,7 +496,6 @@ const UserList = () => {
                 {sortConfig.key === "name" &&
                   (sortConfig.direction === "ascending" ? "↑" : "↓")}
               </th>
-              <th>Hình ảnh</th>
               <th
                 onClick={() => requestSort("role")}
                 style={{ cursor: "pointer" }}
@@ -468,19 +538,6 @@ const UserList = () => {
               <tr key={user.id || index}>
                 <td>{user.name}</td>
                 <td>
-                  <img
-                    src={user.image}
-                    alt={user.name}
-                    className="rounded-circle"
-                    width="40"
-                    height="40"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = "https://i.ibb.co/Ydf3C1H/brand-1.png";
-                    }}
-                  />
-                </td>
-                <td>
                   <span
                     className={`badge ${
                       user.role === "Admin"
@@ -499,7 +556,9 @@ const UserList = () => {
                 <td>
                   <span
                     className={`badge ${
-                      user.status === "Active" ? "bg-success" : "bg-secondary"
+                      user.status === "Active" || user.status === "active"
+                        ? "bg-success"
+                        : "bg-secondary"
                     }`}
                   >
                     {user.status}
@@ -508,16 +567,27 @@ const UserList = () => {
                 <td>{formatDate(user.joiningDate)}</td>
                 <td>
                   <div className="btn-group" role="group">
-                    <button type="button" className="btn btn-sm btn-info me-1">
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-info me-1"
+                      onClick={() => handleView(user)}
+                    >
                       <i className="bi bi-eye"></i>
                     </button>
+
                     <button
                       type="button"
                       className="btn btn-sm btn-warning me-1"
+                      onClick={() => handleEdit(user)}
                     >
                       <i className="bi bi-pencil"></i>
                     </button>
-                    <button type="button" className="btn btn-sm btn-danger">
+
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(user._id)}
+                    >
                       <i className="bi bi-trash"></i>
                     </button>
                   </div>
@@ -537,6 +607,122 @@ const UserList = () => {
 
       {/* Phân trang */}
       {totalPages > 0 && renderPagination()}
+      {showEditModal && (
+        <div className="modal fade show d-block" tabIndex="-1">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <form onSubmit={handleEditSubmit}>
+                <div className="modal-header">
+                  <h5 className="modal-title">Chỉnh sửa người dùng</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={() => setShowEditModal(false)}
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <div className="mb-3">
+                    <label className="form-label">Tên</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={editUser?.name || ""}
+                      onChange={(e) =>
+                        setEditUser((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      value={editUser?.email || ""}
+                      disabled
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Số điện thoại</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={editUser?.phone || ""}
+                      onChange={(e) =>
+                        setEditUser((prev) => ({
+                          ...prev,
+                          phone: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                  {/* Thêm các trường khác nếu cần */}
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setShowEditModal(false)}
+                  >
+                    Đóng
+                  </button>
+                  <button type="submit" className="btn btn-primary">
+                    Lưu thay đổi
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+      {showViewModal && viewUser && (
+        <div className="modal fade show d-block" tabIndex="-1">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Chi tiết người dùng</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowViewModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12">
+                    <p>
+                      <strong>Tên:</strong> {viewUser.name}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {viewUser.email}
+                    </p>
+                    <p>
+                      <strong>Số điện thoại:</strong> {viewUser.phone}
+                    </p>
+                    <p>
+                      <strong>Vai trò:</strong> {viewUser.role}
+                    </p>
+                    <p>
+                      <strong>Trạng thái:</strong> {viewUser.status}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setShowViewModal(false)}
+                >
+                  Đóng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

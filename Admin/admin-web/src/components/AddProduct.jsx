@@ -65,6 +65,7 @@ const AddProduct = () => {
   const [uploadingIndex, setUploadingIndex] = useState(null);
   const [selectedUnit, setSelectedUnit] = useState("cái");
   const [customUnit, setCustomUnit] = useState("");
+  const API_LINK = process.env.REACT_APP_API_LINK;
 
   useEffect(() => {
     // const fetchBrand = async () => {
@@ -79,7 +80,7 @@ const AddProduct = () => {
     // };
     const fetchCategory = async () => {
       try {
-        const res = await axios.get("http://localhost:9999/api/category/all");
+        const res = await axios.get(`${API_LINK}/api/category/all`);
         setCategory(res.data?.result);
         return res.data;
       } catch (error) {
@@ -177,7 +178,7 @@ const AddProduct = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:9999/api/cloudinary/add-img",
+        `${API_LINK}/api/cloudinary/add-img`,
         formData,
         {
           headers: {
@@ -393,7 +394,7 @@ const AddProduct = () => {
       console.log("DỮ LIỆU GỬI:", product);
       console.log("CLEAN PRODUCT:", JSON.stringify(safeProduct, null, 2));
 
-      const response = await fetch("http://localhost:9999/api/product/add", {
+      const response = await fetch(`${API_LINK}/api/product/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
