@@ -1,7 +1,7 @@
 import * as dayjs from "dayjs";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+// import { CardElement, useElements } from "@stripe/react-stripe-js";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
@@ -56,8 +56,7 @@ const useCheckoutSubmit = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const stripe = useStripe();
-  const elements = useElements();
+  // const elements = useElements();
 
   const {register,handleSubmit,setValue,formState: { errors }} = useForm();
 
@@ -204,7 +203,7 @@ const useCheckoutSubmit = () => {
       country: "Việt Nam",
       zipCode: "123456",
       shippingOption: data.shippingOption,
-      status: "Pending",
+      status: "pending",
       cart: cart_products,
       paymentMethod: data.payment,
       subTotal: total,
@@ -216,25 +215,41 @@ const useCheckoutSubmit = () => {
     };
     if (data.payment === 'VNPAY') {
       try {
-        const response = await createPaymentIntent({
-          amount: cartTotal,
-          orderId: new Date().getTime(),
-          orderInfo: "Thanh toán đơn hàng",
-          returnUrl: `${window.location.origin}/order-status`,
-        }).unwrap(); // unwrap để lấy dữ liệu gốc
-    
-        if (response?.vnpUrl) {
-          window.location.href = response.vnpUrl;
-        } else {
-          toast.error("Không thể tạo liên kết thanh toán VNPAY.");
-          setIsCheckoutSubmit(false);
-        }
+          // BƯỚC 1: LƯU ĐƠN HÀNG VỚI TRẠNG THÁI CHỜ THANH TOÁN TRƯỚC
+         const initialOrderResponse = await saveOrder({
+              ...orderInfo,
+              status: 'payment pending', // <--- SỬA THÀNH CHỮ THƯỜNG HOÀN TOÀN Ở ĐÂY
+          }).unwrap();
+          if (initialOrderResponse?.order?._id) {
+              const orderIdForVnpay = initialOrderResponse.order._id; // Dùng _id của đơn hàng vừa tạo làm orderId cho VNPAY
+
+              // BƯỚC 2: TẠO URL THANH TOÁN VỚI VNPAY
+              const response = await createPaymentIntent({
+                  amount: cartTotal,
+                  orderId: orderIdForVnpay, // Gửi ID đơn hàng từ DB cho VNPAY
+                  orderInfo: "Thanh toán đơn hàng " + orderIdForVnpay,
+                  returnUrl: `${window.location.origin}/order/${orderIdForVnpay}`, // Trang để chuyển hướng người dùng về
+              }).unwrap();
+              console.log("Initial Order Response:", initialOrderResponse); 
+              if (response?.vnpUrl) {
+                  // BƯỚC 3: CHUYỂN HƯỚNG NGƯỜI DÙNG ĐẾN VNPAY
+                  window.location.href = response.vnpUrl;
+              } else {
+                  toast.error("Không thể tạo liên kết thanh toán VNPAY.");
+                  setIsCheckoutSubmit(false);
+                  // Có thể cập nhật lại trạng thái đơn hàng vừa tạo thành 'Failed' hoặc 'Cancelled'
+              }
+          } else {
+              toast.error("Không thể lưu đơn hàng ban đầu.");
+              setIsCheckoutSubmit(false);
+          }
       } catch (error) {
-        console.error("Lỗi khi tạo liên kết thanh toán VNPAY:", error);
-        toast.error("Đã xảy ra lỗi trong quá trình thanh toán VNPAY.");
-        setIsCheckoutSubmit(false);
+          console.error("Lỗi khi tạo liên kết thanh toán VNPAY:", error);
+          toast.error("Đã xảy ra lỗi trong quá trình thanh toán VNPAY.");
+          setIsCheckoutSubmit(false);
+          // Có thể cập nhật lại trạng thái đơn hàng vừa tạo thành 'Failed' hoặc 'Cancelled'
       }
-    }
+  }
     if (data.payment === 'COD') {
       saveOrder({
         ...orderInfo
@@ -248,7 +263,7 @@ const useCheckoutSubmit = () => {
           notifySuccess("Your Order Confirmed!");
           router.push(`/order/${res.data?.order?._id}`);
         }
-      })
+      })  
     }
   };
 
@@ -311,7 +326,6 @@ const useCheckoutSubmit = () => {
     errors,
     cardError,
     submitHandler,
-    stripe,
     handleSubmit,
     clientSecret,
     setClientSecret,

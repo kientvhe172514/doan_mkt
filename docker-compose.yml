@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  backend:
+    image: tranvukien125/doan_tot_nghiep_backend:latest
+    ports:
+      - "5000:5000"
+    restart: always
+  frontend:
+    image: tranvukien125/doan_tot_nghiep_client:latest
+    ports:
+      - "3000:3000"
+    restart: always
+
+  admin:
+    image: tranvukien125/doan_tot_nghiep_admin:latest
+    ports:
+      - "3001:80"
+    restart: always

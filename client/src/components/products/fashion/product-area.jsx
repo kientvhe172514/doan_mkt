@@ -83,7 +83,7 @@ const ProductArea = () => {
           <div className="row">
             <div className="col-xl-12">
               <div className="tp-section-title-wrapper-2 text-center mb-35">
-                <span className="tp-section-title-pre-2">
+                <span className="tp-section-title-pre-2" >
                   Tất Cả Sản Phẩm
                   <TextShapeLine />
                 </span>

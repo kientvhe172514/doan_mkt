@@ -80,9 +80,14 @@ const orderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "processing", "delivered", "cancel", "success"],
+      enum: ["pending", "processing", "delivered",'cancel','payment pending'],
+      default: 'Pending',
       lowercase: true,
     },
+    paymentDetails: { 
+      type: Object,
+      required: false,
+  },
   },
   {
     timestamps: true,
@@ -90,21 +95,19 @@ const orderSchema = new mongoose.Schema(
 );
 
 // define pre-save middleware to generate the invoice number
-orderSchema.pre("save", async function (next) {
+orderSchema.pre('save', async function (next) {
   const order = this;
-  if (!order.invoice) {
-    // check if the order already has an invoice number
+  if (!order.invoice) { // check if the order already has an invoice number
     try {
       // find the highest invoice number in the orders collection
       const highestInvoice = await mongoose
-        .model("Order")
+        .model('Order')
         .find({})
-        .sort({ invoice: "desc" })
+        .sort({ invoice: 'desc' })
         .limit(1)
         .select({ invoice: 1 });
       // if there are no orders in the collection, start at 1000
-      const startingInvoice =
-        highestInvoice.length === 0 ? 1000 : highestInvoice[0].invoice + 1;
+      const startingInvoice = highestInvoice.length === 0 ? 1000 : highestInvoice[0].invoice + 1;
       // set the invoice number for the new order
       order.invoice = startingInvoice;
       next();

@@ -1,8 +1,8 @@
 import store from "@/redux/store";
 import { Provider } from "react-redux";
 import ReactModal from "react-modal";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import '../styles/index.scss';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,18 +15,16 @@ if (typeof window !== "undefined") {
 }
 
 // stripePromise
-const NEXT_PUBLIC_STRIPE_KEY = 'pk_test_51NYXCFGndYsQkAEFifIbJH64sZFMDpF7DcLYvUUN2az3VdK1M7qVPo7Z2j9rhunf3Pd0C3aFLENIxFriJWwx1P6a00lQFqaoc6';
-const stripePromise = loadStripe(NEXT_PUBLIC_STRIPE_KEY);
+// const NEXT_PUBLIC_STRIPE_KEY = 'pk_test_51NYXCFGndYsQkAEFifIbJH64sZFMDpF7DcLYvUUN2az3VdK1M7qVPo7Z2j9rhunf3Pd0C3aFLENIxFriJWwx1P6a00lQFqaoc6';
+// const stripePromise = loadStripe(NEXT_PUBLIC_STRIPE_KEY);
 const NEXT_PUBLIC_GOOGLE_CLIENT_ID = '248769353998-fcv5ved8uiqnvlg8o9la9aac258pjd9s.apps.googleusercontent.com'
 export default function App({ Component, pageProps }) {
   return (
     <GoogleOAuthProvider clientId={NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
-      <Provider store={store}>
-        <Elements stripe={stripePromise}>
+      <Provider store={store}>    
           <div id="root">
             <Component {...pageProps} />
-          </div>
-        </Elements>
+          </div>     
       </Provider>
     </GoogleOAuthProvider>
   )
