@@ -54,9 +54,9 @@ const ForgotPassword = ({ params }) => {
             <div className="col-xl-6 col-lg-8">
               <div className="tp-login-wrapper">
                 <div className="tp-login-top text-center mb-30">
-                  <h3 className="tp-login-title">Forget Password</h3>
+                  <h3 className="tp-login-title">Quên Mật Khẩu</h3>
                   <p>
-                    Reset Your Password
+                    Đổi mật khẩu
                   </p>
                 </div>
                 <div className="tp-login-option">
@@ -81,7 +81,7 @@ const ForgotPassword = ({ params }) => {
                             </span>
                           </div>
                           <div className="tp-login-input-title">
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password">Mật khẩu</label>
                           </div>
                         </div>
                         <ErrorMsg msg={errors.password?.message} />
@@ -104,7 +104,7 @@ const ForgotPassword = ({ params }) => {
                             </span>
                           </div>
                           <div className="tp-login-input-title">
-                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <label htmlFor="confirmPassword">Nhắc lại mật khẩu</label>
                           </div>
                         </div>
                         <ErrorMsg msg={errors.confirmPassword?.message} />
@@ -113,7 +113,7 @@ const ForgotPassword = ({ params }) => {
 
                     <div className="tp-login-bottom">
                       <button type="submit" className="tp-login-btn w-100">
-                        Confirm password
+                        Đổi mật khẩu
                       </button>
                     </div>
                   </form>

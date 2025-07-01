@@ -58,7 +58,7 @@ const RegisterForm = () => {
             />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="name">Your Name</label>
+            <label htmlFor="name">Họ và tên</label>
           </div>
           <ErrorMsg msg={errors.name?.message} />
         </div>
@@ -73,7 +73,7 @@ const RegisterForm = () => {
             />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="email">Your Email</label>
+            <label htmlFor="email">Email</label>
           </div>
           <ErrorMsg msg={errors.email?.message} />
         </div>
@@ -94,7 +94,7 @@ const RegisterForm = () => {
               </span>
             </div>
             <div className="tp-login-input-title">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Mật khẩu</label>
             </div>
           </div>
           <ErrorMsg msg={errors.password?.message} />
@@ -111,14 +111,14 @@ const RegisterForm = () => {
             type="checkbox"
           />
           <label htmlFor="remember">
-            I accept the terms of the Service & <a href="#">Privacy Policy</a>.
+           Tôi đồng ý với các chính sách <a href="#">và điều khoản</a>.
           </label>
           <ErrorMsg msg={errors.remember?.message} />
         </div>
       </div>
       <div className="tp-login-bottom">
         <button type="submit" className="tp-login-btn w-100">
-          Sign Up
+           Đăng Ký
         </button>
       </div>
     </form>

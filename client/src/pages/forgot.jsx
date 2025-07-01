@@ -11,7 +11,7 @@ const ForgotPage = () => {
     <Wrapper>
       <SEO pageTitle="Đăng Nhập" />
       <HeaderTwo style_2={true} />
-      <CommonBreadcrumb title="Forgot Password" subtitle="Reset Password" center={true} />
+      <CommonBreadcrumb title="Quên Mật Khẩu" subtitle="Thay đổi mật khẩu" center={true} />
       <ForgotArea />
       <Footer primary_style={true} />
     </Wrapper>
