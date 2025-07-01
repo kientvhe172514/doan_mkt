@@ -27,7 +27,7 @@ export default function Home() {
       <TrendingProducts/>
       <BestSellerProducts/>
       {/* <FashionTestimonial/> */}
-      <BlogArea/>
+      {/* <BlogArea/> */}
       <FeatureAreaTwo/>
       <InstagramAreaTwo/>
       <Footer style_2={true} />
