@@ -11,7 +11,7 @@ const BlogArea = () => {
     <>
       <section className="tp-blog-area pt-110 pb-120">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xl-12">
               <div className="tp-section-title-wrapper-2 mb-50 text-center">
                 <span className="tp-section-title-pre-2">
@@ -21,7 +21,7 @@ const BlogArea = () => {
                 <h3 className="tp-section-title-2">Tin Tức & Bài Viết Mới Nhất</h3>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row">
             {blogs.map(blog => (
               <div key={blog.id} className="col-xl-4 col-lg-4 col-md-6">

@@ -7,13 +7,13 @@ const CheckoutCoupon = ({ handleCouponCode, couponRef,couponApplyMsg }) => {
   return (
     <div className="tp-checkout-verify-item">
       <p className="tp-checkout-verify-reveal">
-        Have a coupon?{" "}
+        Bạn có mã giảm giá?{" "}
         <button
           onClick={() => setIsOpen(!isOpen)}
           type="button"
           className="tp-checkout-coupon-form-reveal-btn"
         >
-          Click here to enter your code
+          Bấm vào đây để nhập mã giảm giá
         </button>
       </p>
 
@@ -21,14 +21,14 @@ const CheckoutCoupon = ({ handleCouponCode, couponRef,couponApplyMsg }) => {
         <div id="tpCheckoutCouponForm" className="tp-return-customer">
           <form onSubmit={handleCouponCode}>
             <div className="tp-return-customer-input">
-              <label>Coupon Code :</label>
-              <input ref={couponRef} type="text" placeholder="Coupon" />
+              <label>Mã :</label>
+              <input ref={couponRef} type="text" placeholder="mã giả giá..." />
             </div>
             <button
               type="submit"
               className="tp-return-customer-btn tp-checkout-btn"
             >
-              Apply
+              ÁP DỤNG MÃ GIẢM GIÁ
             </button>
           </form>
           {couponApplyMsg && <p className="p-2" style={{color:'green'}}>{couponApplyMsg}</p>}

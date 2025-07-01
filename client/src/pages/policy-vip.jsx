@@ -3,19 +3,19 @@ import SEO from "@/components/seo";
 import HeaderTwo from "@/layout/headers/header-2";
 import Wrapper from "@/layout/wrapper";
 import Footer from "@/layout/footers/footer";
-import BlogBreadcrumb from "@/components/breadcrumb/blog-breadcrumb";
-import BlogPostboxArea from "@/components/blog-details/blog-details-area-2";
+import PolicyCrumb from "@/components/breadcrumb/PolicyCrumb";
+import PolicyDetail from "@/components/policy-detail/policy-vip";
 
-const BlogPostBoxPage = () => {
+const PolicyPage = () => {
   return (
     <Wrapper>
-      <SEO pageTitle="Blog" />
+      <SEO pageTitle="Policy" />
       <HeaderTwo style_2={true} />
-      <BlogBreadcrumb/>
-      <BlogPostboxArea/>
+      <PolicyCrumb title="Chính Sách Khách hàng Thân Thiết"/>
+      <PolicyDetail/>
       <Footer primary_style={true} />
     </Wrapper>
   );
 };
 
-export default BlogPostBoxPage;
+export default PolicyPage;

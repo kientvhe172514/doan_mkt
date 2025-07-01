@@ -71,13 +71,12 @@ function ProfileSetting({active,handleActive}) {
   }
   return (
     <div className="tp-header-top-menu-item tp-header-setting">
-      <span
+      <i
         onClick={() => handleActive('setting')}
-        className="tp-header-setting-toggle"
+        className="tp-header-setting-toggle fa-solid fa-bars"
         id="tp-header-setting-toggle"
       >
-        Cài Đặt
-      </span>
+      </i>
       <ul className={active === 'setting' ? "tp-setting-list-open" : ""}>
         <li>
           <Link href="/profile">Trang Cá Nhân</Link>

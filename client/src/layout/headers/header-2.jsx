@@ -10,7 +10,7 @@ import useCartInfo from '@/hooks/use-cart-info';
 import { openCartMini } from '@/redux/features/cartSlice';
 import HeaderTopRight from './header-com/header-top-right';
 import CartMiniSidebar from '@/components/common/cart-mini-sidebar';
-import { CartTwo, Compare, Facebook, Menu, PhoneTwo, Wishlist, Search } from '@/svg';
+import { CartTwo, Compare, Menu, Wishlist, Search } from '@/svg'; // Bỏ các SVG không dùng
 import useSearchFormSubmit from '@/hooks/use-search-form-submit';
 import OffCanvas from '@/components/common/off-canvas';
 
@@ -25,37 +25,10 @@ const HeaderTwo = ({ style_2 = false }) => {
     <>
       <header>
         <div className={`tp-header-area tp-header-style-${style_2 ? 'primary' : 'darkRed'} tp-header-height`}>
-          <div className="tp-header-top-2 p-relative z-index-11 tp-header-top-border d-none d-md-block">
-            <div className="container">
-              <div className="row align-items-center">
-                <div className="col-md-6">
-                  <div className="tp-header-info d-flex align-items-center">
-                    <div className="tp-header-info-item">
-                      <a href="#">
-                        <span>
-                          {/* <Facebook /> */}
-                        </span> 7500k Followers
-                      </a>
-                    </div>
-                    <div className="tp-header-info-item">
-                      <a href="tel:966-595-035-008">
-                        <span>
-                          {/* <PhoneTwo /> */}
-                        </span> 0363.697.288
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="tp-header-top-right tp-header-top-black d-flex align-items-center justify-content-end">
-                    <HeaderTopRight />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
+          {/* 1. XÓA BỎ TOÀN BỘ DIV "tp-header-top-2" */}
 
-          <div id="header-sticky" className={`tp-header-bottom-2 tp-header-sticky ${sticky ? 'header-sticky' : ''}`}>
+          <div style={{ position: 'relative', zIndex: 999 }} id="header-sticky" className={`tp-header-bottom-2 tp-header-sticky ${sticky ? 'header-sticky' : ''}`}>
             <div className="container">
               <div className="tp-mega-menu-wrapper p-relative">
                 <div className="row align-items-center">
@@ -87,6 +60,7 @@ const HeaderTwo = ({ style_2 = false }) => {
                           </button>
                         </form>
                       </div>
+
                       <div className="tp-header-action d-flex align-items-center ml-30">
                         <div className="tp-header-action-item d-none d-lg-block">
                           <Link href="/compare" className="tp-header-action-btn">
@@ -105,6 +79,11 @@ const HeaderTwo = ({ style_2 = false }) => {
                             <span className="tp-header-action-badge">{quantity}</span>
                           </button>
                         </div>
+                        {/* 2. THÊM HeaderTopRight VÀO ĐÂY, BỌC TRONG DIV CÓ CLASS TƯƠNG TỰ */}
+                        <div className="tp-header-action-item cursor-pointer">
+                          <HeaderTopRight />
+                        </div>
+
                         <div className="tp-header-action-item tp-header-hamburger mr-20 d-xl-none">
                           <button onClick={() => setIsCanvasOpen(true)} type="button" className="tp-offcanvas-open-btn">
                             <Menu />
@@ -120,13 +99,8 @@ const HeaderTwo = ({ style_2 = false }) => {
         </div>
       </header>
 
-      {/* cart mini sidebar start */}
       <CartMiniSidebar />
-      {/* cart mini sidebar end */}
-
-      {/* off canvas start */}
       <OffCanvas isOffCanvasOpen={isOffCanvasOpen} setIsCanvasOpen={setIsCanvasOpen} categoryType="fashion" />
-      {/* off canvas end */}
     </>
   );
 };

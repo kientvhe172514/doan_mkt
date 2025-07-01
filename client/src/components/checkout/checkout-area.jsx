@@ -32,11 +32,11 @@ const CheckoutArea = () => {
               <div className="col-xl-7 col-lg-7">
                 <div className="tp-checkout-verify">
                   <CheckoutLogin />
-                  {/* <CheckoutCoupon
+                  <CheckoutCoupon
                     handleCouponCode={handleCouponCode}
                     couponRef={couponRef}
                     couponApplyMsg={couponApplyMsg}
-                  /> */}
+                  />
                 </div>
               </div>
               <form onSubmit={handleSubmit(submitHandler)}>
