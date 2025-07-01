@@ -44,6 +44,8 @@ const ProductManagement = () => {
   const [newColorFile, setNewColorFile] = useState(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
+  const API_LINK = process.env.REACT_APP_API_LINK;
+
   const handleEdit = () => {
     setIsEditing(true);
     setEditedProduct({ ...product });
@@ -91,7 +93,7 @@ const ProductManagement = () => {
       console.log("Saving cleaned product:", cleaned);
 
       const res = await axios.patch(
-        `http://localhost:9999/api/product/edit-product/${product._id}`,
+        `${API_LINK}/api/product/edit-product/${product._id}`,
         cleaned
       );
 
@@ -128,7 +130,7 @@ const ProductManagement = () => {
     formData.append("image", file);
     try {
       const res = await axios.post(
-        "http://localhost:9999/api/cloudinary/add-img",
+        `${API_LINK}/api/cloudinary/add-img`,
         formData,
         {
           headers: {

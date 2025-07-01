@@ -344,3 +344,96 @@ exports.signUpWithProvider = async (req, res, next) => {
     next(error);
   }
 };
+
+// getAllUsers
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().select("-password"); // ẩn mật khẩu
+    res.status(200).json({
+      status: "success",
+      data: users,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// delete user
+exports.deleteUser = async (req, res, next) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// get a single user by ID
+exports.getUserById = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// add user by admin
+exports.addUser = async (req, res, next) => {
+  try {
+    const isExist = await User.findOne({ email: req.body.email });
+    if (isExist) {
+      return res.status(409).json({ message: "Email already exists!" });
+    }
+
+    const hashedPassword = bcrypt.hashSync(req.body.password);
+    const newUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword,
+      phone: req.body.phone,
+      address: req.body.address,
+      bio: req.body.bio,
+      status: "active",
+    });
+
+    const user = await newUser.save();
+    res.status(201).json({
+      message: "User added successfully",
+      data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// update status
+exports.updateUser = async (req, res, next) => {
+  try {
+    const updateData = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "User updated successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

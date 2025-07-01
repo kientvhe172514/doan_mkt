@@ -45,11 +45,12 @@ const ProductList = () => {
     max: Number.MAX_VALUE,
   });
   const [statusFilter, setStatusFilter] = useState("");
+  const API_LINK = process.env.REACT_APP_API_LINK;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:9999/api/product/all");
+        const res = await axios.get(`${API_LINK}/api/product/all`);
         const data = res.data?.data;
         console.log(data);
 
@@ -169,9 +170,7 @@ const ProductList = () => {
   const deleteProduct = async () => {
     if (productToDelete) {
       try {
-        await axios.delete(
-          `http://localhost:9999/api/product/${productToDelete._id}`
-        );
+        await axios.delete(`${API_LINK}/api/product/${productToDelete._id}`);
 
         // Cập nhật lại danh sách sản phẩm sau khi xoá thành công
         setProducts((prev) =>

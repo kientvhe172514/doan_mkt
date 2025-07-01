@@ -134,9 +134,15 @@ const DashboardNavbar = () => {
               Orders
             </NavLink>
 
-            {/* <NavLink to="/cloudinary" className="fw-medium px-3 nav-link">Cloudinary</NavLink>
-    <NavLink to="/coupon" className="fw-medium px-3 nav-link">Coupon</NavLink>
-    <NavLink to="/user" className="fw-medium px-3 nav-link">User</NavLink> */}
+            {/* <NavLink to="/cloudinary" className="fw-medium px-3 nav-link">
+              Cloudinary
+            </NavLink>
+            <NavLink to="/coupon" className="fw-medium px-3 nav-link">
+              Coupon
+            </NavLink> */}
+            <NavLink to="/user" className="fw-medium px-3 nav-link">
+              User
+            </NavLink>
           </Nav>
 
           <div className="d-flex align-items-center">

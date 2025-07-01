@@ -31,11 +31,12 @@ const CouponList = () => {
     productType: "",
   });
   const [alert, setAlert] = useState({ show: false, variant: "", message: "" });
+  const API_LINK = process.env.REACT_APP_API_LINK;
 
   // Get All coupons
   const fetchCoupons = async () => {
     try {
-      const res = await axios.get("http://localhost:9999/api/coupon");
+      const res = await axios.get(`${API_LINK}/api/coupon`);
       setCoupons(res.data);
     } catch (error) {
       console.log(error);
@@ -129,7 +130,7 @@ const CouponList = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:9999/api/coupon/add", {
+      const response = await fetch(`${API_LINK}/api/coupon/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -151,7 +152,7 @@ const CouponList = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        `http://localhost:9999/api/coupon/${selectedCoupon._id}`,
+        `${API_LINK}/api/coupon/${selectedCoupon._id}`,
         formData
       );
       setShowEditModal(false);
@@ -166,9 +167,7 @@ const CouponList = () => {
   // Delete coupon
   const deleteCoupon = async () => {
     try {
-      await axios.delete(
-        `http://localhost:9999/api/coupon/${selectedCoupon._id}`
-      );
+      await axios.delete(`${API_LINK}/api/coupon/${selectedCoupon._id}`);
       setShowDeleteModal(false);
       fetchCoupons();
       showAlert("success", "Coupon deleted successfully");

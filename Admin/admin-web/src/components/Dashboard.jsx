@@ -38,11 +38,12 @@ const Dashboard = () => {
     pendingOrders: 0,
     deliveredOrders: 0,
   });
+  const API_LINK = process.env.REACT_APP_API_LINK;
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get("http://localhost:9999/api/order/orders");
+        const res = await axios.get(`${API_LINK}/api/order/orders`);
         const data = res.data?.data;
         setOrders(data);
         calculateStats(data);

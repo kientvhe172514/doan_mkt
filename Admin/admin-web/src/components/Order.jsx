@@ -24,6 +24,9 @@ const OrderList = () => {
   const [ordersPerPage] = useState(10);
   const [showModal, setShowModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+
+  const API_LINK = process.env.REACT_APP_API_LINK;
+
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       // Optimistically update UI
@@ -35,7 +38,7 @@ const OrderList = () => {
 
       // Send API request
       const res = await axios.patch(
-        `http://localhost:9999/api/order/update-status/${orderId}`,
+        `${API_LINK}/api/order/update-status/${orderId}`,
         {
           status: newStatus,
         }
@@ -61,7 +64,7 @@ const OrderList = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get("http://localhost:9999/api/order/orders");
+        const res = await axios.get(`${API_LINK}/api/order/orders`);
         const data = res.data?.data; // Adjust this based on API response structure
         console.log(data);
         setOrders(data); // Assuming you have a state variable setOrders
