@@ -51,25 +51,25 @@ const BlogDetailsAreaTwo = ({blog}) => {
                 <div className="tp-postbox-details-content">
                 <h4 className="tp-postbox-details-heading">Câu Chuyện Thương Hiệu</h4>
 
-                  <p>L’Muse là thương hiệu thời trang thiết kế dành riêng cho phụ nữ ngoại cỡ - những người luôn muốn mặc đẹp không phải để che giấu, mà để bộc lộ bản thân một cách tự tin và đầy kiêu hãnh.
+                  <p>L&apos;Muse là thương hiệu thời trang thiết kế dành riêng cho phụ nữ ngoại cỡ - những người luôn muốn mặc đẹp không phải để che giấu, mà để bộc lộ bản thân một cách tự tin và đầy kiêu hãnh.
 
-Chúng tôi sinh ra từ một câu hỏi giản đơn nhưng đầy trăn trở: Tại sao phụ nữ big-size lại không có những lựa chọn thời trang xứng đáng như bất kỳ ai? Từ đó, L’Muse ra đời như một lời hồi đáp mạnh mẽ - rằng cái đẹp không bị giới hạn bởi số đo, và mọi vóc dáng đều xứng đáng được tôn vinh bằng những thiết kế chỉn chu, thời thượng và đầy cảm xúc.
+Chúng tôi sinh ra từ một câu hỏi giản đơn nhưng đầy trăn trở: Tại sao phụ nữ big-size lại không có những lựa chọn thời trang xứng đáng như bất kỳ ai? Từ đó, L&apos;Muse ra đời như một lời hồi đáp mạnh mẽ - rằng cái đẹp không bị giới hạn bởi số đo, và mọi vóc dáng đều xứng đáng được tôn vinh bằng những thiết kế chỉn chu, thời thượng và đầy cảm xúc.
 
-Tại L’Muse, mỗi sản phẩm là sự kết hợp giữa kỹ thuật cắt may chuẩn chỉnh cho vóc dáng đầy đặn, chất liệu cao cấp và tinh thần thiết kế hiện đại. Không chỉ là quần áo - đó là cách bạn thể hiện bản lĩnh, cá tính và tình yêu với chính mình.
+Tại L&apos;Muse, mỗi sản phẩm là sự kết hợp giữa kỹ thuật cắt may chuẩn chỉnh cho vóc dáng đầy đặn, chất liệu cao cấp và tinh thần thiết kế hiện đại. Không chỉ là quần áo - đó là cách bạn thể hiện bản lĩnh, cá tính và tình yêu với chính mình.
 
 Chúng tôi còn mang đến trải nghiệm mua sắm thông minh và đồng hành sâu sát cùng khách hàng – từ công nghệ AI thử đồ trên website, tư vấn cá nhân hóa theo form dáng, đến những chiến dịch truyền cảm hứng được xây dựng bởi cộng đồng phụ nữ yêu thời trang thật sự.
 
-L’Muse không chỉ là thương hiệu! - Đó là phong cách sống, là tiếng nói của một thế hệ phụ nữ dám yêu bản thân - đúng với dáng hình mình đang có.</p>
+L&apos;Muse không chỉ là thương hiệu! - Đó là phong cách sống, là tiếng nói của một thế hệ phụ nữ dám yêu bản thân - đúng với dáng hình mình đang có.</p>
 
                   <h4 className="tp-postbox-details-heading">Tầm Nhìn</h4>
-                  <p>L’MUSE hướng tới trở thành thương hiệu thời trang plus-size hàng đầu Việt Nam, là biểu tượng của sự tự tin và vẻ đẹp đa dạng dành cho phụ nữ đầy đặn, góp phần thay đổi cách nhìn nhận của xã hội về vẻ đẹp cơ thể. Trong 5–10 năm tới, L’MUSE mong muốn mở rộng tầm ảnh hưởng ra thị trường Đông Nam Á, mang phong cách thời trang tinh tế, phù hợp và bền vững đến nhiều người hơn nữa.</p>
+                  <p>L&apos;Muse hướng tới trở thành thương hiệu thời trang plus-size hàng đầu Việt Nam, là biểu tượng của sự tự tin và vẻ đẹp đa dạng dành cho phụ nữ đầy đặn, góp phần thay đổi cách nhìn nhận của xã hội về vẻ đẹp cơ thể. Trong 5–10 năm tới, L&apos;Muse mong muốn mở rộng tầm ảnh hưởng ra thị trường Đông Nam Á, mang phong cách thời trang tinh tế, phù hợp và bền vững đến nhiều người hơn nữa.</p>
 
                   <div className="tp-postbox-details-desc-thumb text-center">
                     <Image src={blog_details_sm_img} alt="details-sm-img" />
                     {/* <span className="tp-postbox-details-desc-thumb-caption">Gucci’s Women’s Cruise Collection 2023 Lookbook Has Arrived</span> */}
                   </div>
                   <h4 className="tp-postbox-details-heading">Sứ Mệnh</h4>
-                  <p>“L’MUSE cam kết mang đến những thiết kế thời trang tinh tế, vừa vặn và thoải mái, giúp phụ nữ plus-size tự tin thể hiện cá tính và vẻ đẹp riêng của mình mỗi ngày. Chúng tôi luôn đồng hành cùng khách hàng bằng sự thấu hiểu, sáng tạo không ngừng và dịch vụ tận tâm, góp phần tạo nên một cộng đồng yêu thương bản thân, khỏe mạnh và năng động.” </p>
+                  <p>“L&apos;Muse cam kết mang đến những thiết kế thời trang tinh tế, vừa vặn và thoải mái, giúp phụ nữ plus-size tự tin thể hiện cá tính và vẻ đẹp riêng của mình mỗi ngày. Chúng tôi luôn đồng hành cùng khách hàng bằng sự thấu hiểu, sáng tạo không ngừng và dịch vụ tận tâm, góp phần tạo nên một cộng đồng yêu thương bản thân, khỏe mạnh và năng động.” </p>
 
                   <div className="tp-postbox-details-quote">
                     <blockquote>
@@ -78,12 +78,12 @@ L’Muse không chỉ là thương hiệu! - Đó là phong cách sống, là ti
                         <Image className="tp-postbox-details-quote-shape-2" src={shape_line_2} alt="shape" />
                       </div>
                       <p>Vượt ra khỏi mọi giới hạn để tự tin tỏa sáng theo cách riêng của bạn.</p>
-                      <cite>L’MUSE</cite>
+                      <cite>L&apos;Muse</cite>
                     </blockquote>
                   </div>
 
                   <h4 className="tp-postbox-details-heading">Giá Trị Cốt Lõi</h4>
-                  <strong className=''>L’MUSE hoạt động dựa trên ba giá trị cốt lõi làm nền tảng cho mọi hành động, quyết định và sự phát triển của chúng tôi. Những giá trị này định hướng cam kết của chúng tôi đối với sự xuất sắc và nuôi dưỡng một văn hóa đề cao sự tin cậy, đổi mới và lấy khách hàng làm trọng tâm:</strong>
+                  <strong className=''>L&apos;Muse hoạt động dựa trên ba giá trị cốt lõi làm nền tảng cho mọi hành động, quyết định và sự phát triển của chúng tôi. Những giá trị này định hướng cam kết của chúng tôi đối với sự xuất sắc và nuôi dưỡng một văn hóa đề cao sự tin cậy, đổi mới và lấy khách hàng làm trọng tâm:</strong>
 
                   <div className="tp-postbox-details-list">
                   <ul>
