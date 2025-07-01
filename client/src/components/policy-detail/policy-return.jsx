@@ -40,7 +40,7 @@ const PolicyDetail = ({blog}) => {
             <div className="tp-postbox-details-item mt-40">
               <h5 className="">I. ĐỐI TƯỢNG ÁP DỤNG</h5>
               <p>
-              Chính sách áp dụng cho tất cả khách hàng mua hàng online qua website, fanpage Facebook, Instgram, Tiktok, Shopee của L'Muse
+              Chính sách áp dụng cho tất cả khách hàng mua hàng online qua website, fanpage Facebook, Instgram, Tiktok, Shopee của LMuse
             </p> 
             </div>
 
@@ -121,7 +121,7 @@ const PolicyDetail = ({blog}) => {
                     <li>
                         <strong>Facebook:</strong>
                         {/* Mở link trong tab mới */}
-                        <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L'Muse</a>
+                        <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> LMuse</a>
                     </li>
                     <li>
                         <strong>Instagram:</strong>

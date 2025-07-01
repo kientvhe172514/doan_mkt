@@ -91,7 +91,7 @@ const PolicyDetail = ({blog}) => {
                     <li>
                         <strong>Facebook:</strong>
                         {/* Mở link trong tab mới */}
-                        <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L'Muse</a>
+                        <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> LMuse</a>
                     </li>
                     <li>
                         <strong>Instagram:</strong>

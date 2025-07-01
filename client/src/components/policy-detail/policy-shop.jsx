@@ -45,7 +45,7 @@ const PolicyDetail = ({blog}) => {
                 {/* Phần 1: Quy định đổi hàng */}
                 <h5>Bước 1: Chọn sản phẩm</h5>
                 <ul>
-                    <li>Truy cập website chính thức: www.lmuse.vn/L'museshopee....</li>
+                    <li>Truy cập website chính thức: www.lmuse.vn/LMuseshopee....</li>
                     <li>
                     Hoặc xem sản phẩm qua fanpage Facebook/Instgram/Tiktok của LMuse
                     </li>
@@ -90,7 +90,7 @@ const PolicyDetail = ({blog}) => {
                     <li>Áp dụng đổi 1 lần/1 đơn hàng.</li>
             
 
-                <li>Chính sách vận chuyển được áp dụng đối với tất cả các đối tượng khách hàng mua sản phẩm của L'Muse qua các kênh mua sắm online chính thức của L'Muse (Website, Fanpage Facebook, Instagram, Tiktok, Shopee)</li>
+                <li>Chính sách vận chuyển được áp dụng đối với tất cả các đối tượng khách hàng mua sản phẩm của LMuse qua các kênh mua sắm online chính thức của LMuse (Website, Fanpage Facebook, Instagram, Tiktok, Shopee)</li>
                    
               
                 </ul>
@@ -126,7 +126,7 @@ const PolicyDetail = ({blog}) => {
                 <li>
                     <strong>Facebook:</strong>
                     {/* Mở link trong tab mới */}
-                    <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L'Muse</a>
+                    <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> LMuse</a>
                 </li>
                 <li>
                     <strong>Instagram:</strong>
