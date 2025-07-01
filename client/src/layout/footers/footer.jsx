@@ -38,8 +38,8 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                   <h4 className="tp-footer-widget-title">Thương Hiệu</h4>
                   <div className="tp-footer-widget-content">
                     <ul>               
-                      <li><a href="/blog">Câu chuyện thương hiệu</a></li>
-                      <li><a href="/contact">Liên hệ</a></li>
+                      <li><Link href="/blog">Câu chuyện thương hiệu</Link></li>
+                      <li><Link href="/contact">Liên hệ</Link></li>
                     </ul>
                   </div>
                 </div>
@@ -49,9 +49,9 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                   <h4 className="tp-footer-widget-title">Hỗ Trợ</h4>
                   <div className="tp-footer-widget-content">
                     <ul>
-                      <li><a href="/policy-shop">Chính sách mua hàng online</a></li>
-                      <li><a href="/policy-return">Chính sách đổi/trả hàng</a></li>
-                      <li><a href="/policy-vip">Chính sách thẻ thành viên - thẻ vip</a></li>                    
+                      <li><Link href="/policy-shop">Chính sách mua hàng online</Link></li>
+                      <li><Link href="/policy-return">Chính sách đổi/trả hàng</Link></li>
+                      <li><Link href="/policy-vip">Chính sách thẻ thành viên - thẻ vip</Link></li>                    
                      
                     </ul>
                   </div>
