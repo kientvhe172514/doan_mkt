@@ -33,13 +33,13 @@ const PolicyDetail = ({blog}) => {
                       <div className="tp-postbox-details-content">
                           <h4 className="tp-postbox-details-heading">CHÍNH SÁCH MUA HÀNG ONLINE</h4>
                           <h5 className="">
-                          LMuse – Trân quý từng khoảnh khắc đồng hành
+                          L&apos;Muse – Trân quý từng khoảnh khắc đồng hành
             </h5>
             {/* Phần I */}
             <div className="tp-postbox-details-item mt-40">
               <h5 className="">I. HƯỚNG DẪN MUA HÀNG</h5>
               <p>
-              Khách hàng có thể đặt hàng trực tuyến qua các kênh chính thức của LMuse:
+              Khách hàng có thể đặt hàng trực tuyến qua các kênh chính thức của L&apos;Muse:
             </p>  
             <div className="tp-postbox-details-list">
                 {/* Phần 1: Quy định đổi hàng */}
@@ -47,7 +47,7 @@ const PolicyDetail = ({blog}) => {
                 <ul>
                     <li>Truy cập website chính thức: www.lmuse.vn/LMuseshopee....</li>
                     <li>
-                    Hoặc xem sản phẩm qua fanpage Facebook/Instgram/Tiktok của LMuse
+                    Hoặc xem sản phẩm qua fanpage Facebook/Instgram/Tiktok của L&apos;Muse
                     </li>
                 </ul>
 
@@ -64,12 +64,12 @@ const PolicyDetail = ({blog}) => {
                 {/* Phần 3: Xác nhận và thanh táon */}
                 <h5 style={{ marginTop: '30px' }}>Bước 3: Xác nhận & Thanh toán</h5>
                 <ul>
-                    <li>Sau khi đặt hàng, nhân viên LMuse sẽ liên hệ để xác nhận đơn và hướng dẫn thanh toán.</li>
+                    <li>Sau khi đặt hàng, nhân viên L&apos;Muse sẽ liên hệ để xác nhận đơn và hướng dẫn thanh toán.</li>
                     <li>Phương thức thanh toán:</li>
                     <li>Thanh toán khi nhận hàng (COD)</li>
                     <li>Chuyển khoản ngân hàng: (Thông tin tài khoản sẽ được cung cấp sau khi xác nhận đơn)</li>
                     <li>Thanh toán qua ví điện tử hoặc cổng thanh toán (đang cập nhật)</li>
-                    <li>⚠️ Lưu ý: Vui lòng KHÔNG chuyển khoản trước khi có xác nhận từ nhân viên LMuse.</li>
+                    <li>⚠️ Lưu ý: Vui lòng KHÔNG chuyển khoản trước khi có xác nhận từ nhân viên L&apos;Muse.</li>
                 </ul>
                 </div>
             </div>
@@ -78,10 +78,10 @@ const PolicyDetail = ({blog}) => {
             <div className="tp-postbox-details-item mt-40">
               <h5 className="">II. CHÍNH SÁCH VẬN CHUYỂN</h5>
               <p>
-              LMuse – Giao hàng đúng hẹn, an tâm từng bước
+              L&apos;Muse – Giao hàng đúng hẹn, an tâm từng bước
              </p>
                 <p>
-                LMuse cam kết giao sản phẩm đến tay bạn một cách nhanh chóng, an toàn và minh bạch. Chính sách vận chuyển áp dụng như sau:
+                L&apos;Muse cam kết giao sản phẩm đến tay bạn một cách nhanh chóng, an toàn và minh bạch. Chính sách vận chuyển áp dụng như sau:
              </p>
               <div className="tp-postbox-details-list">
                 {/* Phần 1: Quy định đổi hàng */}
@@ -90,7 +90,7 @@ const PolicyDetail = ({blog}) => {
                     <li>Áp dụng đổi 1 lần/1 đơn hàng.</li>
             
 
-                <li>Chính sách vận chuyển được áp dụng đối với tất cả các đối tượng khách hàng mua sản phẩm của LMuse qua các kênh mua sắm online chính thức của LMuse (Website, Fanpage Facebook, Instagram, Tiktok, Shopee)</li>
+                <li>Chính sách vận chuyển được áp dụng đối với tất cả các đối tượng khách hàng mua sản phẩm của L&apos;Muse qua các kênh mua sắm online chính thức của LMuse (Website, Fanpage Facebook, Instagram, Tiktok, Shopee)</li>
                    
               
                 </ul>
@@ -126,7 +126,7 @@ const PolicyDetail = ({blog}) => {
                 <li>
                     <strong>Facebook:</strong>
                     {/* Mở link trong tab mới */}
-                    <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> LMuse</a>
+                    <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L&apos;Muse</a>
                 </li>
                 <li>
                     <strong>Instagram:</strong>

@@ -108,7 +108,7 @@ const SingleOrder = ({ params }) => {
                                                     <div className="row align-items-end">
                                                         <div className="col-md-4 col-sm-6">
                                                             <div className="invoice__left">
-                                                                <p>LMUSE SHOP<br />  </p>
+                                                                <p>L&apos;Muse SHOP<br />  </p>
                                                             </div>
                                                         </div>
                                                         <div className="col-md-8 col-sm-6">

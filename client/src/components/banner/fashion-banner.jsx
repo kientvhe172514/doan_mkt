@@ -16,19 +16,19 @@ const slider_data = [
   {
     id: 1,
     subtitle: 'Gu tôi chọn, dáng tôi yêu',
-    title: 'LMuse',
+    title: 'L&apos;Muse',
     img: slider_img_1,
   },
   {
     id: 2,
     subtitle: 'Bộ sưu tập mới nhất',
-    title: 'LMuse',
+    title: 'L&apos;Muse',
     img: slider_img_2,
   },
   {
     id: 3,
     subtitle: 'thoả sức sáng tạo',
-    title: 'LMuse',
+    title: 'L&apos;Muse',
     img: slider_img_3,
   },
 ]
