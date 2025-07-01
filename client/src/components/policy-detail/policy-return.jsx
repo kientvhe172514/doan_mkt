@@ -34,7 +34,7 @@ const PolicyDetail = ({blog}) => {
                       <div className="tp-postbox-details-content">
                           <h4 className="tp-postbox-details-heading">CHÍNH SÁCH ĐỔI TRẢ & HOÀN TIỀN</h4>
                           <h5 className="">
-                          L&apos;Muse – Trân quý từng khoảnh khắc đồng hành
+                          LMuse – Trân quý từng khoảnh khắc đồng hành
                          </h5>
             {/* Phần I */}
             <div className="tp-postbox-details-item mt-40">
@@ -107,8 +107,8 @@ const PolicyDetail = ({blog}) => {
                 {/* Phần 3: Thời gian & hình thức hoàn tiền */}
                 <h5 style={{ marginTop: '30px' }}>3. Thời gian & hình thức hoàn tiền:</h5>
                 <ul>
-                    <li>Sau khi xác minh lỗi (trong 1–3 ngày làm việc), L&apos;Muse sẽ hoàn tiền trong vòng 3–5 ngày qua tài khoản ngân hàng.</li>
-                    <li>L&apos;Muse sẽ chịu 100% phí vận chuyển trả lại nếu lỗi được xác nhận từ phía thương hiệu.</li>
+                    <li>Sau khi xác minh lỗi (trong 1–3 ngày làm việc), LMuse sẽ hoàn tiền trong vòng 3–5 ngày qua tài khoản ngân hàng.</li>
+                    <li>LMuse sẽ chịu 100% phí vận chuyển trả lại nếu lỗi được xác nhận từ phía thương hiệu.</li>
                 </ul>
                 </div>
             </div>

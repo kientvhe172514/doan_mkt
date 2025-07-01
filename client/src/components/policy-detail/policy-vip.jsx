@@ -33,10 +33,10 @@ const PolicyDetail = ({blog}) => {
                       <div className="tp-postbox-details-content">
                           <h4 className="tp-postbox-details-heading">Chính Thẻ Thành Viên - Thẻ Vip</h4>
                           <h5 className="">
-                          L&apos;Muse – Trân quý từng khoảnh khắc đồng hành
+                          LMuse – Trân quý từng khoảnh khắc đồng hành
             </h5>
             <p>
-              Nhằm tri ân khách hàng đã tin tưởng lựa chọn L&apos;Muse, chúng tôi xây dựng chương trình Thẻ thành viên – Thẻ VIP với nhiều quyền lợi ưu đãi và trải nghiệm mua sắm đặc quyền dành riêng cho bạn.
+              Nhằm tri ân khách hàng đã tin tưởng lựa chọn LMuse, chúng tôi xây dựng chương trình Thẻ thành viên – Thẻ VIP với nhiều quyền lợi ưu đãi và trải nghiệm mua sắm đặc quyền dành riêng cho bạn.
             </p>
 
             {/* Phần I */}
