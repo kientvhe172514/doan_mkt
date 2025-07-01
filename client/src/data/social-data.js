@@ -2,26 +2,26 @@
 const social_data = [
   {
     id:1,
-    link:'https://www.facebook.com/hamed.y.hasan0',
+    link:'https://www.facebook.com/Lmuse.official',
     icon:'fa-brands fa-facebook-f',
     title:'Facebook'
   },
   {
     id:2,
-    link:'https://twitter.com/HamedHasan75',
-    icon:'fa-brands fa-twitter',
+    link:'https://www.tiktok.com/@lmuse.official',
+    icon:'fa-brands fa-tiktok',
     title:'Twitter'
   },
   {
     id:3,
-    link:'nkedin.com/in/hamed-hasan/',
-    icon:'fa-brands fa-linkedin-in',
+    link:'https://www.instagram.com/lmuse.official/',
+    icon:'fa-brands fa-instagram',
     title:'Linkedin'
   },
   {
     id:4,
-    link:'https://vimeo.com/',
-    icon:'fa-brands fa-vimeo-v',
+    link:'https://shopee.vn/thutrang2112003?uls_trackid=5330m0oa01b2',
+    icon:'fa-solid fa-shop',
     title:'Vimeo'
   },
 ]

@@ -35,26 +35,23 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
               </div>
               <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <div className="tp-footer-widget footer-col-2 mb-50">
-                  <h4 className="tp-footer-widget-title">Tài Khoản</h4>
+                  <h4 className="tp-footer-widget-title">Thương Hiệu</h4>
                   <div className="tp-footer-widget-content">
                     <ul>               
-                      <li><a href="#">Vận Chuyển</a></li>
-                      <li><a href="#">Danh Sách Yêu Thích</a></li>
-                      <li><a href="#">Tài Khoản</a></li>
-                      <li><a href="#">Lịch Sử Mua Hàng</a></li>
-                      <li><a href="#">Hoàn Trả</a></li>
+                      <li><a href="#">Uy Tín</a></li>
+                      <li><a href="#">Đảm Bảo</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                 <div className="tp-footer-widget footer-col-3 mb-50">
-                  <h4 className="tp-footer-widget-title">Thông Tin</h4>
+                  <h4 className="tp-footer-widget-title">Hỗ Trợ</h4>
                   <div className="tp-footer-widget-content">
                     <ul>
-                      <li><a href="#">Về Chúng Tôi</a></li>
-                      <li><a href="#">Đội Ngũ</a></li>
-                      <li><a href="#">Chính Sách</a></li>                    
+                      <li><a href="#">Chính sách mua hàng online</a></li>
+                      <li><a href="#">Chính sách đổi/trả hàng</a></li>
+                      <li><a href="#">Chính Sách thẻ thành viên-thẻ vip</a></li>                    
                       <li><a href="#">Liên hệ</a></li>
                     </ul>
                   </div>

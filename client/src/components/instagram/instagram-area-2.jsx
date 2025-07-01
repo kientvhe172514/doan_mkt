@@ -9,11 +9,11 @@ import insta_icon from "@assets/img/instagram/2/insta-icon.png";
 
 // instagram data
 const instagram_data = [
-  { id: 1, link: "https://www.instagram.com/", img: insta_1 },
-  { id: 2, link: "https://www.instagram.com/", img: insta_2 },
-  { id: 3, link: "https://www.instagram.com/", banner: true, img: insta_icon },
-  { id: 4, link: "https://www.instagram.com/", img: insta_3 },
-  { id: 5, link: "https://www.instagram.com/", img: insta_4 },
+  { id: 1, link: "https://www.instagram.com/lmuse.official/", img: insta_1 },
+  { id: 2, link: "https://www.instagram.com/lmuse.official/", img: insta_2 },
+  { id: 3, link: "https://www.instagram.com/lmuse.official/", banner: true, img: insta_icon },
+  { id: 4, link: "https://www.instagram.com/lmuse.official/", img: insta_3 },
+  { id: 5, link: "https://www.instagram.com/lmuse.official/", img: insta_4 },
 ];
 
 const InstagramAreaTwo = () => {

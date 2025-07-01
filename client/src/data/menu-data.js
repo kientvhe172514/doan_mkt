@@ -84,19 +84,19 @@ const menu_data = [
   //   title: 'Coupons',
   //   link: '/coupon',
   // },
-  {
-    id: 5,
-    sub_menu: true,
-    title: 'Bài Viết',
-    link: '/blog',
-    sub_menus: [
-      { title: 'Blog Standard', link: '/blog' },
-      { title: 'Blog Grid', link: '/blog-grid' },
-      { title: 'Blog List', link: '/blog-list' },
-      { title: 'Blog Details', link: '/blog-details' },
-      { title: 'Blog Details Full Width', link: '/blog-details-2' },
-    ]
-  },
+  // {
+  //   id: 5,
+  //   sub_menu: true,
+  //   title: 'Bài Viết',
+  //   link: '/blog',
+  //   sub_menus: [
+  //     { title: 'Blog Standard', link: '/blog' },
+  //     { title: 'Blog Grid', link: '/blog-grid' },
+  //     { title: 'Blog List', link: '/blog-list' },
+  //     { title: 'Blog Details', link: '/blog-details' },
+  //     { title: 'Blog Details Full Width', link: '/blog-details-2' },
+  //   ]
+  // },
   {
     id: 6,
     single_link: true,
