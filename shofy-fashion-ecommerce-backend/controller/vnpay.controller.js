@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require('moment-timezone');
 const crypto = require('crypto');
 const querystring = require('qs'); // <-- ĐẢM BẢO BẠN ĐÃ CÀI ĐẶT THƯ VIỆN 'qs': npm install qs
 const Order = require('../model/Order'); // Đảm bảo đường dẫn đúng đến Order Model của bạn
@@ -38,58 +38,54 @@ exports.createPaymentUrl = async (req, res, next) => {
         const { amount, orderId, orderInfo, returnUrl } = req.body;
 
         let ipAddr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        // Xử lý IPv6 loopback address
         if (ipAddr && ipAddr.includes('::ffff:')) {
             ipAddr = ipAddr.split(':').pop();
-        } else if (ipAddr === '::1') { // Xử lý trường hợp IPv6 loopback đơn giản
+        } else if (ipAddr === '::1') {
             ipAddr = '127.0.0.1';
         }
-        
+
         if (!vnp_TmnCode || !vnp_HashSecret || !vnp_Url || !vnp_ReturnUrl) {
             console.error("VNPAY configuration is missing. Check your environment variables.");
             return res.status(500).json({ message: "VNPAY configuration is missing. Check your environment variables." });
         }
 
-        const date = new Date();
-        const createDate = moment(date).format('YYYYMMDDHHmmss');
+        // --- ⭐ THAY ĐỔI CHÍNH Ở ĐÂY ---
+        // Lấy thời gian hiện tại theo múi giờ Việt Nam
+        const nowInVietnam = moment().tz('Asia/Ho_Chi_Minh');
+        const createDate = nowInVietnam.format('YYYYMMDDHHmmss');
+        const expireDate = nowInVietnam.add(15, 'minutes').format('YYYYMMDDHHmmss');
         // Sử dụng orderId được cung cấp (từ DB) hoặc tạo mới nếu không có
-        const vnpTxnRef = orderId || moment(date).format('DDHHmmss'); 
+        const vnpTxnRef = orderId || moment().format('HHmmss'); // Giữ nguyên hoặc tuỳ chỉnh
 
         let vnp_Params = {};
         vnp_Params['vnp_Version'] = '2.1.0';
         vnp_Params['vnp_Command'] = 'pay';
         vnp_Params['vnp_TmnCode'] = vnp_TmnCode;
-        vnp_Params['vnp_Locale'] = 'vn'; // hoặc 'en'
+        vnp_Params['vnp_Locale'] = 'vn';
         vnp_Params['vnp_CurrCode'] = 'VND';
         vnp_Params['vnp_TxnRef'] = vnpTxnRef;
         vnp_Params['vnp_OrderInfo'] = orderInfo || `Thanh toan don hang ${vnpTxnRef}`;
-        vnp_Params['vnp_OrderType'] = 'other'; // Có thể là 'billpayment', 'fashion', 'sport', v.v.
-        vnp_Params['vnp_Amount'] = amount * 100; // VNPAY expects amount in dong (e.g., 100,000 VND -> 10000000)
-        vnp_Params['vnp_ReturnUrl'] = returnUrl || vnp_ReturnUrl; // Ưu tiên returnUrl từ body request
+        vnp_Params['vnp_OrderType'] = 'other';
+        vnp_Params['vnp_Amount'] = amount * 100;
+        vnp_Params['vnp_ReturnUrl'] = returnUrl || vnp_ReturnUrl;
         vnp_Params['vnp_IpAddr'] = ipAddr;
         vnp_Params['vnp_CreateDate'] = createDate;
-        vnp_Params['vnp_ExpireDate'] = moment(date).add(15, 'minutes').format('YYYYMMDDHHmmss'); // Thêm thời gian hết hạn cho giao dịch (15 phút)
+        vnp_Params['vnp_ExpireDate'] = expireDate; // Sử dụng thời gian hết hạn đã được tính toán ở trên
 
-        // Sắp xếp các tham số và mã hóa giá trị bằng hàm sortObject đã sửa
         vnp_Params = sortObject(vnp_Params);
 
-        // Tạo chuỗi ký (signData)
-        // Dùng querystring.stringify với encode: false vì các giá trị đã được encode đúng bởi sortObject
         let signData = querystring.stringify(vnp_Params, { encode: false });
-
         let hmac = crypto.createHmac("sha512", vnp_HashSecret);
         let signed = hmac.update(Buffer.from(signData, 'utf-8')).digest("hex");
         vnp_Params['vnp_SecureHash'] = signed;
 
-        // Tạo URL cuối cùng
-        // Lại dùng querystring.stringify với encode: false vì các giá trị đã được encode
         const finalVnpUrl = vnp_Url + '?' + querystring.stringify(vnp_Params, { encode: false });
 
         res.json({ vnpUrl: finalVnpUrl });
 
     } catch (error) {
         console.error("Error in createPaymentUrl:", error);
-        next(error); // Pass to global error handler
+        next(error);
     }
 };
 
