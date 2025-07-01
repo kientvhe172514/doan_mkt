@@ -13,6 +13,7 @@ import BlogDetailsAuthor from '../blog-details/blog-details-author';
 import PostboxDetailsNav from '../blog-details/postbox-details-nav';
 import PostboxDetailsTop from '../blog-details/postbox-details-top';
 import social_data from '@/data/social-data';
+import Link from 'next/link';
 // related_blogs
 const related_blogs = blogData.filter(b => b.blog === 'blog-grid').slice(0, 3)
 
@@ -120,29 +121,29 @@ const PolicyDetail = ({blog}) => {
                     <li>
                         <strong>Facebook:</strong>
                         {/* Mở link trong tab mới */}
-                        <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L'Muse</a>
+                        <Link href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L'Muse</Link>
                     </li>
                     <li>
                         <strong>Instagram:</strong>
-                        <a href="https://www.instagram.com/LMuse.official" target="_blank" rel="noopener noreferrer"> LMuse.official</a>
+                        <Link href="https://www.instagram.com/LMuse.official" target="_blank" rel="noopener noreferrer"> LMuse.official</Link>
                     </li>
                     <li>
                         <strong>Tiktok:</strong>
-                        <a href="https://www.tiktok.com/@lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</a>
+                        <Link href="https://www.tiktok.com/@lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</Link>
                     </li>
                     <li>
                         <strong>Shopee:</strong>
-                        <a href="https://shopee.vn/lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</a>
+                        <Link href="https://shopee.vn/lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</Link>
                     </li>
                     <li>
                         <strong>Email:</strong>
                         {/* Mở ứng dụng email mặc định */}
-                        <a href="mailto:lmuse.contact@gmail.com"> lmuse.contact@gmail.com</a>
+                        <Link href="mailto:lmuse.contact@gmail.com"> lmuse.contact@gmail.com</Link>
                     </li>
                     <li>
                         <strong>Hotline:</strong>
                         {/* Mở ứng dụng gọi điện trên di động */}
-                        <a href="tel:0363697288"> 0363.697.288</a>
+                        <Link href="tel:0363697288"> 0363.697.288</Link>
                     </li>
                     </ul>
                 </div>
