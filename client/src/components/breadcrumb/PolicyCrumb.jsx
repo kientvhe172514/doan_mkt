@@ -14,7 +14,7 @@ const PolicyCrumb  = ({title}) => {
               <h3 className="breadcrumb__title">{title}</h3>
               <div className="breadcrumb__list">
                 <span>
-                  <a href="/">Trang Chủ</a>
+                  <a href="#">Trang Chủ</a>
                 </span>
                 <span>Chính Sách</span>
               </div>

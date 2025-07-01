@@ -121,29 +121,29 @@ const PolicyDetail = ({blog}) => {
                     <li>
                         <strong>Facebook:</strong>
                         {/* Mở link trong tab mới */}
-                        <Link href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L'Muse</Link>
+                        <a href="https://www.facebook.com/lmuse.official" target="_blank" rel="noopener noreferrer"> L'Muse</a>
                     </li>
                     <li>
                         <strong>Instagram:</strong>
-                        <Link href="https://www.instagram.com/LMuse.official" target="_blank" rel="noopener noreferrer"> LMuse.official</Link>
+                        <a href="https://www.instagram.com/LMuse.official" target="_blank" rel="noopener noreferrer"> LMuse.official</a>
                     </li>
                     <li>
                         <strong>Tiktok:</strong>
-                        <Link href="https://www.tiktok.com/@lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</Link>
+                        <a href="https://www.tiktok.com/@lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</a>
                     </li>
                     <li>
                         <strong>Shopee:</strong>
-                        <Link href="https://shopee.vn/lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</Link>
+                        <a href="https://shopee.vn/lmuse.official" target="_blank" rel="noopener noreferrer"> Lmuse.official</a>
                     </li>
                     <li>
                         <strong>Email:</strong>
                         {/* Mở ứng dụng email mặc định */}
-                        <Link href="mailto:lmuse.contact@gmail.com"> lmuse.contact@gmail.com</Link>
+                        <a href="mailto:lmuse.contact@gmail.com"> lmuse.contact@gmail.com</a>
                     </li>
                     <li>
                         <strong>Hotline:</strong>
                         {/* Mở ứng dụng gọi điện trên di động */}
-                        <Link href="tel:0363697288"> 0363.697.288</Link>
+                        <a href="tel:0363697288"> 0363.697.288</a>
                     </li>
                     </ul>
                 </div>
