@@ -11,33 +11,35 @@ import blogData from "@/data/blog-data";
 import BlogItem from "@/components/blog/fashion/blog-item";
 
 const Menus = () => {
-  const { data: products, isError, isLoading } = useGetProductTypeQuery({
-    type: 'fashion',
-    query: 'new=true'
+  const {
+    data: products,
+    isError,
+    isLoading,
+  } = useGetProductTypeQuery({
+    type: "fashion",
+    query: "new=true",
   });
-  
-  const blogs = blogData.filter(b => b.blog === 'fashion');
+
+  const blogs = blogData.filter((b) => b.blog === "fashion");
 
   // decide what to render
   let content = null;
-  
+
   if (isLoading) {
-    content = (
-      <HomeNewArrivalPrdLoader loading={isLoading} />
-    );
+    content = <HomeNewArrivalPrdLoader loading={isLoading} />;
   }
-  
+
   if (!isLoading && isError) {
-    content = <ErrorMsg msg="There was an error" />;
+    content = <ErrorMsg msg="Có lỗi xảy ra" />;
   }
-  
+
   if (!isLoading && !isError && products?.data?.length === 0) {
-    content = <ErrorMsg msg="No Products found!" />;
+    content = <ErrorMsg msg="Không sản phẩm nào được tìm thấy!" />;
   }
-  
+
   if (!isLoading && !isError && products?.data?.length > 0) {
     const product_items = products.data;
-  
+
     content = (
       <div className="row">
         {product_items.slice(0, 4).map((item) => (
@@ -58,17 +60,17 @@ const Menus = () => {
           <li key={menu.id} className="has-dropdown has-mega-menu">
             <Link href={menu.link}>{menu.title}</Link>
             <div className="home-menu tp-submenu tp-mega-menu">
-            {/* <div className="tp-product-arrival-slider fix">
+              {/* <div className="tp-product-arrival-slider fix">
               {content}
             </div> */}
-               <div className="row">
-            {blogs.map(blog => (
-              <div key={blog.id} className="col-xl-4 col-lg-4 col-md-6">
-                <BlogItem blog={blog} />
+              <div className="row">
+                {blogs.map((blog) => (
+                  <div key={blog.id} className="col-xl-4 col-lg-4 col-md-6">
+                    <BlogItem blog={blog} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-                {/* <OfferCouponArea/> */}
+              {/* <OfferCouponArea/> */}
               <div className="row row-cols-1 row-cols-lg-4 row-cols-xl-4">
                 {menu.home_pages.map((home, i) => (
                   <div key={i} className="col">
