@@ -23,6 +23,10 @@ export const productApi = apiSlice.injectEndpoints({
       query: () => `${API_BASE_URL}/product/top-rated`,
       providesTags:['TopRatedProducts']
     }),
+    getDiscountProducts: builder.query({
+      query: () => `${API_BASE_URL}/product/discount-product`,
+      providesTags:['TopRatedProducts']
+    }),
     // get single product
     getProduct: builder.query({
       query: (id) => `${API_BASE_URL}/product/single-product/${id}`,
@@ -49,4 +53,5 @@ export const {
   useGetTopRatedProductsQuery,
   useGetProductQuery,
   useGetRelatedProductsQuery,
+  useGetDiscountProductsQuery,
 } = productApi;

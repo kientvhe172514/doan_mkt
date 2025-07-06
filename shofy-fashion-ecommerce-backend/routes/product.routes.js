@@ -9,6 +9,8 @@ router.post('/add', productController.addProduct);
 router.post('/add-all', productController.addAllProducts);
 // get all products
 router.get('/all', productController.getAllProducts);
+// get Products by discount
+router.get('/discount-product', productController.getDiscountedProducts);
 // get offer timer product
 router.get('/offer', productController.getOfferTimerProducts);
 // top rated products

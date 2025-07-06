@@ -75,6 +75,19 @@ module.exports.getProductsByType = async (req, res, next) => {
 };
 
 // get offer product controller
+module.exports.getDiscountedProducts = async (req, res, next) => {
+  try {
+    const result = await productServices.getDiscountedProductsService();
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// get offer product controller
 module.exports.getOfferTimerProducts = async (req, res, next) => {
   try {
     const result = await productServices.getOfferTimerProductService(

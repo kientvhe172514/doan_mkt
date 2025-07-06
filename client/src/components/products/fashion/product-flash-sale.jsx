@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ErrorMsg from '@/components/common/error-msg';
-import { useGetProductTypeQuery } from '@/redux/features/productApi';
+import { useGetDiscountProductsQuery } from '@/redux/features/productApi';
 import { TextShapeLine } from '@/svg';
 import ProductItem from './product-item';
 import { HomeTwoPrdLoader } from '@/components/loader';
@@ -11,7 +11,7 @@ const tabs = ["Bộ Sưu Tập"];
 const ProductArea = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const { data: products, isError, isLoading } =
-    useGetProductTypeQuery({ type: 'fashion' });
+  useGetDiscountProductsQuery();
   // handleActiveTab
   const handleActiveTab = (tab) => {
     setActiveTab(tab);

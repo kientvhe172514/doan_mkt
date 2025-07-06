@@ -12,6 +12,7 @@ import { set_coupon } from "@/redux/features/coupon/couponSlice";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import {useCreatePaymentIntentMutation,useSaveOrderMutation} from "@/redux/features/order/orderApi";
 import { useGetOfferCouponsQuery } from "@/redux/features/coupon/couponApi";
+import { apply_coupon,remove_coupon } from '@/redux/features/cartSlice';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 const useCheckoutSubmit = () => {
@@ -126,7 +127,6 @@ const useCheckoutSubmit = () => {
   // handleCouponCode
   const handleCouponCode = (e) => {
     e.preventDefault();
-
     if (!couponRef.current?.value) {
       notifyError("Please Input a Coupon Code!");
       return;
@@ -165,6 +165,11 @@ const useCheckoutSubmit = () => {
       setDiscountProductType(result[0].productType);
       setDiscountPercentage(result[0].discountPercentage);
       dispatch(set_coupon(result[0]));
+      dispatch(
+        apply_coupon({
+          couponId: result[0]._id,
+        })
+      );
       setTimeout(() => {
         couponRef.current.value = "";
         setCouponApplyMsg("")

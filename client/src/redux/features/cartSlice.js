@@ -111,6 +111,27 @@ export const cartSlice = createSlice({
     closeCartMini: (state, { payload }) => {
       state.cartMiniOpen = false;
     },
+    apply_coupon: (state, { payload }) => {
+      const { couponId } = payload; // Chỉ nhận couponId
+      state.cart_products = state.cart_products.map((product) => {
+        return {
+          ...product,
+          couponId: couponId, // Áp dụng couponId cho TẤT CẢ sản phẩm
+        };
+      });
+      setLocalStorage("cart_products", state.cart_products);
+    },
+    remove_coupon: (state) => {
+      state.cart_products = state.cart_products.map((product) => {
+        const newProduct = { ...product };
+        if (newProduct.hasOwnProperty('couponId')) {
+          delete newProduct.couponId;
+        }
+        return newProduct;
+      });
+      setLocalStorage("cart_products", state.cart_products);
+      notifySuccess("Đã gỡ mã giảm giá"); // Thông báo sau khi gỡ
+    },
   },
 });
 
@@ -125,6 +146,8 @@ export const {
   clearCart,
   closeCartMini,
   openCartMini,
+  apply_coupon,
+  remove_coupon
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

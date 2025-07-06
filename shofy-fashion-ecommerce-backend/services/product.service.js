@@ -63,6 +63,21 @@ exports.getProductTypeService = async (req) => {
   return products;
 };
 
+exports.getDiscountedProductsService = async () => {
+  try {
+    // Tìm tất cả sản phẩm có trường 'discount' tồn tại và lớn hơn 0
+    const products = await Product.find({
+      discount: { $gt: 0 } 
+    }).populate("reviews"); // .populate("reviews") để lấy thông tin review nếu cần
+    return products;
+  } catch (error) {
+    // Ghi lại lỗi để debug
+    console.error("Error fetching discounted products:", error);
+    // Ném lỗi ra để controller ở trên có thể bắt và xử lý
+    throw error;
+  }
+};
+
 // get offer product service
 exports.getOfferTimerProductService = async (query) => {
   const products = await Product.find({
