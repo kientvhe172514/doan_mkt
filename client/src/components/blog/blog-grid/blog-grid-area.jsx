@@ -31,7 +31,7 @@ const BlogGridArea = ({ list_area = false }) => {
               <div className="tp-blog-grid-wrapper">
                 <div className="tp-blog-grid-top d-flex justify-content-between mb-40">
                   <div className="tp-blog-grid-result">
-                    <p>Showing 1–{filteredRows.slice(pageStart, pageStart + countOfPage).length} of {blog_items.length} results</p>
+                    <p>Hiển Thị 1–{filteredRows.slice(pageStart, pageStart + countOfPage).length} trên {blog_items.length} sản phẩm</p>
                   </div>
                   <div className="tp-blog-grid-tab tp-tab">
                     <nav>
