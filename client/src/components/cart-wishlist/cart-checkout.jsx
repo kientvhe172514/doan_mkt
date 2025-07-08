@@ -44,7 +44,11 @@ const CartCheckout = () => {
       </div> */}
       <div className="tp-cart-checkout-total d-flex align-items-center justify-content-between">
         <span>Tổng</span>
-        <span>{(total + shipCost).toFixed(2)}đ</span>
+        {(total + shipCost).toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}
       </div>
       <div className="tp-cart-checkout-proceed">
         <Link href="/checkout" className="tp-cart-checkout-btn w-100">

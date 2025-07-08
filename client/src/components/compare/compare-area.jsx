@@ -78,7 +78,11 @@ const CompareArea = () => {
                         {compareItems.map((item) => (
                           <td key={item._id}>
                             <div className="tp-compare-price">
-                              <span>${item.price.toFixed(2)}</span>
+                              <span>{item.price.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>
                             </div>
                           </td>
                         ))}

@@ -123,7 +123,11 @@ const ProductManagement = () => {
   };
 
   const calculateDiscountedPrice = (price, discount) => {
-    return ((price * (100 - discount)) / 100).toFixed(2);
+    return ((price * (100 - discount)) / 100).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        currencyDisplay: 'code'
+        });
   };
   const uploadImageToCloudinary = async (file) => {
     const formData = new FormData();

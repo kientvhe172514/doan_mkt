@@ -82,7 +82,11 @@ const ProductSliderItem = ({ product }) => {
           <Link href={`/product-details/${_id}`}>{title}</Link>
         </h3>
         <div className="tp-category-price-wrapper-4">
-          <span className="tp-category-price-4">${price.toFixed(2)}</span>
+          <span className="tp-category-price-4">{price.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>
           {/* <div className="tp-category-add-to-cart">
             {isAddedToCart ? (
               <Link href="/cart" className="tp-category-add-to-cart-4">

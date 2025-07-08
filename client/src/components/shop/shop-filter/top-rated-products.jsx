@@ -45,7 +45,11 @@ const TopRatedProducts = () => {
             <Link href={`/product-details/${item._id}`}>{item.title.substring(0,20)}...</Link>
           </h4>
           <div className="tp-shop-widget-product-price-wrapper">
-            <span className="tp-shop-widget-product-price">${item.price.toFixed(2)}</span>
+            <span className="tp-shop-widget-product-price">${item.price.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>
           </div>
         </div>
       </div>

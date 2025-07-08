@@ -15,20 +15,20 @@ import thumb_shape_2 from '@assets/img/slider/2/shape/shape-3.png';
 const slider_data = [
   {
     id: 1,
-    subtitle: 'Gu tôi chọn, dáng tôi yêu',
-    title: 'LMuse',
+    subtitle: 'Gu tôi chọn - dáng tôi yêu',
+    title: 'L’Muse',
     img: slider_img_1,
   },
   {
     id: 2,
     subtitle: 'Bộ sưu tập mới nhất',
-    title: 'LMuse',
+    title: 'L’Muse',
     img: slider_img_2,
   },
   {
     id: 3,
     subtitle: 'thoả sức sáng tạo',
-    title: 'LMuse',
+    title: 'L’Muse',
     img: slider_img_3,
   },
 ]
@@ -63,7 +63,12 @@ const FashionBanner = () => {
                   <div className="row align-items-center">
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div className="tp-slider-content-2">
-                        <span>{item.subtitle}</span>
+                        <span
+                         style={{
+                          fontWeight: '400', 
+                          letterSpacing: '0.5px', 
+                        }}
+                        ><i>{item.subtitle}</i></span>
                         <h3 className="tp-slider-title-2">{item.title}</h3>
                         <div className="tp-slider-btn-2">
                           <Link href="/shop" className="tp-btn tp-btn-border">Cửa hàng</Link>

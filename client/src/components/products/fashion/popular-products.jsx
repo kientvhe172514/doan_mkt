@@ -88,9 +88,9 @@ const PopularProducts = () => {
               <Link href={`/product-details/${item._id}`}>
                 <Image src={item.img} alt="product-img" width={224} height={260} />
               </Link>
-            </div>
+            </div>  
             <div className="tp-category-content-2">
-              <span>From ${item.price}</span>
+              <span>From {item.price}đ</span>
               <h3 className="tp-category-title-2">
                 <Link href={`/product-details/${item._id}`}>{item.title.substring(0, 15)}</Link>
               </h3>

@@ -133,11 +133,19 @@ const ProductItem = ({ product, offer_style = false }) => {
               <>
                 <span className="tp-product-price old-price">${price}</span>
                 <span className="tp-product-price new-price">
-                  {" "} ${(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}
+                  {" "} {(Number(price) - (Number(price) * Number(discount)) / 100).toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}
                 </span>
               </>
             ) : (
-              <span className="tp-product-price new-price">${parseFloat(price).toFixed(2)}</span>
+              <span className="tp-product-price new-price">${parseFloat(price).toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>
             )}
           </div>
           {offer_style && (

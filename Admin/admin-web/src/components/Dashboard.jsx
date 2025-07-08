@@ -81,7 +81,11 @@ const Dashboard = () => {
       customer: order.name,
       status: order.status,
       date: new Date(order.createdAt || Date.now()).toLocaleDateString(),
-      amount: `$${order.totalAmount.toFixed(2)}`,
+      amount: `$${order.totalAmount.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}`,
     }));
   };
 
@@ -158,7 +162,11 @@ const Dashboard = () => {
             <Card className="mb-4">
               <Card.Body>
                 <Card.Title>Total Revenue</Card.Title>
-                <h2>${stats.totalRevenue.toFixed(2)}</h2>
+                <h2>${stats.totalRevenue.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</h2>
                 <div className="text-success">+12.5% from last month</div>
               </Card.Body>
             </Card>

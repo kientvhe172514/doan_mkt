@@ -46,7 +46,11 @@ const ProductSmItem = ({ product }) => {
           </div>
         </div>
         <div className="tp-product-price-wrapper">
-          <span className="tp-product-price">${price.toFixed(2)}</span>
+          <span className="tp-product-price">{price.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>
         </div>
       </div>
     </div>

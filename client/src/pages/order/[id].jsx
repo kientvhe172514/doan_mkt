@@ -188,14 +188,22 @@ const SingleOrder = ({ params }) => {
                                             <div className="col-lg-3 col-md-4">
                                                 <div className="invoice__discount-cost mb-30">
                                                     <h5 className="mb-0">Giảm giá</h5>
-                                                    <p className="tp-font-medium">{discount.toFixed(2)}đ</p>
+                                                    <p className="tp-font-medium">{discount.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</p>
                                                 </div>
                                             </div>
                                             <div className="col-lg-3 col-md-4">
                                                 <div className="invoice__total-ammount mb-30">
                                                     <h5 className="mb-0">Thành Tiền</h5>
                                                     <p className="tp-font-medium text-danger">
-                                                        <strong>{parseInt(totalAmount).toFixed(2)}đ</strong>
+                                                        <strong>{parseInt(totalAmount).toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</strong>
                                                     </p>
                                                 </div>
                                             </div>

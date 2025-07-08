@@ -96,9 +96,13 @@ const ShopListItem = ({ product }) => {
           <div className="tp-product-price-wrapper-2">
             {discount > 0 ? (
               <>
-                <span className="tp-product-price-2 new-price">${price}</span>
+                <span className="tp-product-price-2 new-price">{price}VND</span>
                 <span className="tp-product-price-2 old-price">
-                  {" "} {(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(2)}đ
+                  {" "} {(Number(price) - (Number(price) * Number(discount)) / 100).toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}
                 </span>
               </>
             ) : (

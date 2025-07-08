@@ -67,7 +67,15 @@ const CartMiniSidebar = () => {
                         {item.selectedSize && <span> / {item.selectedSize}</span>}
                     </div>
                     <div className="cartmini__price-wrapper">
-                      {item.discount > 0 ? <span className="cartmini__price">{(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100).toFixed(2)}đ</span> : <span className="cartmini__price">{item.price.toFixed(2)}đ</span>}
+                      {item.discount > 0 ? <span className="cartmini__price">{(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100).toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span> : <span className="cartmini__price">{item.price.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>}
                       <span className="cartmini__quantity">{" "}x{item.orderQuantity}</span>
                     </div>
                   </div>
@@ -86,7 +94,11 @@ const CartMiniSidebar = () => {
           <div className="cartmini__checkout">
             <div className="cartmini__checkout-title mb-30">
               <h4>tổng giá:</h4>
-              <span>{total.toFixed(2)}đ</span>
+              <span>{total.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>
             </div>
             <div className="cartmini__checkout-btn">
               <Link href="/cart" onClick={handleCloseCartMini} className="tp-btn mb-10 w-100"> Xem giỏ hàng</Link>

@@ -51,7 +51,11 @@ const ProductItem = ({ product, style_2 = false }) => {
     dispatch(add_to_compare(prd));
   };
 
-  const formatPrice = (val) => Number(val || 0).toFixed(2);
+  const formatPrice = (val) => Number(val || 0).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        currencyDisplay: 'code'
+        });
   const discountedPrice = price - (price * discount) / 100;
 
   return (
@@ -125,15 +129,15 @@ const ProductItem = ({ product, style_2 = false }) => {
           {discount > 0 ? (
             <>
               <span className="tp-product-price-2 new-price">
-                {formatPrice(discountedPrice)}đ
+                {formatPrice(discountedPrice)}
               </span>
               <span className="tp-product-price-2 old-price">
-                {formatPrice(price)}đ
+                {formatPrice(price)}
               </span>
             </>
           ) : (
             <span className="tp-product-price-2 new-price">
-              {formatPrice(price)}đ
+              {formatPrice(price)}
             </span>
           )}
         </div>

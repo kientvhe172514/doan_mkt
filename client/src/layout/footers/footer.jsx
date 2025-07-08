@@ -14,35 +14,31 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
         data-bg-color={`${style_2 ? 'footer-bg-white' : 'footer-bg-grey'}`}>
         <div className="tp-footer-top pt-95 pb-40">
           <div className="container">
-            <div className="row">
-              <div className="col-xl-4 col-lg-3 col-md-4 col-sm-6">
-                <div className="tp-footer-widget footer-col-1 mb-50">
-                  <div className="tp-footer-widget-content">
-                    <div className="tp-footer-logo">
+          <div className="tp-footer-logo">
                       <Link href="/">
                         <Image src={logo} alt="logo" />
                       </Link>
-                      <ul>
-                        <li>
-                          <i className="fa-solid fa-building"></i>&nbsp;
-                          <strong>CÔNG TY TNHH L&apos;Muse</strong>
-                        </li>
-                        <li>
-                          <i className="fa-solid fa-envelope"></i>&nbsp;
-                          <a href="mailto:lmuse.contact@gmail.com">lmuse.contact@gmail.com</a>
-                        </li>
-                        <li>
-                          <i className="fa-solid fa-phone"></i>&nbsp;
-                          <a href="tel:0363697288">0363.697.288</a>
-                        </li>
-                      </ul>
                     </div>
-                    <p className="tp-footer-desc"></p>
+            <div className="row">
+              <div className="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                <div className="tp-footer-widget footer-col-1 mb-50">
+                    <div className="tp-footer-widget-content">
+                    <ul>
+                      <li>
+                        <i className="fa-solid fa-building"></i> 
+                        <strong> CÔNG TY TNHH L'Muse</strong>
+                      </li>
+                      <li>
+                        <i className="fa-solid fa-envelope"></i> 
+                        <a href="mailto:lmuse.contact@gmail.com">lmuse.contact@gmail.com</a>
+                      </li>
+                      <li>
+                        <i className="fa-solid fa-phone"></i> 
+                        <a href="tel:0363697288">0363.697.288</a>
+                      </li>
+                    </ul>
                     <div className="tp-footer-social">
-                      {social_data.map(s => <a href={s.link} key={s.id} target="_blank">
-                        <i className={s.icon}></i>
-                      </a>
-                      )}
+                      {/* ... */}
                     </div>
                   </div>
                 </div>
@@ -75,8 +71,17 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                 <div className="tp-footer-widget footer-col-4 mb-50">
                   <h4 className="tp-footer-widget-title">Liên Hệ Với Chúng Tôi</h4>
                   <div className="tp-footer-widget-content">
-                    <div className="tp-footer-talk mb-20">  
-                      <p><i className='fa-solid fa-phone'><a href="tel:0363.697.288"> 0363.697.288</a></i></p>
+                    <div className="tp-footer-talk "> 
+                    <div className="tp-footer-contact-item d-flex align-items-start">
+                        <div className="tp-footer-contact-icon">
+                          <span>
+                           <i className='fa-solid fa-phone'></i>
+                          </span>
+                        </div>
+                        <div className="tp-footer-contact-content">
+                          <p><a href="tel:0363.697.288"> 0363.697.288</a></p>
+                        </div>
+                      </div> 
                     </div>
                     <div className="tp-footer-contact">
                       <div className="tp-footer-contact-item d-flex align-items-start">

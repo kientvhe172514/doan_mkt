@@ -70,7 +70,11 @@ const CartItem = ({ product }) => {
 
       {/* price */}
       <td className="tp-cart-price">
-        <span>{(price * orderQuantity).toFixed(2)}đ</span>
+        <span>{(price * orderQuantity).toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })}</span>
       </td>
 
       {/* quantity */}

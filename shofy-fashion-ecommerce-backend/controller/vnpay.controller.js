@@ -144,7 +144,15 @@ exports.vnpayReturn = async (req, res, next) => {
                     }
                     // Kiểm tra số tiền
                     // So sánh với số thập phân, sử dụng toFixed(2) để đảm bảo độ chính xác
-                    else if (order.totalAmount.toFixed(2) !== amount.toFixed(2)) {
+                    else if (order.totalAmount.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        currencyDisplay: 'code'
+        }) !== amount.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        currencyDisplay: 'code'
+        })) {
                         console.error('Amount mismatch for order:', orderId, 'Expected:', order.totalAmount, 'Received:', amount);
                         RspCode = '04'; // Invalid amount (Theo mã quy định của VNPAY)
                         responseMessage = "Số tiền không khớp.";

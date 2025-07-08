@@ -190,7 +190,11 @@ const ProductList = () => {
 
   // Calculate discounted price
   const getDiscountedPrice = (price, discount) => {
-    return (price - (price * discount) / 100).toFixed(2);
+    return (price - (price * discount) / 100).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        currencyDisplay: 'code'
+        });
   };
 
   // Render loading state
