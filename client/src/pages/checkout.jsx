@@ -10,9 +10,9 @@ import CheckoutArea from '@/components/checkout/checkout-area';
 const CheckoutPage = () => {
   return (
     <Wrapper>
-      <SEO pageTitle="Checkout" />
+      <SEO pageTitle="Thanh Toán" />
       <HeaderTwo style_2={true} />
-      <CommonBreadcrumb title="Checkout" subtitle="Checkout" bg_clr={true} />
+      <CommonBreadcrumb title="Thanh Toán" subtitle="thanh toán" bg_clr={true} />
       <CheckoutArea />
       <Footer style_2={true} />
     </Wrapper>

@@ -160,7 +160,7 @@ const useCheckoutSubmit = () => {
       // notifySuccess(
       //   `Your Coupon ${result[0].title} is Applied on ${result[0].productType}!`
       // );
-      setCouponApplyMsg(`Your Coupon ${result[0].title} is Applied on ${result[0].productType} productType!`)
+      setCouponApplyMsg(`Mã giảm giá của bạn ${result[0].title} đã được áp dụng thành công!`)
       setMinimumAmount(result[0]?.minimumAmount);
       setDiscountProductType(result[0].productType);
       setDiscountPercentage(result[0].discountPercentage);

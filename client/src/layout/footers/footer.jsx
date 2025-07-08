@@ -117,13 +117,13 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                     </p>
                   </div>
                 </div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                   <div className="tp-footer-payment text-md-end">
                     <p>
                       <Image src={pay} alt="pay" />
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
