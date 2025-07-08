@@ -12,7 +12,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
     <footer>
       <div className={`tp-footer-area ${primary_style?'tp-footer-style-2 tp-footer-style-primary tp-footer-style-6':''} ${style_2 ?'tp-footer-style-2':style_3 ? 'tp-footer-style-2 tp-footer-style-3': ''}`}
         data-bg-color={`${style_2 ? 'footer-bg-white' : 'footer-bg-grey'}`}>
-        <div className="tp-footer-top pt-95 pb-40">
+        <div className="tp-footer-top">
           <div className="container">
           <div className="tp-footer-logo">
                       <Link href="/">
