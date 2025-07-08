@@ -9,9 +9,11 @@ const RenderCartProgress = () => {
     const remainingAmount = freeShippingThreshold - total;
     return (
       <>
-        <p>{`Thêm ${remainingAmount.toFixed(
-          2
-        )}đ để được miễn phí vận chuyển`}</p>
+        <p>{`Thêm ${remainingAmount.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                  currencyDisplay: 'code'
+                  })} để được miễn phí vận chuyển`}</p>
         <div className="progress">
           <div
             className="progress-bar progress-bar-striped progress-bar-animated"

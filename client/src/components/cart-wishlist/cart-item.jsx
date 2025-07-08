@@ -19,7 +19,8 @@ const CartItem = ({ product }) => {
     orderQuantity = 0,
     cartId, // Rất quan trọng
     selectedColor,
-    selectedSize
+    selectedSize,
+    discount = 0
   } = product || {};
 
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const CartItem = ({ product }) => {
 
       {/* price */}
       <td className="tp-cart-price">
-        <span>{(price * orderQuantity).toLocaleString('vi-VN', {
+        <span>{((price * orderQuantity)-(price * orderQuantity)*discount/100).toLocaleString('vi-VN', {
                   style: 'currency',
                   currency: 'VND',
                   currencyDisplay: 'code'
