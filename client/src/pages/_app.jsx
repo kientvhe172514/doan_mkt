@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import ReactModal from "react-modal";
 // import { Elements } from "@stripe/react-stripe-js";
 // import { loadStripe } from "@stripe/stripe-js";
+
 import '../styles/index.scss';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,12 +21,12 @@ if (typeof window !== "undefined") {
 const NEXT_PUBLIC_GOOGLE_CLIENT_ID = '580636148261-7mlnda1mhk84sk4f5p327a0iq79nc5us.apps.googleusercontent.com'
 export default function App({ Component, pageProps }) {
   return (
-    <GoogleOAuthProvider clientId={NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
-      <Provider store={store}>    
+      <GoogleOAuthProvider clientId={NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+        <Provider store={store}>
           <div id="root">
             <Component {...pageProps} />
-          </div>     
-      </Provider>
-    </GoogleOAuthProvider>
+          </div>
+        </Provider>
+      </GoogleOAuthProvider>
   )
 }

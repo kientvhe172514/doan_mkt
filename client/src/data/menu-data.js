@@ -157,8 +157,8 @@ export const mobile_menu = [
   {
     id: 3,
     sub_menu: true,
-    title: 'Cài Đặt',
-    link: '/cart',
+    title: 'Về Chúng Tôi',
+    link: '/blog',
     sub_menus: [
       { title: 'Giỏ Hàng', link: '/cart' },
       { title: 'So Sánh', link: '/compare' },
@@ -170,8 +170,8 @@ export const mobile_menu = [
   {
     id: 4,
     sub_menu: true,
-    title: 'Trang',
-    link: '/login',
+    title: 'Flash Sale',
+    link: '/flash-sale',
     sub_menus: [
       { title: 'Login', link: '/login' },
       { title: 'Register', link: '/register' },
@@ -179,24 +179,11 @@ export const mobile_menu = [
       { title: '404 Error', link: '/404' },
     ],
   },
-  // {
-  //   id: 4,
-  //   single_link: true,
-  //   title: 'Coupons',
-  //   link: '/coupon',
-  // },
   {
-    id: 5,
-    sub_menu: true,
-    title: 'Bài Viết',
-    link: '/blog',
-    sub_menus: [
-      { title: 'Blog Standard', link: '/blog' },
-      { title: 'Blog Grid', link: '/blog-grid' },
-      { title: 'Blog List', link: '/blog-list' },
-      { title: 'Blog Details', link: '/blog-details' },
-      { title: 'Blog Details Full Width', link: '/blog-details-2' },
-    ]
+    id: 4,
+    single_link: true,
+    title: 'Bộ Sưu Tập',
+    link: '/shop',
   },
   {
     id: 6,

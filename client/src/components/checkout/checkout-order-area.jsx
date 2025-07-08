@@ -117,12 +117,11 @@ const CheckoutOrderArea = ({ checkoutData }) => {
             value="VNPAY" // Changed value
             onClick={() => setShowCard(true)} // Keep setShowCard for VNPAY
           />
-          <label htmlFor="vnpay_payment">Thanh toán qua VNPAY</label>
+          <label htmlFor="vnpay_payment">Thanh toán qua QRcode</label>
           {showCard && ( // This will now conditionally show VNPAY specific info if any
             <div className="direct-bank-transfer">
               <p>
-                Bạn sẽ được chuyển hướng đến cổng thanh toán VNPAY để hoàn tất
-                đơn hàng.
+                Bấm đặt hàng để để hiển thị mã QR thanh toán.
               </p>
             </div>
           )}

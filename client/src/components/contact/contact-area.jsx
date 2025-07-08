@@ -54,7 +54,7 @@ const ContactArea = () => {
                           href="https://maps.app.goo.gl/uzCuwGcQdtPfA8aE6"
                           target="_blank"
                         >
-                          Thạch Thất <br /> Hoà lạc, Hà Nội, Việt Nam
+                          HHA Building <br /> 43 Pham van Dong, Bac Tu Liem, Hanoi
                         </a>
                       </p>
                     </div>

@@ -91,6 +91,12 @@ const DetailsWrapper = ({
   const handleCompareProduct = (prd) => {
     dispatch(add_to_compare(prd));
   };
+  const handleBuyNow = (productItem) => {
+    // Hành động 1: Thêm sản phẩm vào giỏ hàng
+    handleAddProduct(productItem);
+    // Hành động 2: Đóng modal
+    dispatch(handleModalClose());
+  };
 
   return (
     <div className="tp-product-details-wrapper">
@@ -176,7 +182,7 @@ const DetailsWrapper = ({
             </button>
           </div>
         </div>
-        <Link href="/cart" onClick={() => dispatch(handleModalClose())}>
+        <Link href="/checkout" onClick={() =>handleBuyNow(productItem)}>
           <button className="tp-product-details-buy-now-btn w-100">
             Mua Ngay
           </button>

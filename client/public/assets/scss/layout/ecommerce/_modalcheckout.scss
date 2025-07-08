@@ -1,0 +1,78 @@
+// _modal.scss
+
+//== Biến màu để dễ dàng tùy chỉnh ==//
+$modal-overlay-bg: rgba(0, 0, 0, 0.75);
+$modal-content-bg: #ffffff;
+$modal-primary-btn: #007bff; // Màu nút chính
+$modal-secondary-btn: #6c757d; // Màu nút phụ
+$modal-text-color: #333;
+$modal-text-light: #555;
+
+//== Style cho Modal ==//
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $modal-overlay-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 15px; // Thêm padding cho các màn hình nhỏ
+
+  // Khối nội dung chính của modal
+  .modal-content {
+    background: $modal-content-bg;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+    .modal-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: $modal-text-color;
+    }
+
+    .modal-description {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: $modal-text-light;
+    }
+
+    .qr-code-wrapper {
+      margin-bottom: 20px;
+    }
+
+    .modal-details {
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+
+    // Các nút hành động
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      // Sử dụng & để lồng các pseudo-classes (như :hover)
+      .confirm-btn {
+        background-color: $modal-primary-btn;
+        &:hover {
+          background-color: darken($modal-primary-btn, 10%);
+        }
+      }
+
+      .cancel-btn {
+        background-color: $modal-secondary-btn;
+        &:hover {
+          background-color: darken($modal-secondary-btn, 10%);
+        }
+      }
+    }
+  }
+}

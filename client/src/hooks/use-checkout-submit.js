@@ -171,7 +171,9 @@ const useCheckoutSubmit = () => {
         })
       );
       setTimeout(() => {
-        couponRef.current.value = "";
+        if (couponRef.current) {
+          couponRef.current.value = "";
+        }
         setCouponApplyMsg("")
       }, 5000);
     }
@@ -219,41 +221,54 @@ const useCheckoutSubmit = () => {
       user: user?._id || null,
     };
     if (data.payment === 'VNPAY') {
-      try {
-          // BƯỚC 1: LƯU ĐƠN HÀNG VỚI TRẠNG THÁI CHỜ THANH TOÁN TRƯỚC
-         const initialOrderResponse = await saveOrder({
-              ...orderInfo,
-              status: 'payment pending', // <--- SỬA THÀNH CHỮ THƯỜNG HOÀN TOÀN Ở ĐÂY
-          }).unwrap();
-          if (initialOrderResponse?.order?._id) {
-              const orderIdForVnpay = initialOrderResponse.order._id; // Dùng _id của đơn hàng vừa tạo làm orderId cho VNPAY
+//       try {
+//           // BƯỚC 1: LƯU ĐƠN HÀNG VỚI TRẠNG THÁI CHỜ THANH TOÁN TRƯỚC
+//          const initialOrderResponse = await saveOrder({
+//               ...orderInfo,
+//               status: 'payment pending', // <--- SỬA THÀNH CHỮ THƯỜNG HOÀN TOÀN Ở ĐÂY
+//           }).unwrap();
+//           if (initialOrderResponse?.order?._id) {
+//               const orderIdForVnpay = initialOrderResponse.order._id; // Dùng _id của đơn hàng vừa tạo làm orderId cho VNPAY
 
-              // BƯỚC 2: TẠO URL THANH TOÁN VỚI VNPAY
-              const response = await createPaymentIntent({
-                  amount: cartTotal,
-                  orderId: orderIdForVnpay, // Gửi ID đơn hàng từ DB cho VNPAY
-                  orderInfo: "Thanh toán đơn hàng " + orderIdForVnpay,
-                  returnUrl: `${window.location.origin}/order/${orderIdForVnpay}`, // Trang để chuyển hướng người dùng về
-              }).unwrap();
-              console.log("Initial Order Response:", initialOrderResponse); 
-              if (response?.vnpUrl) {
-                  // BƯỚC 3: CHUYỂN HƯỚNG NGƯỜI DÙNG ĐẾN VNPAY
-                  window.location.href = response.vnpUrl;
-              } else {
-                  toast.error("Không thể tạo liên kết thanh toán VNPAY.");
-                  setIsCheckoutSubmit(false);
-                  // Có thể cập nhật lại trạng thái đơn hàng vừa tạo thành 'Failed' hoặc 'Cancelled'
-              }
-          } else {
-              toast.error("Không thể lưu đơn hàng ban đầu.");
-              setIsCheckoutSubmit(false);
-          }
-      } catch (error) {
-          console.error("Lỗi khi tạo liên kết thanh toán VNPAY:", error);
-          toast.error("Đã xảy ra lỗi trong quá trình thanh toán VNPAY.");
-          setIsCheckoutSubmit(false);
-          // Có thể cập nhật lại trạng thái đơn hàng vừa tạo thành 'Failed' hoặc 'Cancelled'
-      }
+//               // BƯỚC 2: TẠO URL THANH TOÁN VỚI VNPAY
+//               const response = await createPaymentIntent({
+//                   amount: cartTotal,
+//                   orderId: orderIdForVnpay, // Gửi ID đơn hàng từ DB cho VNPAY
+//                   orderInfo: "Thanh toán đơn hàng " + orderIdForVnpay,
+//                   returnUrl: `${window.location.origin}/order/${orderIdForVnpay}`, // Trang để chuyển hướng người dùng về
+//               }).unwrap();
+//               console.log("Initial Order Response:", initialOrderResponse); 
+//               if (response?.vnpUrl) {
+//                   // BƯỚC 3: CHUYỂN HƯỚNG NGƯỜI DÙNG ĐẾN VNPAY
+//                   window.location.href = response.vnpUrl;
+//               } else {
+//                   toast.error("Không thể tạo liên kết thanh toán VNPAY.");
+//                   setIsCheckoutSubmit(false);
+//                   // Có thể cập nhật lại trạng thái đơn hàng vừa tạo thành 'Failed' hoặc 'Cancelled'
+//               }
+//           } else {
+//               toast.error("Không thể lưu đơn hàng ban đầu.");
+//               setIsCheckoutSubmit(false);
+//           }
+//       } catch (error) {
+//           console.error("Lỗi khi tạo liên kết thanh toán VNPAY:", error);
+//           toast.error("Đã xảy ra lỗi trong quá trình thanh toán VNPAY.");
+//           setIsCheckoutSubmit(false);
+//           // Có thể cập nhật lại trạng thái đơn hàng vừa tạo thành 'Failed' hoặc 'Cancelled'
+//       }
+          saveOrder({
+            ...orderInfo
+          }).then(res => {
+            if(res?.error){
+            }
+            else {
+              localStorage.removeItem("cart_products")
+              localStorage.removeItem("couponInfo");
+              setIsCheckoutSubmit(false)
+              notifySuccess("Your Order Confirmed!");
+              router.push(`/order/${res.data?.order?._id}`);
+            }
+          }) 
   }
     if (data.payment === 'COD') {
       saveOrder({

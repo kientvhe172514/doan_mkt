@@ -1,7 +1,8 @@
 const { secret } = require("../config/secret");
 const stripe = require("stripe")(secret.stripe_key);
 const Order = require("../model/Order");
-
+const Products = require("../model/Products");
+const Coupon = require("../model/Coupon")
 // create-payment-intent
 exports.paymentIntent = async (req, res, next) => {
   try {
@@ -25,16 +26,56 @@ exports.paymentIntent = async (req, res, next) => {
 // addOrder
 exports.addOrder = async (req, res, next) => {
   try {
-    const orderItems = await Order.create(req.body);
+    const newOrder = await Order.create(req.body);
+
+    /*
+    // ===================================================================
+    // TẠM THỜI VÔ HIỆU HÓA TÍNH NĂNG TRỪ SỐ LƯỢG SẢN PHẨM
+    // ===================================================================
+    for (const item of newOrder.cart) {
+        const product = await Products.findById(item._id);
+
+        if (product) {
+            const colorVariant = product.imageURLs.find(
+                (imgUrl) => imgUrl.color.clrCode === item.selectedColor.color.clrCode
+            );
+
+            if (colorVariant) {
+                const sizeVariant = colorVariant.sizes.find(
+                    (s) => s.size === item.selectedSize
+                );
+
+                if (sizeVariant && sizeVariant.quantity >= item.orderQuantity) {
+                    sizeVariant.quantity -= item.orderQuantity;
+                    await product.save();
+                    console.log(`✅ SUCCESS: Quantity updated correctly for ${product.title}`);
+                } else {
+                    console.log(`❌ FAILED: Size ${item.selectedSize} not found or not enough stock for ${item.title}`);
+                }
+            } else {
+                console.log(`❌ FAILED: Color not found for ${item.title}`);
+            }
+        } else {
+            console.log(`❌ FAILED: Product with ID ${item._id} not found.`);
+        }
+    }
+    */
+
+    // Logic xóa coupon vẫn được giữ lại và hoạt động bình thường
+    const usedCouponId = newOrder.cart.find(item => item.couponId)?.couponId;
+    if (usedCouponId) {
+      await Coupon.findByIdAndDelete(usedCouponId);
+      console.log(`✅ Coupon with ID: ${usedCouponId} has been deleted.`);
+    }
+
     res.status(200).json({
       success: true,
-      message: "Order added successfully",
-      order: orderItems,
+      message: "Order added successfully, coupon handled.",
+      order: newOrder,
     });
-  }
-  catch (error) {
-    console.log(error);
-    next(error)
+  } catch (error) {
+    console.log("Error in addOrder:", error);
+    next(error);
   }
 };
 // get Orders
