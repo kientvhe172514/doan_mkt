@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ useState, useEffect } from 'react';
 import Image from 'next/image';
 // internal
 import shape_line from '@assets/img/blog/details/shape/line.png';
@@ -6,17 +6,26 @@ import shape_line_2 from '@assets/img/blog/details/shape/quote.png';
 import blog_details_big_img from '@assets/img/blog/details/blog-big-1.jpg';
 import blog_details_sm_img from '@assets/img/blog/details/blog-details-sm-1.jpg';
 import blogData from '@/data/blog-data';
-import GridItem from '../blog/blog-grid/grid-item';
-import BlogDetailsComments from './blog-details-comments';
-import BlogPostCommentForm from '../forms/blog-post-comment-form';
-import BlogDetailsAuthor from './blog-details-author';
-import PostboxDetailsNav from './postbox-details-nav';
-import PostboxDetailsTop from './postbox-details-top';
-import social_data from '@/data/social-data';
+// import GridItem from '../blog/blog-grid/grid-item';
+// import BlogDetailsComments from './blog-details-comments';
+// import BlogPostCommentForm from '../forms/blog-post-comment-form';
+// import BlogDetailsAuthor from './blog-details-author';
+// import PostboxDetailsNav from './postbox-details-nav';
+// import PostboxDetailsTop from './postbox-details-top';
+
 // related_blogs
 const related_blogs = blogData.filter(b => b.blog === 'blog-grid').slice(0, 3)
 
 const BlogDetailsAreaTwo = ({blog}) => {
+    const [facebookShareUrl, setFacebookShareUrl] = useState('');
+  
+    // BƯỚC 3: Dùng useEffect để lấy URL của trang hiện tại một cách an toàn
+    useEffect(() => {
+      // Code bên trong useEffect chỉ chạy ở phía trình duyệt (client-side)
+      const currentUrl = window.location.href;
+      // Tạo link chia sẻ cho Facebook
+      setFacebookShareUrl(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`);
+    }, []); // Mảng rỗng `[]` đảm bảo code chỉ chạy 1 lần sau khi component được render
   return (
     <>
       <section className="tp-postbox-details-area pb-120 pt-95">
@@ -36,13 +45,19 @@ const BlogDetailsAreaTwo = ({blog}) => {
               <div className="tp-postbox-details-share-2">
                 <span>Chia sẻ</span>
                 <ul>
-                  {social_data.map(s => (
-                  <li key={s.id}>
-                    <a href={s.link} target="_blank" className='me-1'>
-                      <i className={s.icon}></i>
-                    </a>
-                  </li>
-                  )) }
+                  <li><a 
+                    href={facebookShareUrl}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fa-brands fa-facebook-f"></i>
+                  </a></li>
+                  <li><a href="tiktok.com">
+                    <i className="fa-brands fa-tiktok"></i>
+                  </a></li>
+                  <li><a href="instagram.com">
+                    <i className="fa-brands fa-instagram"></i>
+                  </a></li>
                 </ul>
               </div>
             </div>

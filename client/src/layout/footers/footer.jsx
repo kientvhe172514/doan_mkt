@@ -26,7 +26,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                     <ul>
                       <li>
                         <i className="fa-solid fa-building"></i> 
-                        <strong> CÔNG TY TNHH L'Muse</strong>
+                        <strong> CÔNG TY TNHH L’Muse</strong>
                       </li>
                       <li>
                         <i className="fa-solid fa-envelope"></i> 
