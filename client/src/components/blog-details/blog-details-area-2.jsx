@@ -52,10 +52,18 @@ const BlogDetailsAreaTwo = ({blog}) => {
                   >
                     <i className="fa-brands fa-facebook-f"></i>
                   </a></li>
-                  <li><a href="tiktok.com">
+                  <li> <a 
+                    href="https://www.tiktok.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
                     <i className="fa-brands fa-tiktok"></i>
                   </a></li>
-                  <li><a href="instagram.com">
+                  <li><a 
+                    href="https://www.instagram.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
                     <i className="fa-brands fa-instagram"></i>
                   </a></li>
                 </ul>
