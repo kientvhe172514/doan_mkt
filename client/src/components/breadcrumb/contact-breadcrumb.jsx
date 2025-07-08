@@ -7,7 +7,7 @@ const ContactBreadcrumb = () => {
         <div className="row">
           <div className="col-xxl-12">
             <div className="breadcrumb__content p-relative z-index-1">
-              <h3 className="breadcrumb__title">Liên Hệ Với Chúng TÔi</h3>
+              <h3 className="breadcrumb__title">Liên Hệ Với Chúng Tôi</h3>
               <div className="breadcrumb__list">
                 <span>
                   <a href="#">Trang Chủ</a>

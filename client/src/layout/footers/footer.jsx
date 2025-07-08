@@ -38,7 +38,10 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                       </li>
                     </ul>
                     <div className="tp-footer-social">
-                      {/* ... */}
+                    {social_data.map(s => <a href={s.link} key={s.id} target="_blank">
+                    <i className={s.icon}></i>
+                    </a>
+                    )}  
                     </div>
                   </div>
                 </div>
@@ -71,7 +74,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                 <div className="tp-footer-widget footer-col-4 mb-50">
                   <h4 className="tp-footer-widget-title">Liên Hệ Với Chúng Tôi</h4>
                   <div className="tp-footer-widget-content">
-                    <div className="tp-footer-talk "> 
+                    <div className="tp-footer-contact "> 
                     <div className="tp-footer-contact-item d-flex align-items-start">
                         <div className="tp-footer-contact-icon">
                           <span>
