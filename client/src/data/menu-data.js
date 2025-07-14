@@ -44,44 +44,44 @@ const menu_data = [
       { title: 'Blog Details Full Width', link: '/blog-details-2' },
     ]
   },
+  // {
+  //   id: 2,
+  //   products: true,
+  //   title: 'SẢN PHẨM',
+  //   link: '/shop',
+  //   product_pages: [
+  //     {
+  //       title: 'Tất cả Sản Phẩm',
+  //       link: '/shop',
+  //       mega_menus: [
+  //         { title: 'Cửa Hàng', link: '/shop' },
+  
+  //       ]
+  //     },
+  //     {
+  //       title: 'Tiện ích',
+  //       link: '/shop',
+  //       mega_menus: [
+  //         { title: 'Giỏ hàng', link: '/cart' },
+  //         { title: 'So Sánh', link: '/compare' },
+  //         { title: 'Yêu thích', link: '/wishlist' },
+  //         { title: 'Thanh Toán', link: '/checkout' },
+  //         { title: 'Tài Khoản', link: '/profile' },
+  //       ]
+  //     },
+  //     {
+  //       title: 'Trang',
+  //       link: '/shop',
+  //       mega_menus: [
+  //         { title: 'Đăng Nhập', link: '/login' },
+  //         { title: 'Đăng Ký', link: '/register' },
+  //         { title: 'Quên Mật Khẩu', link: '/forgot' },
+  //       ]
+  //     },
+  //   ]
+  // },
   {
     id: 2,
-    products: true,
-    title: 'SẢN PHẨM',
-    link: '/shop',
-    product_pages: [
-      {
-        title: 'Tất cả Sản Phẩm',
-        link: '/shop',
-        mega_menus: [
-          { title: 'Cửa Hàng', link: '/shop' },
-  
-        ]
-      },
-      {
-        title: 'Tiện ích',
-        link: '/shop',
-        mega_menus: [
-          { title: 'Giỏ hàng', link: '/cart' },
-          { title: 'So Sánh', link: '/compare' },
-          { title: 'Yêu thích', link: '/wishlist' },
-          { title: 'Thanh Toán', link: '/checkout' },
-          { title: 'Tài Khoản', link: '/profile' },
-        ]
-      },
-      {
-        title: 'Trang',
-        link: '/shop',
-        mega_menus: [
-          { title: 'Đăng Nhập', link: '/login' },
-          { title: 'Đăng Ký', link: '/register' },
-          { title: 'Quên Mật Khẩu', link: '/forgot' },
-        ]
-      },
-    ]
-  },
-  {
-    id: 3,
     sub_menu: true,
     title: 'BỘ SƯU TẬP',
     link: '/shop',
@@ -92,14 +92,14 @@ const menu_data = [
     ],
   },
   {
-    id: 4,
+    id: 3,
     single_link: true,
     title: 'FLASHSALE',
     link: '/flash-sale',
   },
 
   {
-    id: 5,
+    id: 4,
     single_link: true,
     title: 'LIÊN HỆ',
     link: '/contact',
