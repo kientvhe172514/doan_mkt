@@ -94,7 +94,7 @@ const menu_data = [
   {
     id: 4,
     single_link: true,
-    title: 'FLASH SALE',
+    title: 'FLASHSALE',
     link: '/flash-sale',
   },
 
