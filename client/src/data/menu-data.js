@@ -34,7 +34,7 @@ const menu_data = [
   {
     id: 1,
     sub_menu: true,
-    title: 'Về Chúng Tôi',
+    title: 'VỀ CHÚNG TÔI',
     link: '/blog',
     sub_menus: [
       { title: 'Blog Standard', link: '/blog' },
@@ -47,7 +47,7 @@ const menu_data = [
   {
     id: 2,
     products: true,
-    title: 'Sản Phẩm',
+    title: 'SẢN PHẨM',
     link: '/shop',
     product_pages: [
       {
@@ -83,7 +83,7 @@ const menu_data = [
   {
     id: 3,
     sub_menu: true,
-    title: 'Bộ Sưu Tập',
+    title: 'BỘ SƯU TẬP',
     link: '/shop',
     sub_menus: [
       { title: 'Mua Sắm', link: '/shop' },
@@ -94,14 +94,14 @@ const menu_data = [
   {
     id: 4,
     single_link: true,
-    title: 'FlashSale',
+    title: 'FLASH SALE',
     link: '/flash-sale',
   },
 
   {
     id: 5,
     single_link: true,
-    title: 'Liên Hệ',
+    title: 'LIÊN HỆ',
     link: '/contact',
   },
 ]
@@ -113,7 +113,7 @@ export const mobile_menu = [
   {
     id: 1,
     homes: true,
-    title: 'Trang Chủ',
+    title: 'TRANG CHỦ',
     link: '/',
     home_pages: [
       {
@@ -157,7 +157,7 @@ export const mobile_menu = [
   {
     id: 3,
     sub_menu: true,
-    title: 'Về Chúng Tôi',
+    title: 'VỀ CHÚNG TÔI',
     link: '/blog',
     sub_menus: [
       { title: 'Giỏ Hàng', link: '/cart' },
@@ -170,7 +170,7 @@ export const mobile_menu = [
   {
     id: 4,
     sub_menu: true,
-    title: 'Flash Sale',
+    title: 'FLASH SALE',
     link: '/flash-sale',
     sub_menus: [
       { title: 'Login', link: '/login' },
@@ -182,13 +182,13 @@ export const mobile_menu = [
   {
     id: 4,
     single_link: true,
-    title: 'Bộ Sưu Tập',
+    title: 'BỘ SƯU TẬP',
     link: '/shop',
   },
   {
     id: 6,
     single_link: true,
-    title: 'Liên Hệ',
+    title: 'LIÊN HỆ',
     link: '/contact',
   },
 ]

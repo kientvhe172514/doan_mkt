@@ -48,7 +48,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
               </div>
               <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <div className="tp-footer-widget footer-col-2 mb-50">
-                  <h4 className="tp-footer-widget-title">Thương Hiệu</h4>
+                  <h4 className="tp-footer-widget-title">THƯƠNG HIỆU</h4>
                   <div className="tp-footer-widget-content">
                     <ul>               
                       <li><Link href="/blog">Câu chuyện thương hiệu</Link></li>
@@ -59,7 +59,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
               </div>
               <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                 <div className="tp-footer-widget footer-col-3 mb-50">
-                  <h4 className="tp-footer-widget-title">Hỗ Trợ</h4>
+                  <h4 className="tp-footer-widget-title">HỖ TRỢ</h4>
                   <div className="tp-footer-widget-content">
                     <ul>
                       <li><Link href="/policy-shop">Chính sách mua hàng online</Link></li>
@@ -72,7 +72,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
               </div>
               <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                 <div className="tp-footer-widget footer-col-4 mb-50">
-                  <h4 className="tp-footer-widget-title">Liên Hệ Với Chúng Tôi</h4>
+                  <h4 className="tp-footer-widget-title">LIÊN HỆ VỚI CHÚNG TÔI</h4>
                   <div className="tp-footer-widget-content">
                     <div className="tp-footer-contact "> 
                     <div className="tp-footer-contact-item d-flex align-items-start">
