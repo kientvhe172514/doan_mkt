@@ -19,7 +19,7 @@ async function urlToBlob(url) {
     
     let file;
     if (typeof imageSource === 'string') {
-      console.log(`Đang chuyển đổi URL thành file: ${imageSource}`);
+      //console.log(`Đang chuyển đổi URL thành file: ${imageSource}`);
       file = await urlToBlob(imageSource);
     } else {
       file = imageSource;
@@ -41,7 +41,7 @@ async function urlToBlob(url) {
     });
     if (!uploadResponse.ok) throw new Error("Tải file lên server thất bại.");
     
-    console.log(`Tải ảnh thành công: ${finalImageUrl}`);
+    //console.log(`Tải ảnh thành công: ${finalImageUrl}`);
     return finalImageUrl;
   };
   
@@ -60,7 +60,7 @@ async function urlToBlob(url) {
     const data = await response.json();
     if (data.statusCode !== 2000) throw new Error(data.message);
     
-    console.log(`Bắt đầu tác vụ AI thành công, Order ID: ${data.body.orderId}`);
+    //console.log(`Bắt đầu tác vụ AI thành công, Order ID: ${data.body.orderId}`);
     return data.body.orderId;
   };
   
@@ -80,7 +80,7 @@ async function urlToBlob(url) {
     if (data.statusCode !== 2000) throw new Error(data.message);
     
     const body = data.body;
-    console.log(`Kiểm tra trạng thái Order ID ${orderId}:`, body);
+    //console.log(`Kiểm tra trạng thái Order ID ${orderId}:`, body);
   
     // SỬA LỖI: Lấy URL từ key "output" mà bạn đã tìm thấy
     const outputUrl = 
