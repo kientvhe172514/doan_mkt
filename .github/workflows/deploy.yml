@@ -12,16 +12,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        # Không cần fetch-depth nữa, action dưới đây sẽ tự xử lý
-
-      # Bước kiểm tra các thư mục đã có thay đổi
-      - name: Check for changed files
-        id: changed_files
-        uses: tj-actions/changed-files@v41
         with:
-          # SỬA LỖI: Dùng tùy chọn này để so sánh chính xác với commit trên server
-          since_last_remote_commit: 'true'
-          files_yaml: |
+          # QUAN TRỌNG: Tải về toàn bộ lịch sử để so sánh chính xác
+          fetch-depth: 0
+
+      # SỬA LỖI: Dùng action dorny/paths-filter đáng tin cậy hơn
+      - name: Check for changed files
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
             backend:
               - 'shofy-fashion-ecommerce-backend/**'
             client:
@@ -31,24 +31,22 @@ jobs:
 
       # Bước debug: In ra kết quả kiểm tra để dễ theo dõi
       - name: List changed files outputs
-        # Luôn chạy bước này để bạn có thể xem kết quả trong log
         if: always()
         run: |
           echo "--- Changed Files Report ---"
-          echo "Any files changed: ${{ steps.changed_files.outputs.any_changed }}"
-          echo "Backend changed: ${{ steps.changed_files.outputs.backend }}"
-          echo "Client changed: ${{ steps.changed_files.outputs.client }}"
-          echo "Admin changed: ${{ steps.changed_files.outputs.admin }}"
+          echo "Backend changed: ${{ steps.filter.outputs.backend }}"
+          echo "Client changed: ${{ steps.filter.outputs.client }}"
+          echo "Admin changed: ${{ steps.filter.outputs.admin }}"
           echo "--------------------------"
 
       - name: Login to DockerHub
         # Chỉ đăng nhập khi thực sự có thay đổi cần build
-        if: steps.changed_files.outputs.any_changed == 'true'
+        if: steps.filter.outputs.backend == 'true' || steps.filter.outputs.client == 'true' || steps.filter.outputs.admin == 'true'
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and push backend
         # Chỉ chạy khi có thay đổi trong thư mục backend
-        if: steps.changed_files.outputs.backend == 'true'
+        if: steps.filter.outputs.backend == 'true'
         run: |
           echo "Backend files changed. Building backend..."
           docker build -t tranvukien125/doan_tot_nghiep_backend:latest ./shofy-fashion-ecommerce-backend
@@ -56,7 +54,7 @@ jobs:
 
       - name: Build and push frontend (client)
         # Chỉ chạy khi có thay đổi trong thư mục client
-        if: steps.changed_files.outputs.client == 'true'
+        if: steps.filter.outputs.client == 'true'
         run: |
           echo "Client files changed. Building client..."
           docker build -t tranvukien125/doan_tot_nghiep_client:latest ./client
@@ -64,7 +62,7 @@ jobs:
 
       - name: Build and push frontend_admin
         # Chỉ chạy khi có thay đổi trong thư mục admin
-        if: steps.changed_files.outputs.admin == 'true'
+        if: steps.filter.outputs.admin == 'true'
         run: |
           echo "Admin files changed. Building admin..."
           docker build -t tranvukien125/doan_tot_nghiep_admin:latest ./Admin/admin-web
@@ -72,7 +70,7 @@ jobs:
 
       - name: SSH into VPS and Deploy
         # Chỉ deploy khi có ít nhất một image đã được build
-        if: steps.changed_files.outputs.any_changed == 'true'
+        if: steps.filter.outputs.backend == 'true' || steps.filter.outputs.client == 'true' || steps.filter.outputs.admin == 'true'
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}

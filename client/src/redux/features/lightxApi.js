@@ -79,7 +79,7 @@ async function urlToBlob(url) {
     const data = await response.json();
     if (data.statusCode !== 2000) throw new Error(data.message);
     const body = data.body;
-    //console.log(`Kiểm tra trạng thái Order ID ${orderId}:`, body);
+    console.log(`Kiểm tra trạng thái Order ID ${orderId}:`, body);
   
     // SỬA LỖI: Lấy URL từ key "output" mà bạn đã tìm thấy
     const outputUrl = 
