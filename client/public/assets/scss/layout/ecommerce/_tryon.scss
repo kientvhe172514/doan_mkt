@@ -1,0 +1,371 @@
+// Import CSS của Swiper (nếu cần)
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+
+// Biến màu để dễ quản lý
+$panel-bg-color: #ffffff;
+$page-bg-color: #f7f8fa;
+$border-color: #e5e7eb;
+$primary-color: var(--tp-theme-primary, #0989ff);
+$text-color-dark: #111827;
+$text-color-light: #6b7280;
+
+.try-on-area {
+  padding-top: 50px;
+  padding-bottom: 70px;
+  background-color: $page-bg-color;
+}
+
+// Container chính, layout dọc
+.try-on-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+// KHU VỰC CHÍNH Ở TRÊN (chứa sidebar và canvas)
+.try-on-main-view {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+// KHU VỰC CANVAS HIỂN THỊ ẢNH (Bên phải)
+.try-on-canvas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  width: 100%;
+
+  &__image-wrapper {
+    position: relative;
+    background-color: $panel-bg-color;
+    border: 1px solid $border-color;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 15px;
+    }
+  }
+
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-color-light;
+    text-align: center;
+    font-size: 15px;
+    padding: 20px;
+    height: 100%;
+  }
+}
+
+// PANEL CHỌN TRANG PHỤC (Sidebar bên trái)
+.try-on-clothing-panel {
+  background-color: $panel-bg-color;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid $border-color;
+  max-height: 75vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 100px;
+
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+  &::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+  &::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: $text-color-dark;
+    text-align: center;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+// PANEL CHỌN NGƯỜI MẪU (Slider ngang ở dưới)
+.try-on-options-panel {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 30px 0;
+  border-top: 1px solid #e5e7eb;
+
+  .container {
+    position: relative;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #111827;
+  }
+
+  .model-swiper {
+    position: static;
+    padding: 0 5px;
+  }
+
+  .swiper-slide {
+    width: auto;
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    color: $primary-color;
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    &:hover {
+      background-color: $primary-color;
+      color: #fff;
+    }
+    
+    &::after {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  .swiper-button-prev { left: -20px; }
+  .swiper-button-next { right: -20px; }
+}
+
+// ITEM LỰA CHỌN (Dùng chung cho cả 2 panel)
+.selection-item {
+  border: 2px solid $border-color;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  background-color: #f9f9f9;
+  width: 120px;
+  height: 150px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  &.selected {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+    transform: scale(1.05);
+  }
+  
+  &--upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-style: dashed;
+    color: $text-color-light;
+    font-size: 14px;
+    text-align: center;
+    
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+      background-color: #f0f8ff;
+    }
+  }
+}
+
+// NÚT BẤM "THỬ ĐỒ VỚI AI"
+.try-on-generate-button-wrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.try-on-generate-btn {
+  padding: 14px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background-color: $primary-color;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba($primary-color, 0.4);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// MODAL HIỂN THỊ KẾT QUẢ
+.result-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.result-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform: scale(0.9);
+  animation: zoomIn 0.3s forwards;
+}
+
+.result-modal__close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+  padding: 5px;
+  z-index: 10;
+  
+  &:hover { color: #000; }
+}
+
+.result-modal__image-container {
+  width: 50vh;
+  height: 70vh;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.result-modal__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.result-modal__save-btn {
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: $primary-color;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+
+  &:hover { 
+    filter: brightness(90%);
+  }
+}
+
+.result-modal__loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: $text-color-light;
+
+  p {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid $primary-color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+// Keyframes cho animation
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes zoomIn { to { transform: scale(1); } }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+// RESPONSIVE
+@media (max-width: 992px) {
+  .try-on-main-view {
+    grid-template-columns: 1fr;
+  }
+
+  .try-on-clothing-panel {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+
+    &__list {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+      display: none;
+  }
+
+  // Responsive cho Modal
+  .result-modal-content {
+    padding: 15px;
+  }
+  .result-modal__image-container {
+    width: 85vw; // Chiều rộng bằng 85% chiều rộng màn hình
+    height: 70vh; // Chiều cao bằng 70% chiều cao màn hình
+  }
+}

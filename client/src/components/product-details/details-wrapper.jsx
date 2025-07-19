@@ -11,10 +11,12 @@ import { add_cart_product, initialOrderQuantity } from "@/redux/features/cartSli
 import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 import { add_to_compare } from "@/redux/features/compareSlice";
 import { handleModalClose } from "@/redux/features/productModalSlice";
-
+import { setTryOnProduct } from '@/redux/features/tryOnSlice';
+import { useRouter } from 'next/router';
 const DetailsWrapper = ({
   productItem,
   handleImageActive,
+  imageURLSend,
   activeImg,
   detailsBottom = false,
 }) => {
@@ -41,6 +43,7 @@ const DetailsWrapper = ({
   // const [selectedQuantity, setSelectedQuantity] = useState(1); // THAY ĐỔI 3: Xóa state này
 
   const dispatch = useDispatch();
+  const router = useRouter();
   // THAY ĐỔI 4: Lấy orderQuantity từ Redux store
   const { orderQuantity } = useSelector((state) => state.cart);
 
@@ -68,10 +71,17 @@ const DetailsWrapper = ({
     }
   }, [imageURLs, handleImageActive, selectedColor, dispatch]);
 
+  const handleTryOn = (product) => {
+    // Lưu thông tin sản phẩm vào Redux
+    dispatch(setTryOnProduct(product));
+    // Chuyển hướng đến trang phòng thử đồ
+    router.push('/editor'); 
+    dispatch(handleModalClose());
+  };
+
   const handleAddProduct = (prd) => {
     // TẠO RA cartId DUY NHẤT CHO MỖI PHIÊN BẢN SẢN PHẨM
     const cartId = `${prd._id}-${selectedColor?.color?.name || 'default'}-${selectedSize || 'default'}`;
-
     const payload = {
       ...prd,
       cartId, // Thêm cartId vào payload
@@ -182,11 +192,21 @@ const DetailsWrapper = ({
             </button>
           </div>
         </div>
-        <Link href="/checkout" onClick={() =>handleBuyNow(productItem)}>
-          <button className="tp-product-details-buy-now-btn w-100">
-            Mua Ngay
-          </button>
-        </Link>
+        <div className="d-flex align-items-center gap-3 w-100">
+          <Link href="/checkout" onClick={() => handleBuyNow(productItem)} className="w-100">
+            <button className="tp-product-details-buy-now-btn w-100">
+              Mua Ngay
+            </button>
+          </Link>
+
+            <button
+              className="tp-product-details-buy-now-btn w-100" 
+              onClick={() => handleTryOn(productItem)}  
+            >
+              Thử Đồ Ngay
+            </button>
+        
+        </div>
       </div>
 
       <div className="tp-product-details-action-sm">

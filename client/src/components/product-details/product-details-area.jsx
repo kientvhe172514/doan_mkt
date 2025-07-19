@@ -41,6 +41,7 @@ const ProductDetailsArea = ({ productItem }) => {
               <DetailsWrapper
                 productItem={productItem}
                 handleImageActive={handleImageActive}
+                imageURLSend={imageURLs}
                 activeImg={activeImg}
                 detailsBottom={true}
               />
