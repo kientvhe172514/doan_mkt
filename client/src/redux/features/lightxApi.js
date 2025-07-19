@@ -78,9 +78,6 @@ async function urlToBlob(url) {
     if (!response.ok) throw new Error("Không thể kiểm tra trạng thái tác vụ.");
     const data = await response.json();
     if (data.statusCode !== 2000) throw new Error(data.message);
-
-
-    
     const body = data.body;
     //console.log(`Kiểm tra trạng thái Order ID ${orderId}:`, body);
   
