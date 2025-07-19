@@ -39,6 +39,7 @@ const TryOnArea = () => {
       { img: '/assets/img/product/trending/trending-1.jpg', color: { name: 'Đen' } },
       { img: '/assets/img/product/trending/trending-2.jpg', color: { name: 'Đen' } },
       { img: '/assets/img/product/trending/trending-3.jpg', color: { name: 'Đen' } },
+      { img: '/assets/img/product/trending/aocongan.jpg', color: { name: 'Đen' } },
     ]
   };
   const currentProduct = product || dummyProduct;
