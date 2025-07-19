@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Deploy Optimized
 
 on:
   push:
@@ -12,34 +12,75 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        # Không cần fetch-depth nữa, action dưới đây sẽ tự xử lý
+
+      # Bước kiểm tra các thư mục đã có thay đổi
+      - name: Check for changed files
+        id: changed_files
+        uses: tj-actions/changed-files@v41
+        with:
+          # SỬA LỖI: Dùng tùy chọn này để so sánh chính xác với commit trên server
+          since_last_remote_commit: 'true'
+          files_yaml: |
+            backend:
+              - 'shofy-fashion-ecommerce-backend/**'
+            client:
+              - 'client/**'
+            admin:
+              - 'Admin/admin-web/**'
+
+      # Bước debug: In ra kết quả kiểm tra để dễ theo dõi
+      - name: List changed files outputs
+        # Luôn chạy bước này để bạn có thể xem kết quả trong log
+        if: always()
+        run: |
+          echo "--- Changed Files Report ---"
+          echo "Any files changed: ${{ steps.changed_files.outputs.any_changed }}"
+          echo "Backend changed: ${{ steps.changed_files.outputs.backend }}"
+          echo "Client changed: ${{ steps.changed_files.outputs.client }}"
+          echo "Admin changed: ${{ steps.changed_files.outputs.admin }}"
+          echo "--------------------------"
 
       - name: Login to DockerHub
+        # Chỉ đăng nhập khi thực sự có thay đổi cần build
+        if: steps.changed_files.outputs.any_changed == 'true'
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and push backend
+        # Chỉ chạy khi có thay đổi trong thư mục backend
+        if: steps.changed_files.outputs.backend == 'true'
         run: |
+          echo "Backend files changed. Building backend..."
           docker build -t tranvukien125/doan_tot_nghiep_backend:latest ./shofy-fashion-ecommerce-backend
           docker push tranvukien125/doan_tot_nghiep_backend:latest
 
       - name: Build and push frontend (client)
+        # Chỉ chạy khi có thay đổi trong thư mục client
+        if: steps.changed_files.outputs.client == 'true'
         run: |
+          echo "Client files changed. Building client..."
           docker build -t tranvukien125/doan_tot_nghiep_client:latest ./client
           docker push tranvukien125/doan_tot_nghiep_client:latest
 
       - name: Build and push frontend_admin
+        # Chỉ chạy khi có thay đổi trong thư mục admin
+        if: steps.changed_files.outputs.admin == 'true'
         run: |
+          echo "Admin files changed. Building admin..."
           docker build -t tranvukien125/doan_tot_nghiep_admin:latest ./Admin/admin-web
           docker push tranvukien125/doan_tot_nghiep_admin:latest
 
       - name: SSH into VPS and Deploy
+        # Chỉ deploy khi có ít nhất một image đã được build
+        if: steps.changed_files.outputs.any_changed == 'true'
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}
           username: root
           key: ${{ secrets.SSH_KEY }}
           script: |
+            echo "Deploying new changes..."
             cd /root/doan_tot_nghiep
-            docker-compose down
             docker-compose pull
-            docker-compose up -d
+            docker-compose up -d --remove-orphans
             docker image prune -af
