@@ -9,7 +9,7 @@ import TryOnArea from '@/components/try-on/try-on-area';
 const CouponPage = () => {
   return (
     <Wrapper>
-      <SEO pageTitle="Coupon" />
+      <SEO pageTitle="Phòng thử đồ" />
       <HeaderTwo style_2={true} />
       <CommonBreadcrumb title="Phòng Thử Đồ" subtitle="Phòng thử đồ" />
       <TryOnArea /> 
