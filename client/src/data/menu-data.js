@@ -104,6 +104,12 @@ const menu_data = [
     title: 'LIÊN HỆ',
     link: '/contact',
   },
+  // {
+  //   id: 5,
+  //   single_link: true,
+  //   title: 'BÀI VIẾT',
+  //   link: '/blog-grid',
+  // },
 ]
 
 export default menu_data;

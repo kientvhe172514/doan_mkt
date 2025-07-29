@@ -4,7 +4,7 @@
 @forward 'theme';
 @forward 'components';
 @forward 'layout';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 body *:not(i):not(.flaticon):not(.fa):not([class^="flaticon-"]):not([class*="fa-"]) {
   font-family: 'Montserrat', sans-serif !important;
 }
