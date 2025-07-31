@@ -72,7 +72,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
               </div>
               <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                 <div className="tp-footer-widget footer-col-4 mb-50">
-                  <h4 className="tp-footer-widget-title">LIÊN HỆ VỚI CHÚNG TÔI</h4>
+                  <h4 className="tp-footer-widget-title">LIÊN HỆ</h4>
                   <div className="tp-footer-widget-content">
                     <div className="tp-footer-contact "> 
                     <div className="tp-footer-contact-item d-flex align-items-start">
