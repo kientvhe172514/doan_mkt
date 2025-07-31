@@ -74,10 +74,10 @@ const TrendingProducts = () => {
               <div className="tp-trending-wrapper">
                 <div className="tp-section-title-wrapper-2 mb-50">
                   <span className="tp-section-title-pre-2">
-                    Khám Phá
+                   KHÁM PHÁ
                     <TextShapeLine />
                   </span>
-                  <h3 className="tp-section-title-2">Xu Hướng Thời Trang</h3>
+                  <h3 className="tp-section-title-2">XU HƯỚNG THỜI TRANG </h3>
                 </div>
                 <div className="tp-trending-slider">
                   {content}

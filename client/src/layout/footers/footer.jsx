@@ -64,7 +64,7 @@ const Footer = ({ style_2 = false, style_3 = false,primary_style=false }) => {
                     <ul>
                       <li><Link href="/policy-shop">Chính sách mua hàng online</Link></li>
                       <li><Link href="/policy-return">Chính sách đổi/trả hàng</Link></li>
-                      <li><Link href="/policy-vip">Chính sách thẻ thành viên - thẻ vip</Link></li>                    
+                      <li><Link href="/policy-vip">Chính sách thẻ thành viên - thẻ VIP</Link></li>                    
                      
                     </ul>
                   </div>

@@ -105,10 +105,10 @@ const WeeksFeatured = () => {
           <div className="col-xl-12">
             <div className="tp-section-title-wrapper-2 mb-50">
               <span className="tp-section-title-pre-2">
-                Sản Phẩm Hot
+                SẢN PHẨM HOT TRONG TUẦN
                 <TextShapeLine />
               </span>
-              <h3 className="tp-section-title-2">Trong {"Tuần"}</h3>
+              <h3 className="tp-section-title-2">TRONG {"TUẦN"}</h3>
             </div>
           </div>
         </div>
